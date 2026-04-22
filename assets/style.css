@@ -263,7 +263,7 @@ body {
   text-align: center;
   overflow-x: auto;
 }
-.mermaid svg { max-width: 100%; height: auto; }
+.mermaid svg { width: 100%; height: auto; overflow: visible; }
 
 /* ── AWS Diagram ── */
 .aws-diagram {
