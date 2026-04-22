@@ -12,7 +12,7 @@
 
 ## 0. 시작 전 — README 의 QuickStart (30분)
 
-이미 마치셨다면 1단계로 넘어가세요. 안 했다면 [`README.md`](../README.md) 의 "30분 QuickStart" 부터 따라가세요.
+이미 마치셨다면 1단계로 넘어가세요. 안 했다면 레포 루트의 `README.md` 의 "30분 QuickStart" 부터 따라가세요.
 
 QuickStart 는 다음을 합니다.
 

@@ -27,9 +27,57 @@ body {
   position: fixed;
   top: 0; left: 0;
   overflow-y: auto;
+  overflow-x: hidden;
   border-right: 1px solid #1f1f1f;
+  transition: width .25s ease, padding .25s ease;
 }
+
+/* ── Sidebar Close Button (inside brand) ── */
+.sidebar-close-btn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 28px; height: 28px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #c9cdd4;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 1;
+  transition: background .12s, color .12s;
+}
+.sidebar-close-btn:hover { background: #1f1f1f; color: #9ca3af; }
+
+/* ── Sidebar Open Button (fixed, shown when collapsed) ── */
+.sidebar-open-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  width: 32px; height: 32px;
+  background: #1a1a1a;
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  color: #6b7280;
+  cursor: pointer;
+  z-index: 200;
+  display: none;
+  align-items: center; justify-content: center;
+  transition: background .12s, color .12s, box-shadow .12s;
+}
+.sidebar-open-btn:hover { background: #242424; color: #e5e7eb; box-shadow: 0 2px 8px rgba(0,0,0,.4); }
+
+/* ── Collapsed State ── */
+body.sidebar-collapsed .sidebar {
+  width: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+body.sidebar-collapsed .main { margin-left: 0; }
+body.sidebar-collapsed .sidebar-open-btn { display: flex; }
 .sidebar-brand {
+  position: relative;
   padding: 4px 10px 20px;
   border-bottom: 1px solid #222;
   margin-bottom: 12px;
@@ -46,26 +94,60 @@ body {
   margin-top: 3px;
 }
 .nav-group {
-  font-size: 10px;
-  font-weight: 600;
-  color: #4b5563;
-  letter-spacing: 1px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #9ca3af;
+  letter-spacing: .5px;
   text-transform: uppercase;
-  padding: 14px 10px 6px;
+  padding: 20px 10px 6px;
+  margin: 8px -12px 0;
+  padding-left: 22px;
+  padding-right: 22px;
+  border-top: 1px solid #4b5563;
+}
+.nav-group:first-of-type {
+  margin-top: 0;
+  border-top: none;
+  padding-top: 8px;
 }
 .nav-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   color: #9ca3af;
-  padding: 7px 10px;
+  padding: 8px 10px;
   border-radius: 7px;
   font-size: 13px;
   cursor: pointer;
   transition: background .12s, color .12s;
   text-decoration: none;
-  margin-bottom: 1px;
+  margin-bottom: 2px;
 }
+.nav-item .dot { margin-top: 5px; flex-shrink: 0; }
+.nav-item-inner {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.nav-item-title {
+  color: #c9cdd4;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.nav-item-desc {
+  font-size: 13px;
+  color: #9ca3af;
+  line-height: 1.4;
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav-item:hover .nav-item-title { color: #e5e7eb; }
+.nav-item:hover .nav-item-desc  { color: #566272; }
+.nav-item.active .nav-item-title { color: #a5b4fc; }
+.nav-item.active .nav-item-desc  { color: #6366f1; }
 .nav-item:hover { background: #1a1a1a; color: #e5e7eb; }
 .nav-item.active {
   background: #1e1b4b;
@@ -79,9 +161,17 @@ body {
   flex-shrink: 0;
 }
 .nav-item.active .dot { background: var(--accent); }
+.nav-item-child {
+  padding-left: 24px;
+  font-size: 12px;
+  color: #6b7280;
+}
+.nav-item-child .dot { width: 4px; height: 4px; background: #2d2d2d; }
+.nav-item-child.active { background: #1e1b4b; color: #a5b4fc; }
+.nav-item-child.active .dot { background: var(--accent); }
 
 /* ── Main ── */
-.main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
+.main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; transition: margin-left .25s ease; }
 
 /* ── Post Header ── */
 .post-header {
@@ -91,6 +181,82 @@ body {
   position: relative;
   overflow: hidden;
 }
+
+/* ── Content Area (gray background under header) ── */
+.content-area {
+  background: #edf0f3;
+  padding: 32px;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Doc Footer (관련 문서 / 책 목차) ── */
+.doc-footer {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid #dde3f0;
+  padding: 28px 48px 32px;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.doc-footer h2 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #6366f1;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eef2ff;
+}
+.doc-footer h2::before { display: none; }
+.doc-footer h2 + h2 { margin-top: 24px; }
+.doc-footer hr { display: none; }
+.doc-footer p { margin: 0 0 8px; color: #4b5563; }
+.doc-footer ul { margin: 0 0 8px 18px; color: #4b5563; }
+.doc-footer li { margin-bottom: 4px; }
+.doc-footer a { color: #6366f1; text-decoration: none; }
+.doc-footer a:hover { text-decoration: underline; }
+.doc-footer strong { color: #374151; font-weight: 600; }
+.doc-footer table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 8px 0 12px;
+}
+.doc-footer th {
+  background: #f9fafb;
+  padding: 8px 14px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+.doc-footer td {
+  padding: 8px 14px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #4b5563;
+  vertical-align: top;
+}
+.doc-footer tr:last-child td { border-bottom: none; }
+
+/* ── Site Footer ── */
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 4px 4px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+.site-footer-name { font-weight: 600; color: #6b7280; }
+.site-footer-right { color: #9ca3af; }
 .post-header::before {
   content: '';
   position: absolute;
@@ -128,8 +294,12 @@ body {
 
 /* ── Post Body ── */
 .post-body {
-  margin: 40px 48px 80px;
-  padding: 0;
+  background: white;
+  border-radius: 14px;
+  border: 1px solid #e2e6ea;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  padding: 40px 48px 60px;
+  margin: 0;
   line-height: 1.8;
   font-size: 15px;
 }
