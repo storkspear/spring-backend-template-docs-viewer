@@ -175,7 +175,7 @@ body {
 
 /* Inline code */
 .post-body :not(pre) > code {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Nanum Gothic Coding', 'JetBrains Mono', monospace;
   font-size: 12.5px;
   background: #f3f4f6;
   color: #6366f1;
@@ -192,7 +192,7 @@ body {
   border: 1px solid #1f1f1f;
 }
 .post-body pre code {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Nanum Gothic Coding', 'JetBrains Mono', monospace;
   font-size: 13px;
   line-height: 1.65;
   background: none !important;
