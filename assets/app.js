@@ -2,9 +2,12 @@ mermaid.initialize({
   startOnLoad: false,
   theme: 'default',
   fontFamily: 'Noto Sans KR, Inter, sans-serif',
-  flowchart: { useMaxWidth: false, htmlLabels: true },
+  flowchart: { useMaxWidth: false, htmlLabels: false },
   sequence:   { useMaxWidth: false },
   gantt:      { useMaxWidth: false },
+  themeVariables: {
+    edgeLabelBackground: '#ffffff',
+  }
 });
 
 marked.use({
@@ -52,7 +55,29 @@ async function loadDoc(docPath) {
     html = html.replace(/<p>%%PROD_DIAGRAM%%<\/p>/g, DIAGRAMS['PROD']);
     document.getElementById('content').innerHTML = html;
     document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
-    await mermaid.run({ nodes: document.querySelectorAll('#content .mermaid') });
+    let mermaidId = 0;
+    for (const el of document.querySelectorAll('#content .mermaid')) {
+      const code = el.textContent.trim();
+      const id = `mermaid-${mermaidId++}`;
+      try {
+        const { svg } = await mermaid.render(id, code);
+        el.innerHTML = svg;
+        const svgEl = el.querySelector('svg');
+        if (svgEl) {
+          // Mermaid가 설정한 max-width, overflow 제한 제거
+          svgEl.style.maxWidth = '100%';
+          svgEl.setAttribute('overflow', 'visible');
+          // viewBox 오른쪽/아래 여백 확보
+          const vb = svgEl.getAttribute('viewBox');
+          if (vb) {
+            const [x, y, w, h] = vb.trim().split(/[\s,]+/).map(Number);
+            svgEl.setAttribute('viewBox', `${x} ${y} ${w + 40} ${h + 10}`);
+          }
+        }
+      } catch(e) {
+        el.innerHTML = `<pre style="color:red">${e.message}</pre>`;
+      }
+    }
     window.scrollTo(0, 0);
 
     // URL 해시 업데이트 (뒤로가기 지원)

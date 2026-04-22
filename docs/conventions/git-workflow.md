@@ -199,9 +199,7 @@ git push origin template-v0.3.0
 
 ```mermaid
 flowchart LR
-  A["대기"] -->|"작업 착수"| B["진행 중"]
-  B -->|"완료"| C["완료 (archive)"]
-  C -->|"2개월 후"| D["CHANGELOG.md"]
+  A[대기] --> B[진행 중] --> C[완료 archive] --> D[CHANGELOG]
 ```
 
 - **대기 → 진행 중**: 항목을 "진행 중" 섹션으로 이동 + `(담당 Item: Item X)` 추가

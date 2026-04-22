@@ -258,12 +258,56 @@ body {
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  padding: 24px 16px;
-  margin: 20px 0;
-  text-align: center;
+  padding: 32px 24px;
+  margin: 24px 0;
+  text-align: left;
   overflow-x: auto;
 }
-.mermaid svg { width: 100%; height: auto; overflow: visible; }
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+  font-family: 'Noto Sans KR', 'Inter', sans-serif !important;
+}
+
+/* 노드 박스 */
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node ellipse,
+.mermaid .node polygon {
+  fill: #f8fafc !important;
+  stroke: #cbd5e1 !important;
+  stroke-width: 1.5px !important;
+}
+.mermaid .node:hover rect { fill: #f1f5f9 !important; }
+
+/* 노드 텍스트 */
+.mermaid .nodeLabel,
+.mermaid .label {
+  font-family: 'Noto Sans KR', 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #1e293b !important;
+  fill: #1e293b !important;
+}
+
+/* 엣지 라벨 */
+.mermaid .edgeLabel .label rect {
+  fill: #ffffff !important;
+}
+.mermaid .edgeLabel .label text {
+  fill: #64748b !important;
+  font-size: 12px !important;
+}
+
+/* 화살표 선 */
+.mermaid .edgePath .path {
+  stroke: #94a3b8 !important;
+  stroke-width: 1.5px !important;
+}
+.mermaid .arrowheadPath {
+  fill: #94a3b8 !important;
+  stroke: #94a3b8 !important;
+}
 
 /* ── AWS Diagram ── */
 .aws-diagram {
