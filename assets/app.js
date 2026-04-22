@@ -31,7 +31,10 @@ async function loadDoc(docPath) {
   try {
     const res = await fetch('docs/' + docPath);
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    const md = await res.text();
+    let md = await res.text();
+    // ASCII 아트 코드블록을 마커로 교체 (marked.parse 전에 처리)
+    md = md.replace(/```\n\[개발자 맥북\][\s\S]*?```/g, '\n%%LOCAL_DEV_DIAGRAM%%\n');
+    md = md.replace(/```\n\[인터넷 사용자\][\s\S]*?```/g, '\n%%PROD_DIAGRAM%%\n');
     let html = marked.parse(md);
     html = html.replace(/<p>%%LOCAL_DEV_DIAGRAM%%<\/p>/g, DIAGRAMS['LOCAL_DEV']);
     html = html.replace(/<p>%%PROD_DIAGRAM%%<\/p>/g, DIAGRAMS['PROD']);
