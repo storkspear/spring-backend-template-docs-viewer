@@ -7,33 +7,33 @@
     {
       "name": "여정 (0~7단계)",
       "files": [
-        { "path": "README.md",                        "title": "책 목차",              "desc": "전체 읽기 순서 안내 (Developer Journey)" },
-        { "path": "philosophy.md",                    "title": "Philosophy",           "desc": "설계 결정의 이유 — 모듈러 모놀리스, 포트/어댑터 (1단계 ①)" },
-        { "path": "architecture.md",                  "title": "Architecture",         "desc": "모듈 구조 · 파일 트리 · 기술 스택 (1단계 ②)" },
-        { "path": "guides/onboarding.md",             "title": "Onboarding",           "desc": "로컬 개발 환경 + 첫 앱 모듈 추가 (2~3단계)" },
-        { "path": "social-auth-setup.md",             "title": "Social Auth Setup",    "desc": "소셜 로그인 자격 증명 발급 (4단계)" },
-        { "path": "guides/dogfood-setup.md",          "title": "Dogfood Setup",        "desc": "외부 리소스 발급 · 검증 · cleanup (4~6단계)",
+        { "path": "journey/README.md",                        "title": "책 목차",              "desc": "전체 읽기 순서 안내 (Developer Journey)" },
+        { "path": "journey/philosophy.md",                    "title": "Philosophy",           "desc": "설계 결정의 이유 — 모듈러 모놀리스, 포트/어댑터 (1단계 ①)" },
+        { "path": "journey/architecture.md",                  "title": "Architecture",         "desc": "모듈 구조 · 파일 트리 · 기술 스택 (1단계 ②)" },
+        { "path": "journey/onboarding.md",                    "title": "Onboarding",           "desc": "로컬 개발 환경 + 첫 앱 모듈 추가 (2~3단계)" },
+        { "path": "journey/social-auth-setup.md",             "title": "Social Auth Setup",    "desc": "소셜 로그인 자격 증명 발급 (4단계)" },
+        { "path": "journey/dogfood-setup.md",                 "title": "Dogfood Setup",        "desc": "외부 리소스 발급 · 검증 · cleanup (4~6단계)",
           "children": [
-            { "path": "guides/dogfood-faq.md", "title": "Dogfood FAQ", "desc": "도그푸딩 자주 묻는 질문" }
+            { "path": "journey/dogfood-faq.md", "title": "Dogfood FAQ", "desc": "도그푸딩 자주 묻는 질문" }
           ]
         },
-        { "path": "guides/deployment.md",             "title": "Deployment",           "desc": "파생 레포 첫 운영 배포 (7단계)" },
-        { "path": "guides/cross-repo-cherry-pick.md", "title": "Cross-repo Cherry-pick","desc": "template → 파생 레포 변경 동기화" }
+        { "path": "journey/deployment.md",                    "title": "Deployment",           "desc": "파생 레포 첫 운영 배포 (7단계)" },
+        { "path": "journey/cross-repo-cherry-pick.md",        "title": "Cross-repo Cherry-pick","desc": "template → 파생 레포 변경 동기화" }
       ]
     },
     {
       "name": "인프라 / 운영",
       "files": [
-        { "path": "infrastructure.md",           "title": "Infrastructure",    "desc": "맥미니 홈서버, Supabase, Cloudflare Tunnel, 블루그린 배포",
+        { "path": "infra/infrastructure.md",     "title": "Infrastructure",    "desc": "맥미니 홈서버, Supabase, Cloudflare Tunnel, 블루그린 배포",
           "children": [
-            { "path": "conventions/decisions-infra.md", "title": "Infra Decisions", "desc": "인프라 결정 기록" }
+            { "path": "infra/decisions-infra.md", "title": "Infra Decisions", "desc": "인프라 결정 기록" }
           ]
         },
-        { "path": "runbook.md",                  "title": "Runbook",           "desc": "운영 절차 및 장애 대응" },
-        { "path": "edge-cases.md",               "title": "Edge Cases",        "desc": "엣지 케이스 및 예외 처리 목록" },
-        { "path": "guides/mac-mini-setup.md",    "title": "Mac Mini Setup",    "desc": "홈서버 맥미니 셋업" },
-        { "path": "guides/monitoring-setup.md",  "title": "Monitoring Setup",  "desc": "모니터링 스택 설정" },
-        { "path": "guides/storage-setup.md",     "title": "Storage Setup",     "desc": "스토리지 설정 가이드" }
+        { "path": "infra/runbook.md",            "title": "Runbook",           "desc": "운영 절차 및 장애 대응" },
+        { "path": "infra/edge-cases.md",         "title": "Edge Cases",        "desc": "엣지 케이스 및 예외 처리 목록" },
+        { "path": "infra/mac-mini-setup.md",     "title": "Mac Mini Setup",    "desc": "홈서버 맥미니 셋업" },
+        { "path": "infra/monitoring-setup.md",   "title": "Monitoring Setup",  "desc": "모니터링 스택 설정" },
+        { "path": "infra/storage-setup.md",      "title": "Storage Setup",     "desc": "스토리지 설정 가이드" }
       ]
     },
     {
@@ -59,11 +59,11 @@
     {
       "name": "참조",
       "files": [
-        { "path": "architecture/ci-cd-flow.md",          "title": "CI/CD Flow",      "desc": "commit → 운영 반영까지 전체 흐름" },
-        { "path": "migration/README.md",                 "title": "Migration",       "desc": "DB 마이그레이션 가이드" },
-        { "path": "security/key-rotation.md",            "title": "Key Rotation",    "desc": "보안 키 로테이션 절차" },
-        { "path": "troubleshooting/dogfood-pitfalls.md", "title": "Troubleshooting", "desc": "도그푸딩 함정 11개 모음" },
-        { "path": "backlog.md",                          "title": "Backlog",         "desc": "개발 예정 항목" }
+        { "path": "reference/ci-cd-flow.md",        "title": "CI/CD Flow",      "desc": "commit → 운영 반영까지 전체 흐름" },
+        { "path": "reference/migration.md",         "title": "Migration",       "desc": "DB 마이그레이션 가이드" },
+        { "path": "reference/key-rotation.md",      "title": "Key Rotation",    "desc": "보안 키 로테이션 절차" },
+        { "path": "reference/dogfood-pitfalls.md",  "title": "Troubleshooting", "desc": "도그푸딩 함정 11개 모음" },
+        { "path": "reference/backlog.md",           "title": "Backlog",         "desc": "개발 예정 항목" }
       ]
     }
   ]
