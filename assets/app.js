@@ -1,4 +1,11 @@
-mermaid.initialize({ startOnLoad: false, theme: 'default', fontFamily: 'Noto Sans KR, Inter, sans-serif' });
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'default',
+  fontFamily: 'Noto Sans KR, Inter, sans-serif',
+  flowchart: { useMaxWidth: false, htmlLabels: true },
+  sequence:   { useMaxWidth: false },
+  gantt:      { useMaxWidth: false },
+});
 
 marked.use({
   breaks: true,
@@ -46,16 +53,6 @@ async function loadDoc(docPath) {
     document.getElementById('content').innerHTML = html;
     document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
     await mermaid.run({ nodes: document.querySelectorAll('#content .mermaid') });
-    // 한글 텍스트 너비 오계산으로 인한 SVG 클리핑 보정
-    document.querySelectorAll('#content .mermaid svg').forEach(svg => {
-      svg.setAttribute('overflow', 'visible');
-      svg.style.overflow = 'visible';
-      const vb = svg.getAttribute('viewBox');
-      if (vb) {
-        const [x, y, w, h] = vb.split(/\s+/).map(Number);
-        svg.setAttribute('viewBox', `${x - 10} ${y - 5} ${w + 60} ${h + 10}`);
-      }
-    });
     window.scrollTo(0, 0);
 
     // URL 해시 업데이트 (뒤로가기 지원)
