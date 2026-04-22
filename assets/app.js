@@ -1,9 +1,14 @@
+mermaid.initialize({ startOnLoad: false, theme: 'neutral', fontFamily: 'Noto Sans KR, Inter, sans-serif' });
+
 marked.use({
   breaks: true,
   gfm: true,
   html: true,
   renderer: {
     code({ text, lang }) {
+      if (lang === 'mermaid') {
+        return `<div class="mermaid">${text}</div>`;
+      }
       if (!lang) lang = '';
       const validLang = lang && hljs.getLanguage(lang) ? lang : null;
       const highlighted = validLang
@@ -40,6 +45,7 @@ async function loadDoc(docPath) {
     html = html.replace(/<p>%%PROD_DIAGRAM%%<\/p>/g, DIAGRAMS['PROD']);
     document.getElementById('content').innerHTML = html;
     document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+    await mermaid.run({ nodes: document.querySelectorAll('#content .mermaid') });
     window.scrollTo(0, 0);
 
     // URL 해시 업데이트 (뒤로가기 지원)
