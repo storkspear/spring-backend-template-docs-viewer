@@ -89,10 +89,13 @@ function interceptDocLinks(el, currentDocPath) {
   });
 }
 
+function isMobile() { return window.innerWidth <= 768; }
+
 async function loadDoc(docPath) {
   document.querySelectorAll('.nav-item').forEach(el => {
     el.classList.toggle('active', el.dataset.doc === docPath);
   });
+  if (isMobile()) closeMobileSidebar();
 
   const meta = META[docPath] || { title: docPath.split('/').pop().replace('.md', ''), desc: '' };
   document.getElementById('post-title').textContent = meta.title;
@@ -147,6 +150,17 @@ async function loadDoc(docPath) {
       docFooterEl.innerHTML = footerHtml;
       docFooterEl.style.display = 'block';
       interceptDocLinks(docFooterEl, docPath);
+    }
+
+    // 모바일 테이블 스크롤 래핑
+    if (isMobile()) {
+      contentEl.querySelectorAll('table').forEach(table => {
+        if (table.closest('.table-wrap')) return;
+        const wrap = document.createElement('div');
+        wrap.className = 'table-wrap';
+        table.parentNode.insertBefore(wrap, table);
+        wrap.appendChild(table);
+      });
     }
 
     interceptDocLinks(contentEl, docPath);
@@ -224,12 +238,30 @@ window.addEventListener('popstate', e => {
   if (e.state && e.state.doc) loadDoc(e.state.doc);
 });
 
-function toggleSidebar() {
-  document.body.classList.toggle('sidebar-collapsed');
+const backdrop = document.createElement('div');
+backdrop.id = 'sidebar-backdrop';
+document.body.appendChild(backdrop);
+backdrop.addEventListener('click', closeMobileSidebar);
+
+function closeMobileSidebar() {
+  document.body.classList.remove('sidebar-open');
 }
+
+function toggleSidebar() {
+  if (isMobile()) {
+    document.body.classList.toggle('sidebar-open');
+  } else {
+    document.body.classList.toggle('sidebar-collapsed');
+  }
+}
+
 document.getElementById('sidebar-open-btn').addEventListener('click', toggleSidebar);
 document.addEventListener('click', e => {
   if (e.target.closest('#sidebar-close-btn')) toggleSidebar();
 });
+
+if (isMobile()) {
+  document.body.classList.add('sidebar-collapsed');
+}
 
 init();
