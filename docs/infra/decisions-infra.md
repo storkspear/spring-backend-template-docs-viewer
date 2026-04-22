@@ -6,7 +6,7 @@
 
 | 문서 | 범위 |
 |---|---|
-| [`philosophy.md`](../philosophy.md) | **코드 설계 결정** — 모듈 구조, 포트/어댑터, Mapper 금지, 테스트 전략 등 |
+| [`philosophy.md`](../journey/philosophy.md) | **코드 설계 결정** — 모듈 구조, 포트/어댑터, Mapper 금지, 테스트 전략 등 |
 | **`decisions-infra.md`** (이 문서) | **물리/운영 인프라 결정** — DB, 오브젝트 스토리지, 운영 호스트, 엣지, 관측성 |
 
 경계 케이스 (예: 서비스별 schema — 코드 규약이자 인프라 결정) 는 양쪽에서 상호 참조합니다.
@@ -77,7 +77,7 @@ Phase 1+ 에는 우선순위 재조정 (예: 보안 기준 상향).
 - **status**: `provisioned`
 - **결정일**: Phase 0 초기 (philosophy 결정 5 정의 시점)
 - **결정**: 단일 Postgres DB 에서 **앱별 schema 로 분리** (`core`, `<slug>`). `core` 는 공통 (users, auth 등), 앱별 schema 는 도메인 테이블.
-- **근거**: [philosophy 결정 5](../philosophy.md) 에 정의. 솔로 운영에서 DB 인스턴스 N개 관리 부담 회피.
+- **근거**: [philosophy 결정 5](../journey/philosophy.md) 에 정의. 솔로 운영에서 DB 인스턴스 N개 관리 부담 회피.
 - **대안**: DB 분리, 단일 schema, 단일 테이블 + tenant_id
 - **Trade-off**:
   - schema 경계 실수 위험 (FK cross-schema 사용 시 cascade 영향) — `search_path` + 앱별 DB user 로 완화
@@ -488,9 +488,9 @@ Phase 1+ 에는 우선순위 재조정 (예: 보안 기준 상향).
 
 ## 관련 문서
 
-- [`philosophy.md`](../philosophy.md) — 코드 설계 결정
-- [`../infrastructure.md`](../infrastructure.md) — 인프라 현재 상태 + 구성도
-- [`storage.md`](./storage.md) — 2-tier bucket 상세 규약
-- [`observability.md`](./observability.md) — 관측성 규약
-- [`../edge-cases.md`](../edge-cases.md) — 리스크 시나리오 분석
+- [`philosophy.md`](../journey/philosophy.md) — 코드 설계 결정
+- [`../infrastructure.md`](./infrastructure.md) — 인프라 현재 상태 + 구성도
+- [`storage.md`](../conventions/storage.md) — 2-tier bucket 상세 규약
+- [`observability.md`](../conventions/observability.md) — 관측성 규약
+- [`../edge-cases.md`](./edge-cases.md) — 리스크 시나리오 분석
 - Item Ops-1 (예정) — 운영 배포 구현

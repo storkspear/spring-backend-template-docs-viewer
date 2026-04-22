@@ -6,9 +6,9 @@
 
 - **포함**: 물리/운영 인프라 (DB, 오브젝트 스토리지, 운영 호스트, 엣지, 관측성) 구성과 현재 상태.
 - **제외**:
-  - 코드 아키텍처 (포트/어댑터, 모듈 구조) → [`architecture.md`](./architecture.md)
-  - 인프라 결정의 근거/대안 → [`conventions/decisions-infra.md`](./conventions/decisions-infra.md)
-  - 코드 설계 철학 → [`philosophy.md`](./philosophy.md)
+  - 코드 아키텍처 (포트/어댑터, 모듈 구조) → [`architecture.md`](../journey/architecture.md)
+  - 인프라 결정의 근거/대안 → [`conventions/decisions-infra.md`](./decisions-infra.md)
+  - 코드 설계 철학 → [`philosophy.md`](../journey/philosophy.md)
   - 운영 배포 파이프라인/시크릿/백업 → **Item Ops-1** (예정, `backlog.md` 참조)
 
 **대상 독자**:
@@ -32,7 +32,7 @@
 | 로컬 docker 관측성 | `deprecated` | 로컬에서는 기동하지 않음 (2026-04-19 변경). 운영 전용으로 범위 재조정 (I-06 노트) |
 | 2-tier bucket 정책 | `provisioned` (로컬 `dev-shared`) / `planned` (운영 `{slug}-{category}`) | `BucketProvisioner` 자동 생성. 상세: `conventions/storage.md` I-07 |
 
-상태 필드 정의 (`planned` / `provisioned` / `in-prod` / `hardware-acquired`) 및 전이 규칙: [`decisions-infra.md`](./conventions/decisions-infra.md) 참조.
+상태 필드 정의 (`planned` / `provisioned` / `in-prod` / `hardware-acquired`) 및 전이 규칙: [`decisions-infra.md`](./decisions-infra.md) 참조.
 
 ---
 
@@ -84,7 +84,7 @@ docker compose -f infra/docker-compose.dev.yml up -d postgres minio
 ./gradlew :bootstrap:bootRun
 ```
 
-자세한 onboarding 흐름: [`guides/onboarding.md`](./guides/onboarding.md).
+자세한 onboarding 흐름: [`guides/onboarding.md`](../journey/onboarding.md).
 
 ---
 
@@ -92,7 +92,7 @@ docker compose -f infra/docker-compose.dev.yml up -d postgres minio
 
 > ⚠️ **현재 `planned` 상태이나 배포 파이프라인 인프라는 template 에 구축 완료**.
 > 파생레포가 "Use this template" → 환경값 채움 → `kamal setup` 한 번 실행 → GHA 자동 배포로 운영 진입.
-> 자세한 onboarding: [`guides/deployment.md`](./guides/deployment.md). 결정 근거: [`decisions-infra.md#결정-i-09`](./conventions/decisions-infra.md).
+> 자세한 onboarding: [`guides/deployment.md`](../journey/deployment.md). 결정 근거: [`decisions-infra.md#결정-i-09`](./decisions-infra.md).
 
 ```
 [인터넷 사용자]
@@ -192,7 +192,7 @@ ingress:
 
 ## 6. 선택 근거 요약
 
-각 선택의 "왜 이거인가" 는 [`conventions/decisions-infra.md`](./conventions/decisions-infra.md) 의 결정 카드 참조. 요약만:
+각 선택의 "왜 이거인가" 는 [`conventions/decisions-infra.md`](./decisions-infra.md) 의 결정 카드 참조. 요약만:
 
 - **Supabase** (I-01) — 관리형 Postgres Free tier, Seoul region, 솔로 친화
 - **NAS MinIO** (I-03) — 보유 하드웨어 활용, S3 호환 → 미래 이관 유연, LAN 대역폭
@@ -225,7 +225,7 @@ ingress:
 ### MAU 100K 이상
 - 이 문서는 현재 프로젝트 스케일 범위 밖. 아키텍처 재설계 시점.
 
-**재검토 트리거 구체 표**: [`decisions-infra.md` 말미](./conventions/decisions-infra.md#재검토-트리거-요약-표).
+**재검토 트리거 구체 표**: [`decisions-infra.md` 말미](./decisions-infra.md#재검토-트리거-요약-표).
 
 ---
 
@@ -330,7 +330,7 @@ V009__add_devices_updated_at.sql
 
 앱별 schema 에 붙는 DataSource 는 `apps/app-<slug>/src/main/resources/application-*.yml` 에 정의. Bootstrap 은 core schema 만, 각 앱은 자기 schema 에.
 
-자세한 것: [`philosophy.md 결정 5`](./philosophy.md) + `architecture.md` DB 섹션.
+자세한 것: [`philosophy.md 결정 5`](../journey/philosophy.md) + `architecture.md` DB 섹션.
 
 ### 10.5 `keep-alive.sh` — Supabase Free 7일 비활성 방지
 
@@ -348,13 +348,13 @@ V009__add_devices_updated_at.sql
 
 ## 11. 관련 문서
 
-- [`architecture.md`](./architecture.md) — 코드 아키텍처 (포트/어댑터, 모듈 의존성)
-- [`philosophy.md`](./philosophy.md) — 코드 설계 결정 (모듈러 모놀리스, Mapper 금지 등)
-- [`conventions/decisions-infra.md`](./conventions/decisions-infra.md) — 인프라 결정 카드 I-01~I-07
-- [`conventions/storage.md`](./conventions/storage.md) — MinIO 2-tier bucket 정책
-- [`conventions/observability.md`](./conventions/observability.md) — 관측성 규약
-- [`guides/onboarding.md`](./guides/onboarding.md) — 템플릿 첫 사용 가이드
-- [`guides/storage-setup.md`](./guides/storage-setup.md) — MinIO 로컬/NAS 셋업
-- [`guides/monitoring-setup.md`](./guides/monitoring-setup.md) — 관측성 스택 기동
+- [`architecture.md`](../journey/architecture.md) — 코드 아키텍처 (포트/어댑터, 모듈 의존성)
+- [`philosophy.md`](../journey/philosophy.md) — 코드 설계 결정 (모듈러 모놀리스, Mapper 금지 등)
+- [`conventions/decisions-infra.md`](./decisions-infra.md) — 인프라 결정 카드 I-01~I-07
+- [`conventions/storage.md`](../conventions/storage.md) — MinIO 2-tier bucket 정책
+- [`conventions/observability.md`](../conventions/observability.md) — 관측성 규약
+- [`guides/onboarding.md`](../journey/onboarding.md) — 템플릿 첫 사용 가이드
+- [`guides/storage-setup.md`](./storage-setup.md) — MinIO 로컬/NAS 셋업
+- [`guides/monitoring-setup.md`](./monitoring-setup.md) — 관측성 스택 기동
 - [`edge-cases.md`](./edge-cases.md) — 리스크 분석
-- [`backlog.md`](./backlog.md) — 미완료 항목 (Item Ops-1 묶음 포함)
+- [`backlog.md`](../reference/backlog.md) — 미완료 항목 (Item Ops-1 묶음 포함)

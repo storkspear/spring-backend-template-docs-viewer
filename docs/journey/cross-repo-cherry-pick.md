@@ -142,12 +142,12 @@ git push origin fix/refresh-token-race
 
 ## 📖 책 목차 — Journey 7단계 (마지막)
 
-[`../README.md`](../README.md) 의 **7단계 — 이제 use this template** 의 마무리 문서입니다.
+[`../README.md`](./README.md) 의 **7단계 — 이제 use this template** 의 마무리 문서입니다.
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
 | ← 이전 | [`./deployment.md`](./deployment.md) | 같은 7단계, 파생 레포 첫 운영 배포 |
-| → 다음 | (책 끝) — 본인 도메인 작업 시작 | 막히면 [`../runbook.md`](../runbook.md) (운영 절차) 참고 |
+| → 다음 | (책 끝) — 본인 도메인 작업 시작 | 막히면 [`../runbook.md`](../infra/runbook.md) (운영 절차) 참고 |
 
-**막혔을 때**: [`../runbook.md`](../runbook.md) (장애 대응) / [`../edge-cases.md`](../edge-cases.md) (리스크 시나리오)
-**왜 이렇게?**: [`../philosophy.md`](../philosophy.md) 결정 2 (template 패턴)
+**막혔을 때**: [`../runbook.md`](../infra/runbook.md) (장애 대응) / [`../edge-cases.md`](../infra/edge-cases.md) (리스크 시나리오)
+**왜 이렇게?**: [`../philosophy.md`](./philosophy.md) 결정 2 (template 패턴)

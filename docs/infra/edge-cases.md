@@ -426,7 +426,7 @@
 
 ## 관련 문서
 
-- [`philosophy.md`](./philosophy.md) — 각 설계 결정의 이유
-- [`architecture.md`](./architecture.md) — 시스템 구조
-- [`conventions/api-response.md`](./conventions/api-response.md) — API 응답 포맷
-- [`conventions/design-principles.md`](./conventions/design-principles.md) — 설계 원칙
+- [`philosophy.md`](../journey/philosophy.md) — 각 설계 결정의 이유
+- [`architecture.md`](../journey/architecture.md) — 시스템 구조
+- [`conventions/api-response.md`](../conventions/api-response.md) — API 응답 포맷
+- [`conventions/design-principles.md`](../conventions/design-principles.md) — 설계 원칙

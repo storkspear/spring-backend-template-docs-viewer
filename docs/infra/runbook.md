@@ -1,8 +1,8 @@
 # 운영 런북 (Runbook)
 
-평시 배포·롤백·장애 대응 절차. 파생레포 최초 onboarding 은 [`guides/deployment.md`](./guides/deployment.md).
+평시 배포·롤백·장애 대응 절차. 파생레포 최초 onboarding 은 [`guides/deployment.md`](../journey/deployment.md).
 
-> 결정 근거: [`conventions/decisions-infra.md` I-09](./conventions/decisions-infra.md)
+> 결정 근거: [`conventions/decisions-infra.md` I-09](./decisions-infra.md)
 
 ---
 
@@ -180,8 +180,8 @@ kamal app boot                # 마지막 배포 버전으로 다시 기동
 
 ## 관련 문서
 
-- [`guides/deployment.md`](./guides/deployment.md) — 파생레포 onboarding (최초 1회)
-- [`guides/monitoring-setup.md`](./guides/monitoring-setup.md) — 관측성 스택
+- [`guides/deployment.md`](../journey/deployment.md) — 파생레포 onboarding (최초 1회)
+- [`guides/monitoring-setup.md`](./monitoring-setup.md) — 관측성 스택
 - [`infrastructure.md`](./infrastructure.md) — 전체 구성도
 - [`edge-cases.md`](./edge-cases.md) — 리스크 시나리오
-- [`conventions/decisions-infra.md`](./conventions/decisions-infra.md) — 결정 카드
+- [`conventions/decisions-infra.md`](./decisions-infra.md) — 결정 카드

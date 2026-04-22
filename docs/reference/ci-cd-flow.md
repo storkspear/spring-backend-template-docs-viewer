@@ -1,8 +1,8 @@
 # CI / CD 전체 플로우 — commit 부터 운영 반영까지
 
-> 결정 근거: [`../conventions/decisions-infra.md` I-09 ~ I-14](../conventions/decisions-infra.md)
-> 셋업 가이드: [`../guides/dogfood-setup.md`](../guides/dogfood-setup.md)
-> 함정 모음: [`../troubleshooting/dogfood-pitfalls.md`](../troubleshooting/dogfood-pitfalls.md)
+> 결정 근거: [`../conventions/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md)
+> 셋업 가이드: [`../guides/dogfood-setup.md`](../journey/dogfood-setup.md)
+> 함정 모음: [`../troubleshooting/dogfood-pitfalls.md`](./dogfood-pitfalls.md)
 
 ---
 
@@ -10,7 +10,7 @@
 
 **`git commit` → 사용자에게 노출까지 ~15~20분, billed 8분.**
 
-CI workflow 가 jar 를 만들면 deploy workflow 가 `workflow_run` 으로 자동 트리거되어 jar 를 받아 docker 이미지로 패키징 + GHCR push + Mac mini 의 kamal 이 swap. **gradle build 1회만** (CI 가 만든 jar 를 deploy 가 재사용 — 중복 빌드 제거 [I-12](../conventions/decisions-infra.md)).
+CI workflow 가 jar 를 만들면 deploy workflow 가 `workflow_run` 으로 자동 트리거되어 jar 를 받아 docker 이미지로 패키징 + GHCR push + Mac mini 의 kamal 이 swap. **gradle build 1회만** (CI 가 만든 jar 를 deploy 가 재사용 — 중복 빌드 제거 [I-12](../infra/decisions-infra.md)).
 
 ---
 
@@ -333,7 +333,7 @@ cloudflared tunnel 이 외부 도메인을 Mac mini :80 으로 outbound 연결. 
 **이전 (개선 전, 병렬 + 중복 빌드)**: 같은 wall-clock 8분 + billed 13분.
 → **billed 5분 절약 (38%)**.
 
-이유: deploy 가 더 이상 자체 gradle build 안 함 ([I-12](../conventions/decisions-infra.md)). CI 의 jar 를 artifact 로 받아 패키징만.
+이유: deploy 가 더 이상 자체 gradle build 안 함 ([I-12](../infra/decisions-infra.md)). CI 의 jar 를 artifact 로 받아 패키징만.
 
 ---
 
@@ -354,7 +354,7 @@ cloudflared tunnel 이 외부 도메인을 Mac mini :80 으로 outbound 연결. 
 
 ---
 
-## 6. 함정 11개 (자세히 → [pitfalls](../troubleshooting/dogfood-pitfalls.md))
+## 6. 함정 11개 (자세히 → [pitfalls](./dogfood-pitfalls.md))
 
 | # | 단계 | 키워드 | 자동화로 회피? |
 |---|---|---|---|
@@ -377,9 +377,9 @@ cloudflared tunnel 이 외부 도메인을 Mac mini :80 으로 outbound 연결. 
 
 ## 7. 관련 문서
 
-- [`../guides/dogfood-setup.md`](../guides/dogfood-setup.md) — 셋업 가이드 (정상 흐름)
-- [`../troubleshooting/dogfood-pitfalls.md`](../troubleshooting/dogfood-pitfalls.md) — 함정 모음 (사고 실록)
-- [`../guides/dogfood-faq.md`](../guides/dogfood-faq.md) — 자주 묻는 질문
-- [`../guides/deployment.md`](../guides/deployment.md) — 운영 배포 (cloudflared, observability)
-- [`../runbook.md`](../runbook.md) — 평시 운영 / 장애 대응
-- [`../conventions/decisions-infra.md` I-09 ~ I-14](../conventions/decisions-infra.md) — 결정 카드
+- [`../guides/dogfood-setup.md`](../journey/dogfood-setup.md) — 셋업 가이드 (정상 흐름)
+- [`../troubleshooting/dogfood-pitfalls.md`](./dogfood-pitfalls.md) — 함정 모음 (사고 실록)
+- [`../guides/dogfood-faq.md`](../journey/dogfood-faq.md) — 자주 묻는 질문
+- [`../guides/deployment.md`](../journey/deployment.md) — 운영 배포 (cloudflared, observability)
+- [`../runbook.md`](../infra/runbook.md) — 평시 운영 / 장애 대응
+- [`../conventions/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md) — 결정 카드

@@ -2,9 +2,9 @@
 
 `core-storage-api` / `core-storage-impl` 의 `StoragePort` 사용 가이드.
 
-> 인프라 전체 구성 / 프로비저닝 상태: [`../infrastructure.md §4`](../infrastructure.md)
-> 셋업 가이드 (로컬 docker / NAS): [`../guides/storage-setup.md`](../guides/storage-setup.md)
-> 선택 근거 (2-tier bucket): [`decisions-infra.md`](./decisions-infra.md) I-07
+> 인프라 전체 구성 / 프로비저닝 상태: [`../infrastructure.md §4`](../infra/infrastructure.md)
+> 셋업 가이드 (로컬 docker / NAS): [`../guides/storage-setup.md`](../infra/storage-setup.md)
+> 선택 근거 (2-tier bucket): [`decisions-infra.md`](../infra/decisions-infra.md) I-07
 
 ## Signed URL 패턴 (권장)
 

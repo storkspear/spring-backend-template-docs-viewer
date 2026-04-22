@@ -211,8 +211,8 @@ docker restart factory-app
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
-| ← 이전 | [`guides/onboarding.md`](./guides/onboarding.md) | 2~3단계, 로컬 dev + 첫 앱 모듈 |
-| → 다음 | [`guides/dogfood-setup.md`](./guides/dogfood-setup.md) §3 | 4단계 두 번째, 운영 자격 증명 (Tailscale OAuth · GitHub PAT · Supabase) |
+| ← 이전 | [`guides/onboarding.md`](./onboarding.md) | 2~3단계, 로컬 dev + 첫 앱 모듈 |
+| → 다음 | [`guides/dogfood-setup.md`](./dogfood-setup.md) §3 | 4단계 두 번째, 운영 자격 증명 (Tailscale OAuth · GitHub PAT · Supabase) |
 
-**막혔을 때**: [도그푸딩 함정](./troubleshooting/dogfood-pitfalls.md) / [FAQ](./guides/dogfood-faq.md)
-**왜 이렇게?**: [`philosophy.md`](./philosophy.md) (앱별 social credential 분리 결정) / [`conventions/decisions-infra.md`](./conventions/decisions-infra.md)
+**막혔을 때**: [도그푸딩 함정](../reference/dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
+**왜 이렇게?**: [`philosophy.md`](./philosophy.md) (앱별 social credential 분리 결정) / [`conventions/decisions-infra.md`](../infra/decisions-infra.md)

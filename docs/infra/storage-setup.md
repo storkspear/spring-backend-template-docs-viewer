@@ -1,11 +1,11 @@
 # 스토리지 셋업 가이드 (MinIO / 시놀로지 NAS)
 
 > **대상**: 이 문서는 **template 레포 자체** 의 MinIO 셋업 (docker-compose 기반, 기본 bucket=`template-default`) 을 설명합니다.
-> **파생 레포 개발자** 는 [`onboarding.md`](./onboarding.md) §3.3 를 참조하세요 (`dev-shared` 또는 본인 환경 이름).
+> **파생 레포 개발자** 는 [`onboarding.md`](../journey/onboarding.md) §3.3 를 참조하세요 (`dev-shared` 또는 본인 환경 이름).
 >
-> 인프라 전체 구성 / 책임 분담: [`../infrastructure.md`](../infrastructure.md)
+> 인프라 전체 구성 / 책임 분담: [`../infrastructure.md`](./infrastructure.md)
 > bucket 네이밍 / key 패턴 규약: [`../conventions/storage.md`](../conventions/storage.md)
-> 선택 근거 (왜 NAS MinIO?): [`../conventions/decisions-infra.md`](../conventions/decisions-infra.md) I-03
+> 선택 근거 (왜 NAS MinIO?): [`../conventions/decisions-infra.md`](./decisions-infra.md) I-03
 
 ## 로컬 개발
 

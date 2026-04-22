@@ -346,7 +346,7 @@ apps/app-sumtally/src/main/resources/db/migration/sumtally/
 
 `conditions` 의 키 형식: `{fieldName}_{operator}`. 지원 연산자: `eq`(기본), `not`, `gte`, `lte`, `gt`, `lt`, `like`, `in`, `notIn`, `isNull`, `isNotNull`.
 
-상세 규칙은 [`philosophy.md`](../philosophy.md) 의 "결정 10" 참조.
+상세 규칙은 [`philosophy.md`](../journey/philosophy.md) 의 "결정 10" 참조.
 
 ---
 

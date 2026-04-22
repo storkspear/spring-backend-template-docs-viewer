@@ -195,7 +195,7 @@ Started FactoryApplication in 4.xxx seconds
 
 ### 4.4 관측성은 로컬 dev 에서 제외됨
 
-관측성 스택(Loki/Grafana/Prometheus/Alertmanager)은 운영 전용으로 범위가 조정됐습니다. 로컬에서 대시보드/쿼리 동작 확인이 필요하면 Mac mini 운영 환경의 `log.<domain>` 에서 확인하세요. 자세한 기동 방법은 [`monitoring-setup.md`](./monitoring-setup.md) (Mac mini 기준) 참조.
+관측성 스택(Loki/Grafana/Prometheus/Alertmanager)은 운영 전용으로 범위가 조정됐습니다. 로컬에서 대시보드/쿼리 동작 확인이 필요하면 Mac mini 운영 환경의 `log.<domain>` 에서 확인하세요. 자세한 기동 방법은 [`monitoring-setup.md`](../infra/monitoring-setup.md) (Mac mini 기준) 참조.
 
 로컬 dev 에 관측성 스택이 필요 없는 이유: 메모리·docker 리소스 부담 대비 실제 활용 빈도 낮음. 로그는 `./gradlew :bootstrap:bootRun` 콘솔 출력, 메트릭은 `/actuator/prometheus` HTTP 엔드포인트로 충분합니다.
 
@@ -445,13 +445,13 @@ openssl rand -hex 32   # 64자 출력
 
 | 목적 | 문서 |
 |---|---|
-| 코드 아키텍처 (포트/어댑터, 모듈 의존) | [`../architecture.md`](../architecture.md) |
-| 인프라 구성 (DB/스토리지/관측성 전체 상태) | [`../infrastructure.md`](../infrastructure.md) |
-| 설계 철학 (결정 1~16) | [`../philosophy.md`](../philosophy.md) |
-| 인프라 결정 근거 (Supabase/NAS/맥미니 등) | [`../conventions/decisions-infra.md`](../conventions/decisions-infra.md) |
-| 코딩 규약 (naming, DTO, exception, 등) | [`../conventions/`](../conventions/) |
-| 미완료 / 향후 작업 목록 | [`../backlog.md`](../backlog.md) |
-| 장애 시나리오 분석 | [`../edge-cases.md`](../edge-cases.md) |
+| 코드 아키텍처 (포트/어댑터, 모듈 의존) | [`../architecture.md`](./architecture.md) |
+| 인프라 구성 (DB/스토리지/관측성 전체 상태) | [`../infrastructure.md`](../infra/infrastructure.md) |
+| 설계 철학 (결정 1~16) | [`../philosophy.md`](./philosophy.md) |
+| 인프라 결정 근거 (Supabase/NAS/맥미니 등) | [`../conventions/decisions-infra.md`](../infra/decisions-infra.md) |
+| 코딩 규약 (naming, DTO, exception, 등) | [`../conventions/`](../conventions) |
+| 미완료 / 향후 작업 목록 | [`../backlog.md`](../reference/backlog.md) |
+| 장애 시나리오 분석 | [`../edge-cases.md`](../infra/edge-cases.md) |
 
 ---
 
@@ -471,12 +471,12 @@ openssl rand -hex 32   # 64자 출력
 
 ## 📖 책 목차 — Journey 2~3단계
 
-[`../README.md`](../README.md) 의 **2단계 (어떻게 써? 로컬 dev)** 와 **3단계 (클론 후 뭐부터? 첫 앱 모듈 추가)** 입니다.
+[`../README.md`](./README.md) 의 **2단계 (어떻게 써? 로컬 dev)** 와 **3단계 (클론 후 뭐부터? 첫 앱 모듈 추가)** 입니다.
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
-| ← 이전 | [`../architecture.md`](../architecture.md) | 1단계 — 모듈 구조 한 눈 |
-| → 다음 | [`../social-auth-setup.md`](../social-auth-setup.md) | 4단계 — 외부 자격 증명 발급 (Google/Apple) |
+| ← 이전 | [`../architecture.md`](./architecture.md) | 1단계 — 모듈 구조 한 눈 |
+| → 다음 | [`../social-auth-setup.md`](./social-auth-setup.md) | 4단계 — 외부 자격 증명 발급 (Google/Apple) |
 
-**막혔을 때**: §6 흔한 에러 5개 / [도그푸딩 함정](../troubleshooting/dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
-**왜 이렇게?**: [`../philosophy.md`](../philosophy.md) (설계 결정 22개) / [`../conventions/decisions-infra.md`](../conventions/decisions-infra.md) (I-01~I-14)
+**막혔을 때**: §6 흔한 에러 5개 / [도그푸딩 함정](../reference/dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
+**왜 이렇게?**: [`../philosophy.md`](./philosophy.md) (설계 결정 22개) / [`../conventions/decisions-infra.md`](../infra/decisions-infra.md) (I-01~I-14)

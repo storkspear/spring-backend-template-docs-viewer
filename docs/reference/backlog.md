@@ -23,7 +23,7 @@
 
 5. **2개월마다 archive → CHANGELOG 이관**, 이 파일은 가볍게 유지.
 
-6. **새 Item plan 작성 시**: backlog 에서 관련 항목을 plan scope 에 포함 선언. plan 완료 시 해당 backlog 항목 일괄 archive. 규칙 상세: [`conventions/git-workflow.md`](./conventions/git-workflow.md).
+6. **새 Item plan 작성 시**: backlog 에서 관련 항목을 plan scope 에 포함 선언. plan 완료 시 해당 backlog 항목 일괄 archive. 규칙 상세: [`conventions/git-workflow.md`](../conventions/git-workflow.md).
 
 ---
 
@@ -113,6 +113,5 @@
 
 ## 관련 문서
 
-- [`conventions/git-workflow.md`](./conventions/git-workflow.md) — backlog 운영 규칙 상세
-- [`internal/plans/`](./internal/plans/) — 현재 진행 중 Item plan (내부 작업 기록)
+- [`conventions/git-workflow.md`](../conventions/git-workflow.md) — backlog 운영 규칙 상세
 - [`CHANGELOG.md`](../CHANGELOG.md) — archive 된 완료 항목의 최종 기록처

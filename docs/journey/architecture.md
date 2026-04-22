@@ -23,7 +23,7 @@
 - **언어/런타임:** Java 21, Spring Boot 3.3.x (LTS)
 - **빌드:** Gradle 8.x 멀티모듈
 - **데이터 액세스:** Spring Data JPA / Hibernate (엔티티, 기본 CRUD) + **QueryDsl 5.1.0 (Jakarta)** (타입 세이프 동적 쿼리, Q-클래스 자동 생성)
-- **DB:** PostgreSQL 16 (로컬 Docker / 운영 Supabase Seoul — 상세: [`infrastructure.md`](./infrastructure.md))
+- **DB:** PostgreSQL 16 (로컬 Docker / 운영 Supabase Seoul — 상세: [`infrastructure.md`](../infra/infrastructure.md))
 - **인증:** JJWT (HS256) + Spring Security (stateless) + BCrypt
 - **외부 서비스:** Resend (이메일), Firebase Admin SDK (FCM)
 - **문서화:** springdoc-openapi
@@ -68,7 +68,7 @@
 | DB 인스턴스 | 공유 (하나) | 별도 |
 | 유저/인증 Schema | 앱별 독립 | 전부 별도 |
 
-schema 실제 구조, 마이그레이션 파일, Supabase 연결 상세: [`infrastructure.md §10`](./infrastructure.md).
+schema 실제 구조, 마이그레이션 파일, Supabase 연결 상세: [`infrastructure.md §10`](../infra/infrastructure.md).
 
 ---
 
@@ -665,18 +665,18 @@ apps/app-<slug>/config/<Slug>DataSourceConfig (slug="<slug>")
                          entityManagerFactoryRef = "<slug>EntityManagerFactory")
 ```
 
-두 Config 모두 `common-persistence/AbstractAppDataSourceConfig` 의 `build*` 헬퍼 재사용. 새 앱 추가 시 `new-app.sh` 가 Config 클래스 자동 생성. 상세 결정: [`conventions/decisions-infra.md I-08`](./conventions/decisions-infra.md).
+두 Config 모두 `common-persistence/AbstractAppDataSourceConfig` 의 `build*` 헬퍼 재사용. 새 앱 추가 시 `new-app.sh` 가 Config 클래스 자동 생성. 상세 결정: [`conventions/decisions-infra.md I-08`](../infra/decisions-infra.md).
 
 ---
 
 ## 호스팅 구성
 
-환경별 구성도 (로컬 / 운영), 포트 표, 프로비저닝 상태, 책임 분담은 **[`infrastructure.md`](./infrastructure.md)** 로 이관되었습니다.
+환경별 구성도 (로컬 / 운영), 포트 표, 프로비저닝 상태, 책임 분담은 **[`infrastructure.md`](../infra/infrastructure.md)** 로 이관되었습니다.
 
-- 로컬 개발 구성도: [`infrastructure.md §3`](./infrastructure.md)
-- 운영 구성도 (planned): [`infrastructure.md §4`](./infrastructure.md)
-- 책임 분담 표: [`infrastructure.md §5`](./infrastructure.md)
-- 선택 근거 (Supabase / NAS MinIO / 맥미니 / Cloudflare Tunnel): [`conventions/decisions-infra.md`](./conventions/decisions-infra.md)
+- 로컬 개발 구성도: [`infrastructure.md §3`](../infra/infrastructure.md)
+- 운영 구성도 (planned): [`infrastructure.md §4`](../infra/infrastructure.md)
+- 책임 분담 표: [`infrastructure.md §5`](../infra/infrastructure.md)
+- 선택 근거 (Supabase / NAS MinIO / 맥미니 / Cloudflare Tunnel): [`conventions/decisions-infra.md`](../infra/decisions-infra.md)
 
 ---
 
@@ -702,7 +702,7 @@ apps/app-<slug>/config/<Slug>DataSourceConfig (slug="<slug>")
 
 `build-logic/` 의 역할별 convention plugin (`factory.common-module`, `factory.core-api-module`, `factory.core-impl-module`, `factory.app-module`, `factory.bootstrap-module`) 이 `afterEvaluate` 에서 `ProjectDependency` 를 순회하며 허용/금지 규칙 검증. 위반 시 `GradleException` throw.
 
-자세한 매트릭스와 규칙은 [`conventions/module-dependencies.md`](./conventions/module-dependencies.md).
+자세한 매트릭스와 규칙은 [`conventions/module-dependencies.md`](../conventions/module-dependencies.md).
 
 ### 방어선 5 — ArchUnit CI 강제
 
@@ -712,7 +712,7 @@ apps/app-<slug>/config/<Slug>DataSourceConfig (slug="<slug>")
 
 포트가 약속한 행위를 `AbstractXxxPortContractTest` 로 명문화합니다. 모든 impl 은 이 abstract 를 상속하여 통과해야 머지 가능. JSON 직렬화 계약은 `AbstractJsonContractTest<T>` 로 강제됩니다. 테스트 실패 시 CI 에서 빌드가 멈춥니다.
 
-이 방어선은 **추출 가능성의 형식적 보증** — impl 을 HTTP 어댑터로 교체해도 같은 abstract 를 통과하면 정상 작동이 확정됩니다. 자세한 규약은 [`conventions/contract-testing.md`](./conventions/contract-testing.md) 참조.
+이 방어선은 **추출 가능성의 형식적 보증** — impl 을 HTTP 어댑터로 교체해도 같은 abstract 를 통과하면 정상 작동이 확정됩니다. 자세한 규약은 [`conventions/contract-testing.md`](../conventions/contract-testing.md) 참조.
 
 이 여섯 개가 모두 있으면 **"나중에 뽑을 수 있다"** 가 빈 약속이 아닌 **보장** 이 됩니다. 추출 작업이 필요해지는 시점에는 대략 다음 7~10 영업일 정도로 진행 가능합니다.
 
@@ -728,7 +728,7 @@ apps/app-<slug>/config/<Slug>DataSourceConfig (slug="<slug>")
 ## 관련 문서
 
 - [`philosophy.md`](./philosophy.md) — 설계 결정의 이유
-- [`conventions/`](./conventions/) — 코딩 규약 (네이밍, API 응답 포맷, 설계 원칙 등 11개 문서)
+- [`conventions/`](../conventions) — 코딩 규약 (네이밍, API 응답 포맷, 설계 원칙 등 11개 문서)
 
 ---
 
@@ -739,7 +739,7 @@ apps/app-<slug>/config/<Slug>DataSourceConfig (slug="<slug>")
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
 | ← 이전 | [`philosophy.md`](./philosophy.md) | 같은 1단계, 핵심 결정 1~3 |
-| → 다음 | [`guides/onboarding.md`](./guides/onboarding.md) | 2단계 — 어떻게 써? (로컬 dev) |
+| → 다음 | [`guides/onboarding.md`](./onboarding.md) | 2단계 — 어떻게 써? (로컬 dev) |
 
-**막혔을 때**: [도그푸딩 함정](./troubleshooting/dogfood-pitfalls.md) / [FAQ](./guides/dogfood-faq.md)
-**왜 이렇게?**: [`philosophy.md`](./philosophy.md) (설계 결정 22개) / [`conventions/decisions-infra.md`](./conventions/decisions-infra.md) (인프라 결정 I-01~I-14)
+**막혔을 때**: [도그푸딩 함정](../reference/dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
+**왜 이렇게?**: [`philosophy.md`](./philosophy.md) (설계 결정 22개) / [`conventions/decisions-infra.md`](../infra/decisions-infra.md) (인프라 결정 I-01~I-14)

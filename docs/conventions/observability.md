@@ -2,9 +2,9 @@
 
 이 문서는 `spring-backend-template` 의 **메트릭·로그·알림** 규약을 정의합니다.
 
-> 인프라 스택 구성 / 프로비저닝 상태: [`../infrastructure.md §5`](../infrastructure.md)
-> 셋업 가이드 (도커 기동, 대시보드 프로비저닝): [`../guides/monitoring-setup.md`](../guides/monitoring-setup.md)
-> 선택 근거 (셀프 호스트 vs 관리형): [`decisions-infra.md`](./decisions-infra.md) I-06
+> 인프라 스택 구성 / 프로비저닝 상태: [`../infrastructure.md §5`](../infra/infrastructure.md)
+> 셋업 가이드 (도커 기동, 대시보드 프로비저닝): [`../guides/monitoring-setup.md`](../infra/monitoring-setup.md)
+> 선택 근거 (셀프 호스트 vs 관리형): [`decisions-infra.md`](../infra/decisions-infra.md) I-06
 > 알림 종류/임계치 확정: Item Ops-1 (`../backlog.md`)
 
 ## 3대 축
