@@ -1,4 +1,4 @@
-mermaid.initialize({ startOnLoad: false, theme: 'neutral', fontFamily: 'Noto Sans KR, Inter, sans-serif' });
+mermaid.initialize({ startOnLoad: false, theme: 'default', fontFamily: 'Noto Sans KR, Inter, sans-serif' });
 
 marked.use({
   breaks: true,

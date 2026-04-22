@@ -253,6 +253,18 @@ body {
 .post-body a { color: #6366f1; text-decoration: none; }
 .post-body a:hover { text-decoration: underline; }
 
+/* ── Mermaid ── */
+.mermaid {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px 16px;
+  margin: 20px 0;
+  text-align: center;
+  overflow-x: auto;
+}
+.mermaid svg { max-width: 100%; height: auto; }
+
 /* ── AWS Diagram ── */
 .aws-diagram {
   background: #f8fafc;
