@@ -1,0 +1,64 @@
+{
+  "brand": {
+    "name": "spring-backend-template",
+    "sub": "Architecture Docs"
+  },
+  "groups": [
+    {
+      "name": "핵심 문서",
+      "files": [
+        { "path": "README.md",         "title": "README",         "desc": "프로젝트 개요 및 빠른 시작" },
+        { "path": "architecture.md",   "title": "Architecture",   "desc": "모듈 구조, 파일 트리, 의존 방향, DB 전략" },
+        { "path": "philosophy.md",     "title": "Philosophy",     "desc": "모듈러 모놀리스, 포트/어댑터, 앱별 독립 DB — 각 설계 결정의 이유" },
+        { "path": "infrastructure.md", "title": "Infrastructure", "desc": "맥미니 홈서버, Supabase, Cloudflare Tunnel, 블루그린 배포" },
+        { "path": "runbook.md",        "title": "Runbook",        "desc": "운영 절차 및 장애 대응" },
+        { "path": "backlog.md",        "title": "Backlog",        "desc": "개발 예정 항목" },
+        { "path": "edge-cases.md",     "title": "Edge Cases",     "desc": "엣지 케이스 및 예외 처리 목록" }
+      ]
+    },
+    {
+      "name": "컨벤션",
+      "files": [
+        { "path": "conventions/README.md",              "title": "Overview",            "desc": "컨벤션 전체 개요" },
+        { "path": "conventions/design-principles.md",   "title": "Design Principles",   "desc": "코드 작성 원칙" },
+        { "path": "conventions/exception-handling.md",  "title": "Exception Handling",  "desc": "예외 처리 표준" },
+        { "path": "conventions/api-response.md",        "title": "API Response",        "desc": "API 응답 형식 표준" },
+        { "path": "conventions/dto-factory.md",         "title": "DTO Factory",         "desc": "DTO 생성 패턴" },
+        { "path": "conventions/contract-testing.md",    "title": "Contract Testing",    "desc": "계약 기반 테스트 전략" },
+        { "path": "conventions/json-contract.md",       "title": "JSON Contract",       "desc": "JSON 계약 규칙" },
+        { "path": "conventions/module-dependencies.md", "title": "Module Dependencies", "desc": "모듈 의존 방향 규칙" },
+        { "path": "conventions/naming.md",              "title": "Naming",              "desc": "네이밍 규칙" },
+        { "path": "conventions/observability.md",       "title": "Observability",       "desc": "로깅, 메트릭, 트레이싱" },
+        { "path": "conventions/rate-limiting.md",       "title": "Rate Limiting",       "desc": "요청 제한 전략" },
+        { "path": "conventions/records-and-classes.md", "title": "Records & Classes",   "desc": "Record vs Class 사용 기준" },
+        { "path": "conventions/storage.md",             "title": "Storage",             "desc": "파일 스토리지 컨벤션" },
+        { "path": "conventions/versioning.md",          "title": "Versioning",          "desc": "API 버저닝 전략" },
+        { "path": "conventions/git-workflow.md",        "title": "Git Workflow",        "desc": "브랜치 전략 및 커밋 규칙" },
+        { "path": "conventions/decisions-infra.md",     "title": "Infra Decisions",     "desc": "인프라 결정 기록" }
+      ]
+    },
+    {
+      "name": "가이드",
+      "files": [
+        { "path": "guides/onboarding.md",          "title": "Onboarding",          "desc": "신규 개발자 온보딩" },
+        { "path": "guides/deployment.md",           "title": "Deployment",          "desc": "배포 전략 및 운영 가이드" },
+        { "path": "guides/mac-mini-setup.md",       "title": "Mac Mini Setup",      "desc": "홈서버 맥미니 셋업" },
+        { "path": "guides/monitoring-setup.md",     "title": "Monitoring Setup",    "desc": "모니터링 스택 설정" },
+        { "path": "guides/storage-setup.md",        "title": "Storage Setup",       "desc": "스토리지 설정 가이드" },
+        { "path": "guides/dogfood-setup.md",        "title": "Dogfood Setup",       "desc": "도그푸딩 환경 구성" },
+        { "path": "guides/dogfood-faq.md",          "title": "Dogfood FAQ",         "desc": "도그푸딩 자주 묻는 질문" },
+        { "path": "guides/cross-repo-cherry-pick.md","title": "Cross-repo Cherry-pick","desc": "레포 간 체리픽 방법" }
+      ]
+    },
+    {
+      "name": "기타",
+      "files": [
+        { "path": "architecture/ci-cd-flow.md",    "title": "CI/CD Flow",          "desc": "CI/CD 파이프라인 흐름" },
+        { "path": "migration/README.md",            "title": "Migration",           "desc": "DB 마이그레이션 가이드" },
+        { "path": "security/key-rotation.md",       "title": "Key Rotation",        "desc": "보안 키 로테이션" },
+        { "path": "social-auth-setup.md",           "title": "Social Auth Setup",   "desc": "소셜 로그인 설정" },
+        { "path": "troubleshooting/dogfood-pitfalls.md", "title": "Troubleshooting", "desc": "도그푸딩 트러블슈팅" }
+      ]
+    }
+  ]
+}
