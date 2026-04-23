@@ -44,31 +44,40 @@
     {
       "name": "컨벤션",
       "files": [
-        { "path": "conventions/README.md",              "title": "Overview",            "desc": "컨벤션 전체 개요" },
-        { "path": "conventions/design-principles.md",   "title": "Design Principles",   "desc": "코드 작성 원칙" },
-        { "path": "conventions/exception-handling.md",  "title": "Exception Handling",  "desc": "예외 처리 표준" },
-        { "path": "conventions/api-response.md",        "title": "API Response",        "desc": "API 응답 형식 표준" },
-        { "path": "conventions/dto-factory.md",         "title": "DTO Factory",         "desc": "DTO 생성 패턴" },
-        { "path": "conventions/contract-testing.md",    "title": "Contract Testing",    "desc": "계약 기반 테스트 전략" },
-        { "path": "conventions/json-contract.md",       "title": "JSON Contract",       "desc": "JSON 계약 규칙" },
-        { "path": "conventions/module-dependencies.md", "title": "Module Dependencies", "desc": "모듈 의존 방향 규칙" },
-        { "path": "conventions/naming.md",              "title": "Naming",              "desc": "네이밍 규칙" },
-        { "path": "conventions/observability.md",       "title": "Observability",       "desc": "로깅, 메트릭, 트레이싱" },
-        { "path": "conventions/rate-limiting.md",       "title": "Rate Limiting",       "desc": "요청 제한 전략" },
-        { "path": "conventions/records-and-classes.md", "title": "Records & Classes",   "desc": "Record vs Class 사용 기준" },
-        { "path": "conventions/storage.md",             "title": "Storage",             "desc": "파일 스토리지 컨벤션" },
-        { "path": "conventions/versioning.md",          "title": "Versioning",          "desc": "API 버저닝 전략" },
-        { "path": "conventions/git-workflow.md",        "title": "Git Workflow",        "desc": "브랜치 전략 및 커밋 규칙" }
+        { "path": "conventions/README.md",                  "title": "Overview",              "desc": "컨벤션 전체 개요" },
+        { "path": "conventions/design-principles.md",       "title": "Design Principles",     "desc": "코드 작성 원칙" },
+        { "path": "conventions/module-dependencies.md",     "title": "Module Dependencies",   "desc": "모듈 의존 방향 규칙" },
+        { "path": "conventions/architecture-rules.md",      "title": "Architecture Rules",    "desc": "ArchUnit 22개 규칙 전체 (r1~r22)" },
+        { "path": "conventions/naming.md",                  "title": "Naming",                "desc": "네이밍 규칙" },
+        { "path": "conventions/records-and-classes.md",     "title": "Records & Classes",     "desc": "Record vs Class 사용 기준" },
+        { "path": "conventions/api-response.md",            "title": "API Response",          "desc": "API 응답 형식 표준" },
+        { "path": "conventions/json-contract.md",           "title": "JSON Contract",         "desc": "JSON 계약 규칙" },
+        { "path": "conventions/dto-factory.md",             "title": "DTO Factory",           "desc": "DTO 생성 패턴" },
+        { "path": "conventions/exception-handling.md",      "title": "Exception Handling",    "desc": "예외 처리 표준" },
+        { "path": "conventions/jwt-authentication.md",      "title": "JWT Authentication",    "desc": "JWT 클레임 · access/refresh · @CurrentUser · BCrypt" },
+        { "path": "conventions/multitenant-architecture.md","title": "Multitenant Architecture","desc": "per-app schema · HikariCP 풀 격리 · appSlug 검증" },
+        { "path": "conventions/push-notifications.md",      "title": "Push Notifications",    "desc": "FCM · 디바이스 등록 · PushPort · 토큰 무효화" },
+        { "path": "conventions/email-verification.md",      "title": "Email Verification",    "desc": "Resend · 이메일 인증 · 비밀번호 재설정 플로우" },
+        { "path": "conventions/observability.md",           "title": "Observability",         "desc": "로깅, 메트릭, 트레이싱" },
+        { "path": "conventions/rate-limiting.md",           "title": "Rate Limiting",         "desc": "요청 제한 전략" },
+        { "path": "conventions/storage.md",                 "title": "Storage",               "desc": "파일 스토리지 컨벤션" },
+        { "path": "conventions/versioning.md",              "title": "Versioning",            "desc": "API 버저닝 전략" },
+        { "path": "conventions/contract-testing.md",        "title": "Contract Testing",      "desc": "계약 기반 테스트 전략" },
+        { "path": "conventions/testing-strategy.md",        "title": "Testing Strategy",      "desc": "단위 · Contract · Integration · ArchUnit 4층 전략" },
+        { "path": "conventions/git-workflow.md",            "title": "Git Workflow",          "desc": "브랜치 전략 및 커밋 규칙" }
       ]
     },
     {
       "name": "참조",
       "files": [
-        { "path": "reference/ci-cd-flow.md",        "title": "CI/CD Flow",      "desc": "commit → 운영 반영까지 전체 흐름" },
-        { "path": "reference/migration.md",         "title": "Migration",       "desc": "DB 마이그레이션 가이드" },
-        { "path": "reference/key-rotation.md",      "title": "Key Rotation",    "desc": "보안 키 로테이션 절차" },
-        { "path": "reference/dogfood-pitfalls.md",  "title": "Troubleshooting", "desc": "도그푸딩 함정 11개 모음" },
-        { "path": "reference/backlog.md",           "title": "Backlog",         "desc": "개발 예정 항목" }
+        { "path": "reference/app-scaffolding.md",          "title": "App Scaffolding",         "desc": "new-app.sh — 앱 모듈 자동 생성 도구" },
+        { "path": "reference/ci-cd-flow.md",               "title": "CI/CD Flow",              "desc": "commit → 운영 반영까지 전체 흐름" },
+        { "path": "reference/migration.md",                "title": "Migration",               "desc": "DB 마이그레이션 가이드" },
+        { "path": "reference/seed-data-management.md",     "title": "Seed Data Management",    "desc": "개발/테스트 seed 데이터 전략 — Flyway · Runner · fixture" },
+        { "path": "reference/key-rotation.md",             "title": "Key Rotation",            "desc": "보안 키 로테이션 절차" },
+        { "path": "reference/flutter-backend-integration.md","title": "Flutter Integration",   "desc": "Flutter 앱과 백엔드 연동 — 엔드포인트 · 401 처리 · appSlug" },
+        { "path": "reference/dogfood-pitfalls.md",         "title": "Troubleshooting",         "desc": "도그푸딩 함정 11개 모음" },
+        { "path": "reference/backlog.md",                  "title": "Backlog",                 "desc": "개발 예정 항목" }
       ]
     }
   ]
