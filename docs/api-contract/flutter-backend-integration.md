@@ -139,8 +139,8 @@ public record AuthTokens(
       "emailVerified": false
     },
     "tokens": {
-      "accessToken": "eyJhbGciOiJIUzI1NiJ9...",
-      "refreshToken": "a7f3c2b1e94d..."
+      "accessToken": "<jwt-access-token-placeholder>",
+      "refreshToken": "<refresh-token-placeholder>"
     }
   },
   "error": null
@@ -186,8 +186,8 @@ public record RefreshRequest(
 ```json
 {
   "data": {
-    "accessToken": "eyJhbGc...",
-    "refreshToken": "b8e4d3c2..."
+    "accessToken": "<jwt-access-token-placeholder>",
+    "refreshToken": "<refresh-token-placeholder>"
   },
   "error": null
 }
