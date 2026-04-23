@@ -7,7 +7,12 @@
     {
       "name": "시작하기",
       "files": [
-        { "path": "journey/README.md",                        "title": "Overview",             "desc": "전체 읽기 순서 안내 (Developer Journey)" },
+        { "path": "journey/README.md",                        "title": "Overview",             "desc": "전체 읽기 순서 안내 (Developer Journey)" }
+      ]
+    },
+    {
+      "name": "통합 가이드",
+      "files": [
         { "path": "journey/philosophy.md",                    "title": "Philosophy",           "desc": "설계 결정의 이유 — 모듈러 모놀리스, 포트/어댑터 (1단계 ①)" },
         { "path": "journey/architecture.md",                  "title": "Architecture",         "desc": "모듈 구조 · 파일 트리 · 기술 스택 (1단계 ②)" },
         { "path": "journey/onboarding.md",                    "title": "Onboarding",           "desc": "로컬 개발 환경 + 첫 앱 모듈 추가 (2~3단계)" },
