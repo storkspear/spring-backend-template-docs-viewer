@@ -2,10 +2,10 @@
 
 이 문서는 `spring-backend-template` 의 **메트릭·로그·알림** 규약을 정의합니다.
 
-> 인프라 스택 구성 / 프로비저닝 상태: [`../infrastructure.md §5`](../infra/infrastructure.md)
-> 셋업 가이드 (도커 기동, 대시보드 프로비저닝): [`../guides/monitoring-setup.md`](../infra/monitoring-setup.md)
+> 인프라 스택 구성 / 프로비저닝 상태: [`../infra/infrastructure.md §5`](../infra/infrastructure.md)
+> 셋업 가이드 (도커 기동, 대시보드 프로비저닝): [`../infra/monitoring-setup.md`](../infra/monitoring-setup.md)
 > 선택 근거 (셀프 호스트 vs 관리형): [`decisions-infra.md`](../infra/decisions-infra.md) I-06
-> 알림 종류/임계치 확정: Item Ops-1 (`../backlog.md`)
+> 알림 종류/임계치 확정: Item Ops-1 (`../reference/backlog.md`)
 
 ## 3대 축
 
@@ -78,5 +78,5 @@ Prometheus scrape 시 Micrometer 가 `.` → `_` 변환: `http_server_requests_s
 
 ## 관련 문서
 
-- `docs/guides/monitoring-setup.md` — 프로덕션 모니터링 스택 배포
+- `docs/infra/monitoring-setup.md` — 프로덕션 모니터링 스택 배포
 - `docs/conventions/rate-limiting.md` — Rate limit 정책

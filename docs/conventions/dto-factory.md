@@ -212,6 +212,6 @@ public DetailedProfile getDetailedProfile(long userId) {
 
 ## 참조
 
-- `docs/philosophy.md` 결정 3 (api/impl 분리), 결정 11 (포트/어댑터)
+- `docs/journey/philosophy.md` 결정 3 (api/impl 분리), 결정 11 (포트/어댑터)
 - `docs/conventions/records-and-classes.md` (record vs class)
 - `docs/conventions/json-contract.md` (JSON 정책)

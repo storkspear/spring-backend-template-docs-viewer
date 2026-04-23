@@ -2,7 +2,7 @@
 
 Mac mini 운영 호스트에서 관측성 스택(Loki + Grafana + Prometheus + Alertmanager)을 기동·운영하는 방법.
 
-> 인프라 전체 구성 / 책임 분담: [`../infrastructure.md`](./infrastructure.md)
+> 인프라 전체 구성 / 책임 분담: [`../infra/infrastructure.md`](./infrastructure.md)
 > 관측성 규약 (로그 레벨, MDC, 메트릭 네이밍): [`../conventions/observability.md`](../conventions/observability.md)
 > 선택 근거 (왜 Loki/Graf/Prom 셀프 호스트?): [`../conventions/decisions-infra.md`](./decisions-infra.md) I-06
 
@@ -127,6 +127,6 @@ docker compose -f infra/docker-compose.observability.yml ps
 ## 관련 문서
 
 - `docs/conventions/observability.md` — 메트릭/로그 규약
-- `docs/guides/deployment.md` — 운영 배포 파이프라인 (Kamal + GHA)
-- `docs/infrastructure.md §4` — 운영 구성도
+- `docs/journey/deployment.md` — 운영 배포 파이프라인 (Kamal + GHA)
+- `docs/infra/infrastructure.md §4` — 운영 구성도
 - `docs/conventions/decisions-infra.md` I-06 — 관측성 스택 선택 근거

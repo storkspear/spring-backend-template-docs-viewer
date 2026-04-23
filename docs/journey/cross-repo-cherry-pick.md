@@ -12,7 +12,7 @@
 
 이 템플릿은 **Use this template** 모델을 사용합니다. 파생 레포는 git 히스토리가 분리되어 있어 fork 와 달리 merge 로 동기화할 수 없습니다. 공통 코드 개선은 **cherry-pick** 으로 전파합니다.
 
-자세한 철학: `docs/philosophy.md` 결정 2.
+자세한 철학: `docs/journey/philosophy.md` 결정 2.
 
 ---
 
@@ -103,7 +103,7 @@ git push origin fix/refresh-token-race
 |---|---|
 | 파일이 파생 레포에서 이미 수정됨 | 수동 merge 후 `git cherry-pick --continue` |
 | 기반 버전이 너무 옛날 (v0.1 → v0.5 점프) | 한 단계씩: v0.1 → v0.2 먼저, 그 다음 v0.2 → v0.3 ... |
-| deprecated API 이미 쓰고 있음 | `docs/migration/vX.Y.Z.md` 참고 후 신규 API 로 교체 |
+| deprecated API 이미 쓰고 있음 | `docs/reference/migration.md` 참고 후 신규 API 로 교체 |
 | 공통 코드와 도메인 코드가 한 커밋에 섞임 | `git cherry-pick -n <sha>` 로 staged 상태만 가져와 선별 |
 
 ### 커밋 위생 원칙
@@ -134,9 +134,9 @@ git push origin fix/refresh-token-race
 
 ## 참조
 
-- `docs/philosophy.md` 결정 2 (템플릿 전파 방식)
+- `docs/journey/philosophy.md` 결정 2 (템플릿 전파 방식)
 - `docs/conventions/versioning.md` (버전 · Deprecation)
-- `docs/migration/` (버전별 migration guide — breaking 있을 때만)
+- `docs/reference/migration.md` (버전별 migration guide — breaking 있을 때만)
 
 ---
 
@@ -147,7 +147,7 @@ git push origin fix/refresh-token-race
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
 | ← 이전 | [`./deployment.md`](./deployment.md) | 같은 7단계, 파생 레포 첫 운영 배포 |
-| → 다음 | (책 끝) — 본인 도메인 작업 시작 | 막히면 [`../runbook.md`](../infra/runbook.md) (운영 절차) 참고 |
+| → 다음 | (책 끝) — 본인 도메인 작업 시작 | 막히면 [`../infra/runbook.md`](../infra/runbook.md) (운영 절차) 참고 |
 
-**막혔을 때**: [`../runbook.md`](../infra/runbook.md) (장애 대응) / [`../edge-cases.md`](../infra/edge-cases.md) (리스크 시나리오)
-**왜 이렇게?**: [`../philosophy.md`](./philosophy.md) 결정 2 (template 패턴)
+**막혔을 때**: [`../infra/runbook.md`](../infra/runbook.md) (장애 대응) / [`../infra/edge-cases.md`](../infra/edge-cases.md) (리스크 시나리오)
+**왜 이렇게?**: [`../journey/philosophy.md`](./philosophy.md) 결정 2 (template 패턴)

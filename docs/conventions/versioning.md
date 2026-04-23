@@ -4,7 +4,7 @@
 
 **관련 문서**:
 - `docs/conventions/git-workflow.md` — 브랜치 · 커밋 규약 · Merge 정책
-- `docs/guides/cross-repo-cherry-pick.md` — 파생 레포 동기화
+- `docs/journey/cross-repo-cherry-pick.md` — 파생 레포 동기화
 
 ---
 
@@ -197,7 +197,7 @@ public void verifyEmailLegacy(VerifyEmailRequest request) {
   Removal in `v1.0.0`. No behavioral change.
 ```
 
-**4. `docs/migration/v<x.y.z>.md`** — 복잡한 경우만:
+**4. `docs/reference/migration.md`** — 복잡한 경우만:
 
 단순 rename 은 CHANGELOG 만으로 충분. 필드 의미 변경·연쇄 변경·DTO 재구성 시 별도 guide.
 
@@ -248,7 +248,7 @@ git push origin template-v1.3.0
 
 ## 참조
 
-- `docs/philosophy.md` 결정 2 (템플릿 전파)
+- `docs/journey/philosophy.md` 결정 2 (템플릿 전파)
 - `docs/conventions/git-workflow.md` (브랜치 · 커밋)
-- `docs/guides/cross-repo-cherry-pick.md` (파생 레포)
-- `docs/migration/` (버전별 migration guide)
+- `docs/journey/cross-repo-cherry-pick.md` (파생 레포)
+- `docs/reference/migration.md` (버전별 migration guide)

@@ -50,7 +50,7 @@
 
 ### 2차: ArchUnit (CI 테스트 단계)
 
-`common-testing/src/main/java/.../architecture/ArchitectureRules.java` 에 canonical 정의 (12개 규칙). `BootstrapArchitectureTest` 가 전체 classpath 스캔.
+`common-testing/src/main/java/.../architecture/ArchitectureRules.java` 에 canonical 정의 (22개 규칙, r1~r22). `BootstrapArchitectureTest` 가 전체 classpath 스캔. 전체 목록은 [architecture-rules.md](./architecture-rules.md) 참고.
 
 ---
 
@@ -193,6 +193,6 @@ Rule 'r9: core-*-api must not depend on JPA/Hibernate' was violated (1 time):
 
 ## 참조
 
-- `docs/philosophy.md` 결정 3 (api/impl 분리), 결정 4 (ArchUnit), 결정 14 (delegation mock 금지)
-- `docs/architecture.md` "의존 규칙" 및 6중 방어선
+- `docs/journey/philosophy.md` 결정 3 (api/impl 분리), 결정 4 (ArchUnit), 결정 14 (delegation mock 금지)
+- `docs/journey/architecture.md` "의존 규칙" 및 6중 방어선
 - `docs/conventions/contract-testing.md` (Port 계약 테스트)

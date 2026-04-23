@@ -1,9 +1,9 @@
 # 도그푸딩 환경 셋업 가이드
 
-template (또는 파생 레포) 가 자기 자신을 Mac mini 에 배포해서 한 사이클 검증하기 위한 가이드. **정상 흐름만** 다룸. 에러 만나면 → [`../troubleshooting/dogfood-pitfalls.md`](../reference/dogfood-pitfalls.md).
+template (또는 파생 레포) 가 자기 자신을 Mac mini 에 배포해서 한 사이클 검증하기 위한 가이드. **정상 흐름만** 다룸. 에러 만나면 → [`../reference/dogfood-pitfalls.md`](../reference/dogfood-pitfalls.md).
 
 > 결정 근거: [`../conventions/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md)
-> 전체 플로우: [`../architecture/ci-cd-flow.md`](../reference/ci-cd-flow.md)
+> 전체 플로우: [`../reference/ci-cd-flow.md`](../reference/ci-cd-flow.md)
 > 자주 묻는 질문: [`./dogfood-faq.md`](./dogfood-faq.md)
 
 ---
@@ -264,7 +264,7 @@ cleanup.sh 가 마지막에 안내 출력. 실제 폐기는 사람이:
 2. **Tailscale OAuth client**: https://login.tailscale.com/admin/settings/oauth → 사용 client Delete
 3. **(선택) Supabase password reset**: Dashboard → Settings → Database → Reset
 
-자세히: [`../security/key-rotation.md`](../reference/key-rotation.md)
+자세히: [`../reference/key-rotation.md`](../reference/key-rotation.md)
 
 ---
 
@@ -275,13 +275,13 @@ cleanup.sh 가 마지막에 안내 출력. 실제 폐기는 사람이:
 2. 새 키 재발급
 3. `.env.dogfood` 갱신 후 `setup.sh` 재실행 → 새 키로 GitHub Secrets 자동 갱신
 
-자세한 rotation 정책: [`../security/key-rotation.md`](../reference/key-rotation.md)
+자세한 rotation 정책: [`../reference/key-rotation.md`](../reference/key-rotation.md)
 
 ---
 
 ## 9. 트러블슈팅
 
-에러 만나면 → [`../troubleshooting/dogfood-pitfalls.md`](../reference/dogfood-pitfalls.md) 의 표에서 에러 메시지로 검색.
+에러 만나면 → [`../reference/dogfood-pitfalls.md`](../reference/dogfood-pitfalls.md) 의 표에서 에러 메시지로 검색.
 
 자주 묻는 질문 → [`./dogfood-faq.md`](./dogfood-faq.md)
 
@@ -289,13 +289,13 @@ cleanup.sh 가 마지막에 안내 출력. 실제 폐기는 사람이:
 
 ## 관련 문서
 
-- [`../architecture/ci-cd-flow.md`](../reference/ci-cd-flow.md) — commit→배포 전체 다이어그램
-- [`../troubleshooting/dogfood-pitfalls.md`](../reference/dogfood-pitfalls.md) — 11회 시도 함정 모음
+- [`../reference/ci-cd-flow.md`](../reference/ci-cd-flow.md) — commit→배포 전체 다이어그램
+- [`../reference/dogfood-pitfalls.md`](../reference/dogfood-pitfalls.md) — 11회 시도 함정 모음
 - [`./dogfood-faq.md`](./dogfood-faq.md) — 자주 묻는 질문
-- [`../security/key-rotation.md`](../reference/key-rotation.md) — 키 교체 절차
+- [`../reference/key-rotation.md`](../reference/key-rotation.md) — 키 교체 절차
 - [`./deployment.md`](./deployment.md) — 운영 배포 (cloudflared 셋업, observability 등)
 - [`./mac-mini-setup.md`](../infra/mac-mini-setup.md) — Mac mini 운영 호스트 셋업
-- [`../runbook.md`](../infra/runbook.md) — 평시 배포 / 롤백 / 장애 대응
+- [`../infra/runbook.md`](../infra/runbook.md) — 평시 배포 / 롤백 / 장애 대응
 
 ---
 
@@ -305,8 +305,8 @@ cleanup.sh 가 마지막에 안내 출력. 실제 폐기는 사람이:
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
-| ← 이전 | [`../social-auth-setup.md`](./social-auth-setup.md) | 4단계 첫 번째, 소셜 로그인 자격 증명 |
+| ← 이전 | [`../journey/social-auth-setup.md`](./social-auth-setup.md) | 4단계 첫 번째, 소셜 로그인 자격 증명 |
 | → 다음 | [`./deployment.md`](./deployment.md) | 7단계, 파생 레포 첫 운영 배포 |
 
-**막혔을 때**: [`../troubleshooting/dogfood-pitfalls.md`](../reference/dogfood-pitfalls.md) / [`./dogfood-faq.md`](./dogfood-faq.md)
+**막혔을 때**: [`../reference/dogfood-pitfalls.md`](../reference/dogfood-pitfalls.md) / [`./dogfood-faq.md`](./dogfood-faq.md)
 **왜 이렇게?**: [`../conventions/decisions-infra.md`](../infra/decisions-infra.md) — I-09 (Kamal 선택) / I-10 (GHCR PAT) / I-12 (workflow_run 게이트) / I-14 (Tailscale OAuth scope)

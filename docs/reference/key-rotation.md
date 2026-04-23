@@ -1,7 +1,7 @@
 # 키 교체 절차 (Key Rotation)
 
 > 결정 근거: [`../conventions/decisions-infra.md` I-10, I-14](../infra/decisions-infra.md)
-> 셋업 가이드: [`../guides/dogfood-setup.md`](../journey/dogfood-setup.md)
+> 셋업 가이드: [`../journey/dogfood-setup.md`](../journey/dogfood-setup.md)
 
 ---
 
@@ -39,7 +39,7 @@
 3. 확인
 
 **새 발급**:
-- [`../guides/dogfood-setup.md §3.1`](../journey/dogfood-setup.md) 의 절차 따름
+- [`../journey/dogfood-setup.md §3.1`](../journey/dogfood-setup.md) 의 절차 따름
 - 새 토큰 값 → `.env.dogfood` 의 `GHCR_TOKEN` 갱신
 - `bash tools/dogfooding/setup.sh` 실행 (멱등 — 기존 secret overwrite)
 
@@ -56,7 +56,7 @@
 3. (선택) 같은 client 로 로그인된 ephemeral devices 가 admin → Machines 에 남아있다면 expired 표시되므로 별도 정리 불필요
 
 **새 발급**:
-- [`../guides/dogfood-setup.md §3.2`](../journey/dogfood-setup.md) 의 절차 따름
+- [`../journey/dogfood-setup.md §3.2`](../journey/dogfood-setup.md) 의 절차 따름
 - ⚠️ **scope 2개 모두 체크 필수** (Devices Core Write + Auth Keys Write, 둘 다 tag:ci)
 - ACL 의 `tagOwners` 가 이미 정의되어 있으면 그대로 사용 (재정의 불필요)
 - 새 Client ID + Secret → `.env.dogfood` 의 `TS_OAUTH_CLIENT_ID` / `TS_OAUTH_SECRET` 갱신
@@ -140,6 +140,6 @@
 
 ## 관련 문서
 
-- [`../guides/dogfood-setup.md`](../journey/dogfood-setup.md) — 외부 리소스 발급 절차
+- [`../journey/dogfood-setup.md`](../journey/dogfood-setup.md) — 외부 리소스 발급 절차
 - [`../conventions/decisions-infra.md` I-10, I-14](../infra/decisions-infra.md) — PAT / Tailscale OAuth 결정 근거
-- [`../troubleshooting/dogfood-pitfalls.md`](./dogfood-pitfalls.md) — 키 관련 함정
+- [`../reference/dogfood-pitfalls.md`](./dogfood-pitfalls.md) — 키 관련 함정

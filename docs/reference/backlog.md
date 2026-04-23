@@ -44,7 +44,7 @@
 - [ ] [Ops] MinIO 외부 접근 방식 결정 (Tailscale vs Cloudflare Tunnel vs DDNS+포트포워딩) — 파생 레포 개발자 또는 외부 맥미니 접근 (2026-04-18)
 - [ ] [Ops] MinIO root credential → service account 로테이션 (`mc admin user svcacct add`) — root 남용 위험 제거 (2026-04-18)
 - [ ] [Ops] MinIO ↔ Supabase 동일 비번 사용 분리 — 하나 유출 시 연쇄 위험 (2026-04-18)
-- [ ] [Ops] 자동화된 pre-deploy Flyway migration 훅 — 파괴적 DDL 안전장치. 현재는 수동 out-of-band migrate-only 권장 (docs/runbook.md) (2026-04-19)
+- [ ] [Ops] 자동화된 pre-deploy Flyway migration 훅 — 파괴적 DDL 안전장치. 현재는 수동 out-of-band migrate-only 권장 (docs/infra/runbook.md) (2026-04-19)
 
 ### 보안 / 자격증명
 

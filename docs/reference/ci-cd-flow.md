@@ -1,8 +1,8 @@
 # CI / CD 전체 플로우 — commit 부터 운영 반영까지
 
 > 결정 근거: [`../conventions/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md)
-> 셋업 가이드: [`../guides/dogfood-setup.md`](../journey/dogfood-setup.md)
-> 함정 모음: [`../troubleshooting/dogfood-pitfalls.md`](./dogfood-pitfalls.md)
+> 셋업 가이드: [`../journey/dogfood-setup.md`](../journey/dogfood-setup.md)
+> 함정 모음: [`../reference/dogfood-pitfalls.md`](./dogfood-pitfalls.md)
 
 ---
 
@@ -377,9 +377,9 @@ cloudflared tunnel 이 외부 도메인을 Mac mini :80 으로 outbound 연결. 
 
 ## 7. 관련 문서
 
-- [`../guides/dogfood-setup.md`](../journey/dogfood-setup.md) — 셋업 가이드 (정상 흐름)
-- [`../troubleshooting/dogfood-pitfalls.md`](./dogfood-pitfalls.md) — 함정 모음 (사고 실록)
-- [`../guides/dogfood-faq.md`](../journey/dogfood-faq.md) — 자주 묻는 질문
-- [`../guides/deployment.md`](../journey/deployment.md) — 운영 배포 (cloudflared, observability)
-- [`../runbook.md`](../infra/runbook.md) — 평시 운영 / 장애 대응
+- [`../journey/dogfood-setup.md`](../journey/dogfood-setup.md) — 셋업 가이드 (정상 흐름)
+- [`../reference/dogfood-pitfalls.md`](./dogfood-pitfalls.md) — 함정 모음 (사고 실록)
+- [`../journey/dogfood-faq.md`](../journey/dogfood-faq.md) — 자주 묻는 질문
+- [`../journey/deployment.md`](../journey/deployment.md) — 운영 배포 (cloudflared, observability)
+- [`../infra/runbook.md`](../infra/runbook.md) — 평시 운영 / 장애 대응
 - [`../conventions/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md) — 결정 카드

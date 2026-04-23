@@ -4,7 +4,7 @@
 
 **관련 문서**:
 - `docs/conventions/versioning.md` — semver 규약 · Deprecation 프로세스
-- `docs/guides/cross-repo-cherry-pick.md` — 파생 레포 동기화
+- `docs/journey/cross-repo-cherry-pick.md` — 파생 레포 동기화
 
 ---
 
