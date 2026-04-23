@@ -111,6 +111,20 @@ function interceptDocLinks(el, currentDocPath) {
 
 function isMobile() { return window.innerWidth <= 768; }
 
+let _typewriterTimer = null;
+function typewriter(el, text, speed = 32) {
+  if (_typewriterTimer) clearTimeout(_typewriterTimer);
+  el.textContent = '';
+  let i = 0;
+  function tick() {
+    if (i < text.length) {
+      el.textContent += text[i++];
+      _typewriterTimer = setTimeout(tick, speed);
+    }
+  }
+  tick();
+}
+
 async function loadDoc(docPath) {
   document.querySelectorAll('.nav-item').forEach(el => {
     el.classList.toggle('active', el.dataset.doc === docPath);
@@ -118,7 +132,7 @@ async function loadDoc(docPath) {
   if (isMobile()) closeMobileSidebar();
 
   const meta = META[docPath] || { title: docPath.split('/').pop().replace('.md', ''), desc: '' };
-  document.getElementById('post-title').textContent = meta.title;
+  typewriter(document.getElementById('post-title'), meta.title, 32);
   document.getElementById('post-desc').textContent = meta.desc;
   document.getElementById('content').innerHTML =
     '<p style="color:#9ca3af;text-align:center;padding:60px 0">로딩 중...</p>';
