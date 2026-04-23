@@ -207,7 +207,7 @@ docker restart factory-app
 
 ## 📖 책 목차 — Journey 4단계
 
-[`./README.md`](./README.md) 의 **4단계 — 발급은 어디서?** 의 첫 항목 (소셜 로그인) 입니다.
+[`journey/README.md`](./README.md) 의 **4단계 — 발급은 어디서?** 의 첫 항목 (소셜 로그인) 입니다.
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
@@ -215,4 +215,4 @@ docker restart factory-app
 | → 다음 | [`guides/dogfood-setup.md`](./dogfood-setup.md) §3 | 4단계 두 번째, 운영 자격 증명 (Tailscale OAuth · GitHub PAT · Supabase) |
 
 **막혔을 때**: [도그푸딩 함정](../journey/dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
-**왜 이렇게?**: [`philosophy.md`](./philosophy.md) (앱별 social credential 분리 결정) / [`conventions/decisions-infra.md`](../infra/decisions-infra.md)
+**왜 이렇게?**: [`philosophy.md`](./philosophy.md) (앱별 social credential 분리 결정) / [`infra/decisions-infra.md`](../infra/decisions-infra.md)

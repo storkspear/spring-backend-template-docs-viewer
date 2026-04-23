@@ -2,10 +2,6 @@
 
 이 문서는 새 Java 타입을 정의할 때 `record` 와 `class` 중 무엇을 선택할지 결정 기준을 제공합니다.
 
-**관련 문서**:
-- `docs/conventions/dto-factory.md` — DTO 팩토리 패턴
-- `docs/conventions/naming.md` — 네이밍 규칙
-
 ---
 
 ## 결정 트리
@@ -113,8 +109,8 @@ record 컴포넌트 이름이 자동으로 JSON 키가 됨. 네이밍 충돌 시
 
 ---
 
-## 참조
+## 관련 문서
 
-- `docs/conventions/dto-factory.md` (DTO 패턴)
-- `docs/conventions/naming.md` (네이밍)
-- `docs/architecture/module-dependencies.md` (ArchUnit 규칙 18, 19)
+- [`conventions/dto-factory.md`](./dto-factory.md) — DTO 팩토리 패턴
+- [`conventions/naming.md`](./naming.md) — 네이밍 규칙
+- [`architecture/module-dependencies.md`](../architecture/module-dependencies.md) — ArchUnit 규칙 18, 19

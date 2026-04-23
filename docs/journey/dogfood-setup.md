@@ -1,10 +1,10 @@
 # 도그푸딩 환경 셋업 가이드
 
-template (또는 파생 레포) 가 자기 자신을 Mac mini 에 배포해서 한 사이클 검증하기 위한 가이드. **정상 흐름만** 다룸. 에러 만나면 → [`../journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md).
+template (또는 파생 레포) 가 자기 자신을 Mac mini 에 배포해서 한 사이클 검증하기 위한 가이드. **정상 흐름만** 다룸. 에러 만나면 → [`journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md).
 
-> 결정 근거: [`../conventions/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md)
-> 전체 플로우: [`../infra/ci-cd-flow.md`](../infra/ci-cd-flow.md)
-> 자주 묻는 질문: [`./dogfood-faq.md`](./dogfood-faq.md)
+> 결정 근거: [`infra/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md)
+> 전체 플로우: [`infra/ci-cd-flow.md`](../infra/ci-cd-flow.md)
+> 자주 묻는 질문: [`journey/dogfood-faq.md`](./dogfood-faq.md)
 
 ---
 
@@ -147,7 +147,7 @@ DB_PASSWORD=<your-actual-password>
 
 ### 3.6 (선택) Cloudflare Tunnel — 외부 도메인 접근
 
-내부 Tailscale IP 만으로 검증할 거면 skip. 외부에서 `https://server.<도메인>` 으로 접근 원하면 [`./deployment.md` §2.3 ~ §2.6`](./deployment.md) 참조.
+내부 Tailscale IP 만으로 검증할 거면 skip. 외부에서 `https://server.<도메인>` 으로 접근 원하면 [`journey/deployment.md` §2.3 ~ §2.6`](./deployment.md) 참조.
 
 `.env.dogfood` 의 `PUBLIC_HOSTNAME` 은 cloudflared 안 깔아도 placeholder 로 채워야 함 (kamal-proxy 의 host-based routing 에 사용).
 
@@ -264,7 +264,7 @@ cleanup.sh 가 마지막에 안내 출력. 실제 폐기는 사람이:
 2. **Tailscale OAuth client**: https://login.tailscale.com/admin/settings/oauth → 사용 client Delete
 3. **(선택) Supabase password reset**: Dashboard → Settings → Database → Reset
 
-자세히: [`../infra/key-rotation.md`](../infra/key-rotation.md)
+자세히: [`infra/key-rotation.md`](../infra/key-rotation.md)
 
 ---
 
@@ -275,38 +275,38 @@ cleanup.sh 가 마지막에 안내 출력. 실제 폐기는 사람이:
 2. 새 키 재발급
 3. `.env.dogfood` 갱신 후 `setup.sh` 재실행 → 새 키로 GitHub Secrets 자동 갱신
 
-자세한 rotation 정책: [`../infra/key-rotation.md`](../infra/key-rotation.md)
+자세한 rotation 정책: [`infra/key-rotation.md`](../infra/key-rotation.md)
 
 ---
 
 ## 9. 트러블슈팅
 
-에러 만나면 → [`../journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) 의 표에서 에러 메시지로 검색.
+에러 만나면 → [`journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) 의 표에서 에러 메시지로 검색.
 
-자주 묻는 질문 → [`./dogfood-faq.md`](./dogfood-faq.md)
+자주 묻는 질문 → [`journey/dogfood-faq.md`](./dogfood-faq.md)
 
 ---
 
 ## 관련 문서
 
-- [`../infra/ci-cd-flow.md`](../infra/ci-cd-flow.md) — commit→배포 전체 다이어그램
-- [`../journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) — 11회 시도 함정 모음
-- [`./dogfood-faq.md`](./dogfood-faq.md) — 자주 묻는 질문
-- [`../infra/key-rotation.md`](../infra/key-rotation.md) — 키 교체 절차
-- [`./deployment.md`](./deployment.md) — 운영 배포 (cloudflared 셋업, observability 등)
-- [`./mac-mini-setup.md`](../infra/mac-mini-setup.md) — Mac mini 운영 호스트 셋업
-- [`../infra/runbook.md`](../infra/runbook.md) — 평시 배포 / 롤백 / 장애 대응
+- [`infra/ci-cd-flow.md`](../infra/ci-cd-flow.md) — commit→배포 전체 다이어그램
+- [`journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) — 11회 시도 함정 모음
+- [`journey/dogfood-faq.md`](./dogfood-faq.md) — 자주 묻는 질문
+- [`infra/key-rotation.md`](../infra/key-rotation.md) — 키 교체 절차
+- [`journey/deployment.md`](./deployment.md) — 운영 배포 (cloudflared 셋업, observability 등)
+- [`infra/mac-mini-setup.md`](../infra/mac-mini-setup.md) — Mac mini 운영 호스트 셋업
+- [`infra/runbook.md`](../infra/runbook.md) — 평시 배포 / 롤백 / 장애 대응
 
 ---
 
 ## 📖 책 목차 — Journey 4~6단계
 
-[`../README.md`](./README.md) 의 **4단계 (외부 자격 증명) · 5단계 (테스트) · 6단계 (정리)** 입니다. 한 문서가 세 단계를 통합합니다.
+[`journey/README.md`](./README.md) 의 **4단계 (외부 자격 증명) · 5단계 (테스트) · 6단계 (정리)** 입니다. 한 문서가 세 단계를 통합합니다.
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
-| ← 이전 | [`../journey/social-auth-setup.md`](./social-auth-setup.md) | 4단계 첫 번째, 소셜 로그인 자격 증명 |
-| → 다음 | [`./deployment.md`](./deployment.md) | 7단계, 파생 레포 첫 운영 배포 |
+| ← 이전 | [`journey/social-auth-setup.md`](./social-auth-setup.md) | 4단계 첫 번째, 소셜 로그인 자격 증명 |
+| → 다음 | [`journey/deployment.md`](./deployment.md) | 7단계, 파생 레포 첫 운영 배포 |
 
-**막혔을 때**: [`../journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) / [`./dogfood-faq.md`](./dogfood-faq.md)
-**왜 이렇게?**: [`../conventions/decisions-infra.md`](../infra/decisions-infra.md) — I-09 (Kamal 선택) / I-10 (GHCR PAT) / I-12 (workflow_run 게이트) / I-14 (Tailscale OAuth scope)
+**막혔을 때**: [`journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) / [`journey/dogfood-faq.md`](./dogfood-faq.md)
+**왜 이렇게?**: [`infra/decisions-infra.md`](../infra/decisions-infra.md) — I-09 (Kamal 선택) / I-10 (GHCR PAT) / I-12 (workflow_run 게이트) / I-14 (Tailscale OAuth scope)

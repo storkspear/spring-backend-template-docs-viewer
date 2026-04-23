@@ -2,9 +2,9 @@
 
 template 에서 "Use this template" 으로 만든 파생레포를 Mac mini 홈서버에 처음 배포할 때의 순서.
 
-> 결정 근거: [`../conventions/decisions-infra.md` I-09](../infra/decisions-infra.md#결정-i-09-배포--kamal--docker-bluegreen-mac-mini)
-> 전체 구성도: [`../infra/infrastructure.md §4`](../infra/infrastructure.md)
-> 평시 운영 / 장애 대응: [`../infra/runbook.md`](../infra/runbook.md)
+> 결정 근거: [`infra/decisions-infra.md` I-09](../infra/decisions-infra.md)
+> 전체 구성도: [`infra/infrastructure.md §4`](../infra/infrastructure.md)
+> 평시 운영 / 장애 대응: [`infra/runbook.md`](../infra/runbook.md)
 
 ---
 
@@ -247,8 +247,8 @@ curl -I https://log.<도메인>                                   # 302 (CF Acce
 
 ## 관련 문서
 
-- [`../conventions/decisions-infra.md` I-09](../infra/decisions-infra.md) — Kamal 선택 근거
-- [`../infra/runbook.md`](../infra/runbook.md) — 평시 배포 / 롤백 / 장애 대응
+- [`infra/decisions-infra.md` I-09](../infra/decisions-infra.md) — Kamal 선택 근거
+- [`infra/runbook.md`](../infra/runbook.md) — 평시 배포 / 롤백 / 장애 대응
 - [`monitoring-setup.md`](../infra/monitoring-setup.md) — Grafana / Prometheus / Alertmanager 운영
 - [`onboarding.md`](./onboarding.md) — 새 개발자 첫 실행 (로컬 dev)
 - [`storage-setup.md`](../infra/storage-setup.md) — MinIO 로컬/NAS
@@ -257,12 +257,12 @@ curl -I https://log.<도메인>                                   # 302 (CF Acce
 
 ## 📖 책 목차 — Journey 7단계
 
-[`../README.md`](./README.md) 의 **7단계 — 이제 use this template** 입니다. 파생 레포 첫 운영 배포.
+[`journey/README.md`](./README.md) 의 **7단계 — 이제 use this template** 입니다. 파생 레포 첫 운영 배포.
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
-| ← 이전 | [`./dogfood-setup.md`](./dogfood-setup.md) | 4~6단계, template 자체 검증 (셋업/테스트/정리) |
-| → 다음 | [`./cross-repo-cherry-pick.md`](./cross-repo-cherry-pick.md) | 같은 7단계, template 변경을 파생 레포로 가져오기 |
+| ← 이전 | [`journey/dogfood-setup.md`](./dogfood-setup.md) | 4~6단계, template 자체 검증 (셋업/테스트/정리) |
+| → 다음 | [`journey/cross-repo-cherry-pick.md`](./cross-repo-cherry-pick.md) | 같은 7단계, template 변경을 파생 레포로 가져오기 |
 
-**막혔을 때**: [`../journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) (도그푸딩과 같은 함정 적용) / [`../infra/runbook.md`](../infra/runbook.md) (평시 운영 절차)
-**왜 이렇게?**: [`../conventions/decisions-infra.md` I-09](../infra/decisions-infra.md) (Kamal 선택) / [`../journey/philosophy.md` 결정 2](./philosophy.md) (template 패턴)
+**막혔을 때**: [`journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) (도그푸딩과 같은 함정 적용) / [`infra/runbook.md`](../infra/runbook.md) (평시 운영 절차)
+**왜 이렇게?**: [`infra/decisions-infra.md` I-09](../infra/decisions-infra.md) (Kamal 선택) / [`journey/philosophy.md` 결정 2](./philosophy.md) (template 패턴)

@@ -2,11 +2,6 @@
 
 이 문서는 DTO 의 생성·변환 패턴 규약을 정의합니다.
 
-**관련 문서**:
-- `docs/conventions/records-and-classes.md` — record vs class 선택 기준
-- `docs/conventions/naming.md` — DTO 네이밍 규칙
-- `docs/api-contract/json-contract.md` — JSON 직렬화 정책
-
 ---
 
 ## 기본 원칙
@@ -210,8 +205,9 @@ public DetailedProfile getDetailedProfile(long userId) {
 
 ---
 
-## 참조
+## 관련 문서
 
-- `docs/journey/philosophy.md` 결정 3 (api/impl 분리), 결정 11 (포트/어댑터)
-- `docs/conventions/records-and-classes.md` (record vs class)
-- `docs/api-contract/json-contract.md` (JSON 정책)
+- [`conventions/naming.md`](./naming.md) — DTO 네이밍 규칙
+- [`conventions/records-and-classes.md`](./records-and-classes.md) — record vs class 선택 기준
+- [`api-contract/json-contract.md`](../api-contract/json-contract.md) — JSON 직렬화 정책
+- [`journey/philosophy.md`](../journey/philosophy.md) — 결정 3 (api/impl 분리), 결정 11 (포트/어댑터)

@@ -680,7 +680,7 @@ apps/app-<slug>/config/<Slug>DataSourceConfig (slug="<slug>")
                          entityManagerFactoryRef = "<slug>EntityManagerFactory")
 ```
 
-두 Config 모두 `common-persistence/AbstractAppDataSourceConfig` 의 `build*` 헬퍼 재사용. 새 앱 추가 시 `new-app.sh` 가 Config 클래스 자동 생성. 상세 결정: [`conventions/decisions-infra.md I-08`](../infra/decisions-infra.md).
+두 Config 모두 `common-persistence/AbstractAppDataSourceConfig` 의 `build*` 헬퍼 재사용. 새 앱 추가 시 `new-app.sh` 가 Config 클래스 자동 생성. 상세 결정: [`infra/decisions-infra.md I-08`](../infra/decisions-infra.md).
 
 ---
 
@@ -691,7 +691,7 @@ apps/app-<slug>/config/<Slug>DataSourceConfig (slug="<slug>")
 - 로컬 개발 구성도: [`infrastructure.md §3`](../infra/infrastructure.md)
 - 운영 구성도 (planned): [`infrastructure.md §4`](../infra/infrastructure.md)
 - 책임 분담 표: [`infrastructure.md §5`](../infra/infrastructure.md)
-- 선택 근거 (Supabase / NAS MinIO / 맥미니 / Cloudflare Tunnel): [`conventions/decisions-infra.md`](../infra/decisions-infra.md)
+- 선택 근거 (Supabase / NAS MinIO / 맥미니 / Cloudflare Tunnel): [`infra/decisions-infra.md`](../infra/decisions-infra.md)
 
 ---
 
@@ -749,7 +749,7 @@ apps/app-<slug>/config/<Slug>DataSourceConfig (slug="<slug>")
 
 ## 📖 책 목차 — Journey 1단계
 
-[`docs/README.md`](./README.md) 의 **1단계 — 이 레포가 뭐야?** 입니다.
+[`journey/README.md`](./README.md) 의 **1단계 — 이 레포가 뭐야?** 입니다.
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
@@ -757,4 +757,4 @@ apps/app-<slug>/config/<Slug>DataSourceConfig (slug="<slug>")
 | → 다음 | [`guides/onboarding.md`](./onboarding.md) | 2단계 — 어떻게 써? (로컬 dev) |
 
 **막혔을 때**: [도그푸딩 함정](../journey/dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
-**왜 이렇게?**: [`philosophy.md`](./philosophy.md) (설계 결정 22개) / [`conventions/decisions-infra.md`](../infra/decisions-infra.md) (인프라 결정 I-01~I-14)
+**왜 이렇게?**: [`philosophy.md`](./philosophy.md) (설계 결정 22개) / [`infra/decisions-infra.md`](../infra/decisions-infra.md) (인프라 결정 I-01~I-14)

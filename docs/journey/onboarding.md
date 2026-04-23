@@ -445,13 +445,13 @@ openssl rand -hex 32   # 64자 출력
 
 | 목적 | 문서 |
 |---|---|
-| 코드 아키텍처 (포트/어댑터, 모듈 의존) | [`../journey/architecture.md`](./architecture.md) |
-| 인프라 구성 (DB/스토리지/관측성 전체 상태) | [`../infra/infrastructure.md`](../infra/infrastructure.md) |
-| 설계 철학 (결정 1~16) | [`../journey/philosophy.md`](./philosophy.md) |
-| 인프라 결정 근거 (Supabase/NAS/맥미니 등) | [`../conventions/decisions-infra.md`](../infra/decisions-infra.md) |
-| 코딩 규약 (naming, DTO, exception, 등) | [`../conventions/`](../conventions) |
-| 미완료 / 향후 작업 목록 | [`../reference/backlog.md`](../reference/backlog.md) |
-| 장애 시나리오 분석 | [`../infra/edge-cases.md`](../infra/edge-cases.md) |
+| 코드 아키텍처 (포트/어댑터, 모듈 의존) | [`journey/architecture.md`](./architecture.md) |
+| 인프라 구성 (DB/스토리지/관측성 전체 상태) | [`infra/infrastructure.md`](../infra/infrastructure.md) |
+| 설계 철학 (결정 1~16) | [`journey/philosophy.md`](./philosophy.md) |
+| 인프라 결정 근거 (Supabase/NAS/맥미니 등) | [`infra/decisions-infra.md`](../infra/decisions-infra.md) |
+| 코딩 규약 (naming, DTO, exception, 등) | [`conventions/`](../conventions) |
+| 미완료 / 향후 작업 목록 | [`reference/backlog.md`](../reference/backlog.md) |
+| 장애 시나리오 분석 | [`infra/edge-cases.md`](../infra/edge-cases.md) |
 
 ---
 
@@ -471,12 +471,12 @@ openssl rand -hex 32   # 64자 출력
 
 ## 📖 책 목차 — Journey 2~3단계
 
-[`../README.md`](./README.md) 의 **2단계 (어떻게 써? 로컬 dev)** 와 **3단계 (클론 후 뭐부터? 첫 앱 모듈 추가)** 입니다.
+[`journey/README.md`](./README.md) 의 **2단계 (어떻게 써? 로컬 dev)** 와 **3단계 (클론 후 뭐부터? 첫 앱 모듈 추가)** 입니다.
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
-| ← 이전 | [`../journey/architecture.md`](./architecture.md) | 1단계 — 모듈 구조 한 눈 |
-| → 다음 | [`../journey/social-auth-setup.md`](./social-auth-setup.md) | 4단계 — 외부 자격 증명 발급 (Google/Apple) |
+| ← 이전 | [`journey/architecture.md`](./architecture.md) | 1단계 — 모듈 구조 한 눈 |
+| → 다음 | [`journey/social-auth-setup.md`](./social-auth-setup.md) | 4단계 — 외부 자격 증명 발급 (Google/Apple) |
 
 **막혔을 때**: §6 흔한 에러 5개 / [도그푸딩 함정](../journey/dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
-**왜 이렇게?**: [`../journey/philosophy.md`](./philosophy.md) (설계 결정 22개) / [`../conventions/decisions-infra.md`](../infra/decisions-infra.md) (I-01~I-14)
+**왜 이렇게?**: [`journey/philosophy.md`](./philosophy.md) (설계 결정 22개) / [`infra/decisions-infra.md`](../infra/decisions-infra.md) (I-01~I-14)

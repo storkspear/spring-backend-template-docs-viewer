@@ -191,8 +191,8 @@ Rule 'r9: core-*-api must not depend on JPA/Hibernate' was violated (1 time):
 
 ---
 
-## 참조
+## 관련 문서
 
-- `docs/journey/philosophy.md` 결정 3 (api/impl 분리), 결정 4 (ArchUnit), 결정 14 (delegation mock 금지)
-- `docs/journey/architecture.md` "의존 규칙" 및 6중 방어선
-- `docs/testing/contract-testing.md` (Port 계약 테스트)
+- [`journey/philosophy.md`](../journey/philosophy.md) — 결정 3 (api/impl 분리), 결정 4 (ArchUnit), 결정 14 (delegation mock 금지)
+- [`journey/architecture.md`](../journey/architecture.md) — "의존 규칙" 및 6중 방어선
+- [`testing/contract-testing.md`](../testing/contract-testing.md) — Port 계약 테스트

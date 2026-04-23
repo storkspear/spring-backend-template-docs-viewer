@@ -2,10 +2,6 @@
 
 이 문서는 `spring-backend-template` 의 semver 버저닝 · CHANGELOG · Deprecation 프로세스를 정의합니다.
 
-**관련 문서**:
-- `docs/conventions/git-workflow.md` — 브랜치 · 커밋 규약 · Merge 정책
-- `docs/journey/cross-repo-cherry-pick.md` — 파생 레포 동기화
-
 ---
 
 ## 버전 단위: 템플릿 전체
@@ -246,9 +242,9 @@ git push origin template-v1.3.0
 
 ---
 
-## 참조
+## 관련 문서
 
-- `docs/journey/philosophy.md` 결정 2 (템플릿 전파)
-- `docs/conventions/git-workflow.md` (브랜치 · 커밋)
-- `docs/journey/cross-repo-cherry-pick.md` (파생 레포)
-- `docs/features/migration.md` (버전별 migration guide)
+- [`conventions/git-workflow.md`](../conventions/git-workflow.md) — 브랜치 · 커밋 규약 · Merge 정책
+- [`journey/cross-repo-cherry-pick.md`](../journey/cross-repo-cherry-pick.md) — 파생 레포 동기화
+- [`journey/philosophy.md`](../journey/philosophy.md) — 결정 2 (템플릿 전파)
+- [`features/migration.md`](../features/migration.md) — 버전별 migration guide

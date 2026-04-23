@@ -2,10 +2,6 @@
 
 이 문서는 DTO JSON 직렬화/역직렬화의 전역 정책과 테스트 규약을 정의합니다.
 
-**관련 문서**:
-- `docs/testing/contract-testing.md` — 3층 테스트 구조 전체
-- `docs/conventions/naming.md` — DTO 네이밍 규칙
-
 ---
 
 ## 전역 Jackson 정책
@@ -246,3 +242,8 @@ ISO-8601 문자열 강제:
 - [ ] `deserialize_ignoresUnknownField` 가 여전히 통과 (forward compat 유지)
 - [ ] Instant 필드는 `@JsonFormat` 없이도 ISO-8601 직렬화
 - [ ] Map 은 `LinkedHashMap` 으로 insertion order 확정
+
+## 관련 문서
+
+- [`testing/contract-testing.md`](../testing/contract-testing.md) — 3층 테스트 구조 전체
+- [`conventions/naming.md`](../conventions/naming.md) — DTO 네이밍 규칙

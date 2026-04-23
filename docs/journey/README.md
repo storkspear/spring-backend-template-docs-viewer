@@ -176,7 +176,7 @@ template 의 구조와 자동화를 이해했으니, 이제 실제 본인 프로
 | 궁금한 것 | 문서 | 한 줄 설명 |
 |---|---|---|
 | 왜 이렇게 설계? | [`philosophy.md`](./philosophy.md) | 핵심 결정 22개 (1 ~ 22) |
-| 인프라 결정 근거 | [`conventions/decisions-infra.md`](../infra/decisions-infra.md) | I-01 ~ I-14 결정 카드 (Supabase / Mac mini / Kamal / GHCR PAT 등) |
+| 인프라 결정 근거 | [`infra/decisions-infra.md`](../infra/decisions-infra.md) | I-01 ~ I-14 결정 카드 (Supabase / Mac mini / Kamal / GHCR PAT 등) |
 | 모듈 구조 상세 | [`architecture.md`](./architecture.md) | 731줄 — 파일 트리 + 의존 그래프 + 기술 스택 |
 | 환경별 인프라 현황 | [`infrastructure.md`](../infra/infrastructure.md) | 어떤 서비스가 어디에서 도는지 |
 | 코딩 규약 11종 | [`conventions/`](../conventions) | naming / api-response / exception 등 |

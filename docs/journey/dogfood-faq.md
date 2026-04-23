@@ -1,8 +1,8 @@
 # 도그푸딩 FAQ
 
-> 셋업 가이드: [`./dogfood-setup.md`](./dogfood-setup.md)
-> 함정 모음: [`../journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md)
-> 다이어그램: [`../infra/ci-cd-flow.md`](../infra/ci-cd-flow.md)
+> 셋업 가이드: [`journey/dogfood-setup.md`](./dogfood-setup.md)
+> 함정 모음: [`journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md)
+> 다이어그램: [`infra/ci-cd-flow.md`](../infra/ci-cd-flow.md)
 
 ---
 
@@ -130,8 +130,8 @@ curl -H "Host: server.<도메인>" http://100.X.X.X/actuator/health/liveness
 
 ## 더 궁금한 게 있다면
 
-- [`./dogfood-setup.md`](./dogfood-setup.md) — 정상 흐름
-- [`../journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) — 11회 함정 자세히
-- [`../infra/ci-cd-flow.md`](../infra/ci-cd-flow.md) — 다이어그램
-- [`../infra/key-rotation.md`](../infra/key-rotation.md) — 키 교체
-- [`../conventions/decisions-infra.md`](../infra/decisions-infra.md) — 결정 근거 (I-09 ~ I-14)
+- [`journey/dogfood-setup.md`](./dogfood-setup.md) — 정상 흐름
+- [`journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) — 11회 함정 자세히
+- [`infra/ci-cd-flow.md`](../infra/ci-cd-flow.md) — 다이어그램
+- [`infra/key-rotation.md`](../infra/key-rotation.md) — 키 교체
+- [`infra/decisions-infra.md`](../infra/decisions-infra.md) — 결정 근거 (I-09 ~ I-14)

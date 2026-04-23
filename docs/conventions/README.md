@@ -21,10 +21,10 @@
 
 구조 재편으로 **코드 작성 규약** 과 다른 성격의 문서들은 별도 폴더에서 관리합니다.
 
-- 시스템 구조 → [`../architecture/`](../architecture/) — Module Dependencies · Architecture Rules (ArchUnit) · Multitenant · JWT
-- API 계약 → [`../api-contract/`](../api-contract/) — API Response · JSON Contract · Versioning · Flutter Integration
-- 기능 가이드 → [`../features/`](../features/) — Push · Email · Observability · Rate Limiting · Storage · Migration · Seed Data
-- 테스팅 → [`../testing/`](../testing/) — Contract Testing · Testing Strategy
+- 시스템 구조 → [`architecture/`](../architecture/) — Module Dependencies · Architecture Rules (ArchUnit) · Multitenant · JWT
+- API 계약 → [`api-contract/`](../api-contract/) — API Response · JSON Contract · Versioning · Flutter Integration
+- 기능 가이드 → [`features/`](../features/) — Push · Email · Observability · Rate Limiting · Storage · Migration · Seed Data
+- 테스팅 → [`testing/`](../testing/) — Contract Testing · Testing Strategy
 
 ---
 
@@ -44,7 +44,7 @@
 **자동화가 1순위입니다.** 가능한 한 IDE, 빌드, CI 가 규약을 강제하도록 만듭니다.
 
 - **Gradle 빌드** — 모듈 의존 관계 강제
-- **ArchUnit 테스트** — 패키지 구조 및 네이밍 강제 (전체 22개 규칙: [`../architecture/architecture-rules.md`](../architecture/architecture-rules.md))
+- **ArchUnit 테스트** — 패키지 구조 및 네이밍 강제 (전체 22개 규칙: [`architecture/architecture-rules.md`](../architecture/architecture-rules.md))
 - **checkstyle / spotless** — 포맷팅 강제 (Phase 1+ 도입 예정)
 - **pre-commit hook** — 커밋 메시지 형식 검증 (선택)
 

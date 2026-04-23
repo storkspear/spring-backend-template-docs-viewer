@@ -2,7 +2,7 @@
 
 평시 배포·롤백·장애 대응 절차. 파생레포 최초 onboarding 은 [`guides/deployment.md`](../journey/deployment.md).
 
-> 결정 근거: [`conventions/decisions-infra.md` I-09](./decisions-infra.md)
+> 결정 근거: [`infra/decisions-infra.md` I-09](./decisions-infra.md)
 
 ---
 
@@ -184,4 +184,4 @@ kamal app boot                # 마지막 배포 버전으로 다시 기동
 - [`guides/monitoring-setup.md`](./monitoring-setup.md) — 관측성 스택
 - [`infrastructure.md`](./infrastructure.md) — 전체 구성도
 - [`edge-cases.md`](./edge-cases.md) — 리스크 시나리오
-- [`conventions/decisions-infra.md`](./decisions-infra.md) — 결정 카드
+- [`infra/decisions-infra.md`](./decisions-infra.md) — 결정 카드

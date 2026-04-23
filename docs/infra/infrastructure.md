@@ -7,7 +7,7 @@
 - **포함**: 물리/운영 인프라 (DB, 오브젝트 스토리지, 운영 호스트, 엣지, 관측성) 구성과 현재 상태.
 - **제외**:
   - 코드 아키텍처 (포트/어댑터, 모듈 구조) → [`architecture.md`](../journey/architecture.md)
-  - 인프라 결정의 근거/대안 → [`conventions/decisions-infra.md`](./decisions-infra.md)
+  - 인프라 결정의 근거/대안 → [`infra/decisions-infra.md`](./decisions-infra.md)
   - 코드 설계 철학 → [`philosophy.md`](../journey/philosophy.md)
   - 운영 배포 파이프라인/시크릿/백업 → **Item Ops-1** (예정, `backlog.md` 참조)
 
@@ -192,7 +192,7 @@ ingress:
 
 ## 6. 선택 근거 요약
 
-각 선택의 "왜 이거인가" 는 [`conventions/decisions-infra.md`](./decisions-infra.md) 의 결정 카드 참조. 요약만:
+각 선택의 "왜 이거인가" 는 [`infra/decisions-infra.md`](./decisions-infra.md) 의 결정 카드 참조. 요약만:
 
 - **Supabase** (I-01) — 관리형 Postgres Free tier, Seoul region, 솔로 친화
 - **NAS MinIO** (I-03) — 보유 하드웨어 활용, S3 호환 → 미래 이관 유연, LAN 대역폭
@@ -350,7 +350,7 @@ V009__add_devices_updated_at.sql
 
 - [`architecture.md`](../journey/architecture.md) — 코드 아키텍처 (포트/어댑터, 모듈 의존성)
 - [`philosophy.md`](../journey/philosophy.md) — 코드 설계 결정 (모듈러 모놀리스, Mapper 금지 등)
-- [`conventions/decisions-infra.md`](./decisions-infra.md) — 인프라 결정 카드 I-01~I-07
+- [`infra/decisions-infra.md`](./decisions-infra.md) — 인프라 결정 카드 I-01~I-07
 - [`features/storage.md`](../features/storage.md) — MinIO 2-tier bucket 정책
 - [`features/observability.md`](../features/observability.md) — 관측성 규약
 - [`guides/onboarding.md`](../journey/onboarding.md) — 템플릿 첫 사용 가이드

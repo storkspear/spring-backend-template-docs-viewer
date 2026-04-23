@@ -489,8 +489,8 @@ Phase 1+ 에는 우선순위 재조정 (예: 보안 기준 상향).
 ## 관련 문서
 
 - [`philosophy.md`](../journey/philosophy.md) — 코드 설계 결정
-- [`../infra/infrastructure.md`](./infrastructure.md) — 인프라 현재 상태 + 구성도
+- [`infra/infrastructure.md`](./infrastructure.md) — 인프라 현재 상태 + 구성도
 - [`storage.md`](../features/storage.md) — 2-tier bucket 상세 규약
 - [`observability.md`](../features/observability.md) — 관측성 규약
-- [`../infra/edge-cases.md`](./edge-cases.md) — 리스크 시나리오 분석
+- [`infra/edge-cases.md`](./edge-cases.md) — 리스크 시나리오 분석
 - Item Ops-1 (예정) — 운영 배포 구현

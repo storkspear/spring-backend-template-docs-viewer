@@ -2,10 +2,6 @@
 
 이 문서는 `spring-backend-template` 의 변경을 파생 레포(Use this template 으로 복제한 서비스 레포)로 가져오는 플로우 또는 역방향을 설명합니다.
 
-**관련 문서**:
-- `docs/conventions/git-workflow.md` — 브랜치 · 커밋 규약
-- `docs/api-contract/versioning.md` — 버전 · Deprecation
-
 ---
 
 ## 전제
@@ -132,22 +128,23 @@ git push origin fix/refresh-token-race
 
 ---
 
-## 참조
+## 관련 문서
 
-- `docs/journey/philosophy.md` 결정 2 (템플릿 전파 방식)
-- `docs/api-contract/versioning.md` (버전 · Deprecation)
-- `docs/features/migration.md` (버전별 migration guide — breaking 있을 때만)
+- [`conventions/git-workflow.md`](../conventions/git-workflow.md) — 브랜치 · 커밋 규약
+- [`api-contract/versioning.md`](../api-contract/versioning.md) — 버전 · Deprecation
+- [`journey/philosophy.md`](./philosophy.md) — 결정 2 (템플릿 전파 방식)
+- [`features/migration.md`](../features/migration.md) — 버전별 migration guide (breaking 있을 때만)
 
 ---
 
 ## 📖 책 목차 — Journey 7단계 (마지막)
 
-[`../README.md`](./README.md) 의 **7단계 — 이제 use this template** 의 마무리 문서입니다.
+[`journey/README.md`](./README.md) 의 **7단계 — 이제 use this template** 의 마무리 문서입니다.
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
-| ← 이전 | [`./deployment.md`](./deployment.md) | 같은 7단계, 파생 레포 첫 운영 배포 |
-| → 다음 | (책 끝) — 본인 도메인 작업 시작 | 막히면 [`../infra/runbook.md`](../infra/runbook.md) (운영 절차) 참고 |
+| ← 이전 | [`journey/deployment.md`](./deployment.md) | 같은 7단계, 파생 레포 첫 운영 배포 |
+| → 다음 | (책 끝) — 본인 도메인 작업 시작 | 막히면 [`infra/runbook.md`](../infra/runbook.md) (운영 절차) 참고 |
 
-**막혔을 때**: [`../infra/runbook.md`](../infra/runbook.md) (장애 대응) / [`../infra/edge-cases.md`](../infra/edge-cases.md) (리스크 시나리오)
-**왜 이렇게?**: [`../journey/philosophy.md`](./philosophy.md) 결정 2 (template 패턴)
+**막혔을 때**: [`infra/runbook.md`](../infra/runbook.md) (장애 대응) / [`infra/edge-cases.md`](../infra/edge-cases.md) (리스크 시나리오)
+**왜 이렇게?**: [`journey/philosophy.md`](./philosophy.md) 결정 2 (template 패턴)

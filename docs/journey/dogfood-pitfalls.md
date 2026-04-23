@@ -1,8 +1,8 @@
 # 도그푸딩 함정 모음 (사고 실록)
 
-> 결정 근거: [`../conventions/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md)
-> 정상 흐름: [`../journey/dogfood-setup.md`](../journey/dogfood-setup.md)
-> 전체 플로우: [`../infra/ci-cd-flow.md`](../infra/ci-cd-flow.md)
+> 결정 근거: [`infra/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md)
+> 정상 흐름: [`journey/dogfood-setup.md`](../journey/dogfood-setup.md)
+> 전체 플로우: [`infra/ci-cd-flow.md`](../infra/ci-cd-flow.md)
 
 ---
 
@@ -243,11 +243,11 @@ DB_PASSWORD=<password>
 2. **함정별 자세한 분석 섹션** 에 같은 패턴으로 한 항목 추가
 3. **commit 메시지** 에 `pitfalls: add #N` 접두사
 4. 가능하면 `setup.sh` 의 검증 step 에 가드 추가 (예: #11 의 DB_URL 형식 체크처럼)
-5. ADR 변경이 필요한 결정이면 [`../conventions/decisions-infra.md`](../infra/decisions-infra.md) 에 새 카드 추가
+5. ADR 변경이 필요한 결정이면 [`infra/decisions-infra.md`](../infra/decisions-infra.md) 에 새 카드 추가
 
 ## 관련 문서
 
-- [`../journey/dogfood-setup.md`](../journey/dogfood-setup.md) — 정상 흐름 (이 함정들 없이 가는 길)
-- [`../infra/ci-cd-flow.md`](../infra/ci-cd-flow.md) — 다이어그램 + phase 별 안전망
-- [`../conventions/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md) — ADR (왜 이 결정을)
-- [`../infra/key-rotation.md`](../infra/key-rotation.md) — 키 노출 시 절차
+- [`journey/dogfood-setup.md`](../journey/dogfood-setup.md) — 정상 흐름 (이 함정들 없이 가는 길)
+- [`infra/ci-cd-flow.md`](../infra/ci-cd-flow.md) — 다이어그램 + phase 별 안전망
+- [`infra/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md) — ADR (왜 이 결정을)
+- [`infra/key-rotation.md`](../infra/key-rotation.md) — 키 노출 시 절차
