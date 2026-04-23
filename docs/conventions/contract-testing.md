@@ -253,7 +253,6 @@ Port 계약으로 환원되지 않는 **고유 내부 로직** 은 단위 테스
 - `EmailVerificationServiceTest` — 토큰 생성·만료 로직 (발송 검증은 Contract 로 이관)
 - `PasswordResetServiceTest` — 동일
 - `ResendEmailAdapterTest` — EmailPort 어댑터 단위
-- `UserMapperTest` — Entity ↔ DTO 순수 함수
 - `PushServiceTest` — 오케스트레이션 알고리즘 (토큰 조회 → 발송 → 무효 토큰 정리)
 
 ### 삭제 대상 예시 (delegation mock)

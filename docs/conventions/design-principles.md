@@ -432,8 +432,9 @@ Good:
 ```java
 public UserProfile findProfileById(Long id) {
     User user = userRepository.findById(id)
-        .orElseThrow(() -> new UserNotFoundException(id));
-    return userMapper.toProfile(user);
+        .orElseThrow(() -> new UserException(UserError.USER_NOT_FOUND,
+            Map.of("id", String.valueOf(id))));
+    return user.toProfile();
 }
 ```
 
@@ -445,7 +446,7 @@ public UserProfile findProfileById(Long id) {
     if (user == null) {
         return new UserProfile(null, null, null);  // 빈 객체 반환
     }
-    return userMapper.toProfile(user);
+    return user.toProfile();
 }
 ```
 

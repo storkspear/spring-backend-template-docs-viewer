@@ -328,13 +328,13 @@ Phase D, E 를 구현하면서 User, RefreshToken, EmailVerificationToken, Passw
 
 | 키 형식 | 의미 | 예시 |
 |---|---|---|
-| `field` 또는 `field_eq` | 일치 | `"categoryId": 5` |
-| `field_not` | 불일치 | `"status_not": "DELETED"` |
+| `field_eq` | 일치 | `"categoryId_eq": 5` |
 | `field_gte` / `field_lte` | 이상 / 이하 | `"amount_gte": 10000` |
 | `field_gt` / `field_lt` | 초과 / 미만 | `"age_gt": 18` |
 | `field_like` | 부분 매칭 (대소문자 무시) | `"title_like": "커피"` |
-| `field_in` / `field_notIn` | 목록 포함 / 미포함 | `"status_in": ["ACTIVE", "PENDING"]` |
 | `field_isNull` / `field_isNotNull` | null 여부 | `"deletedAt_isNull": true` |
+
+현재 `QueryDslPredicateBuilder` 가 지원하는 연산자는 위 8가지입니다.
 
 ### 대안 검토
 

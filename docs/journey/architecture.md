@@ -115,21 +115,35 @@ spring-backend-template/
 │   │       │       └── META-INF/spring/...         # autoconfiguration 등록 파일
 │   │       └── test/
 │   │
-│   ├── common-web/                    # 웹 계층 공통 (응답 포맷, 예외 처리)
+│   ├── common-web/                    # 웹 계층 공통 (응답 포맷, 예외 처리, 검색/페이지네이션, 레이트 리밋)
 │   │   └── src/main/java/com/factory/common/web/
 │   │       ├── response/
 │   │       │   ├── ApiResponse.java                 # { data, error } 표준 응답 래퍼
-│   │       │   ├── ApiError.java                    # { code, message, details }
-│   │       │   └── ErrorCode.java                   # 표준 에러 코드 enum
+│   │       │   └── ApiError.java                    # { code, message, details }
 │   │       ├── exception/
-│   │       │   ├── NotFoundException.java           # 리소스 없음
-│   │       │   ├── ValidationException.java         # 입력 검증 실패
-│   │       │   ├── ConflictException.java           # 중복 등
-│   │       │   ├── UnauthorizedException.java       # 인증 실패
-│   │       │   └── GlobalExceptionHandler.java      # 전역 예외 → ApiError 변환
+│   │       │   ├── ErrorInfo.java                   # 모든 도메인 에러 enum 이 구현하는 인터페이스
+│   │       │   ├── BaseException.java               # 모든 비즈니스 예외의 부모 (abstract)
+│   │       │   ├── CommonException.java             # 공통 예외 (NOT_FOUND, FORBIDDEN 등)
+│   │       │   ├── CommonError.java                 # 공통 에러 enum (CMN_001~008, CMN_429)
+│   │       │   └── GlobalExceptionHandler.java      # BaseException → ApiError 통합 변환
 │   │       ├── pagination/
 │   │       │   ├── PageRequest.java                 # 페이지 요청 DTO
 │   │       │   └── PageResponse.java                # 페이지 응답 DTO
+│   │       ├── search/                              # POST /search 요청 DTO (QueryDsl 비의존)
+│   │       │   ├── PageListRequest.java             # conditions + page + sort
+│   │       │   ├── PageListQuery.java
+│   │       │   ├── PageListResult.java
+│   │       │   ├── PageListResponse.java
+│   │       │   ├── SortOrder.java
+│   │       │   └── SortFieldMapper.java             # 허용 정렬 필드 인터페이스
+│   │       ├── ratelimit/                           # Bucket4j 기반 레이트 리미터
+│   │       │   ├── RateLimitFilter.java
+│   │       │   ├── RateLimitProperties.java
+│   │       │   ├── BucketRegistry.java
+│   │       │   └── RateLimitAutoConfiguration.java
+│   │       ├── metrics/                             # Micrometer observation (appSlug 태깅)
+│   │       ├── ApiEndpoints.java                    # 엔드포인트 경로 상수
+│   │       ├── AppSlugExtractor.java                # URL path 에서 {appSlug} 추출
 │   │       └── WebAutoConfiguration.java
 │   │
 │   ├── common-security/               # 인증/인가 공통 (JWT, SecurityConfig)
@@ -157,39 +171,40 @@ spring-backend-template/
 │
 ├── core/                              # 상태 있는 플랫폼 기능 모듈들 (api/impl 분리)
 │   │
-│   ├── core-user-api/                 # 유저 포트 (인터페이스만)
+│   ├── core-user-api/                 # 유저 포트 (인터페이스 + DTO)
 │   │   └── src/main/java/com/factory/core/user/api/
 │   │       ├── UserPort.java                         # 외부 노출 인터페이스
 │   │       ├── dto/
 │   │       │   ├── UserSummary.java                  # 최소 유저 정보
 │   │       │   ├── UserProfile.java                  # 전체 프로필
+│   │       │   ├── UserAccount.java                  # 계정 정보
 │   │       │   └── UpdateProfileRequest.java
-│   │       │   # UserAppAccessDto 삭제됨 (통합 계정 폐기)
 │   │       └── exception/
-│   │           └── UserNotFoundException.java
+│   │           ├── UserException.java                # BaseException 하위
+│   │           └── UserError.java                    # USR_001~002 enum
 │   │
-│   ├── core-user-impl/                # 유저 도메인 엔티티 템플릿
-│   │   # 참고: User 엔티티 클래스는 이 모듈에 정의되지만,
-│   │   # 실제 테이블은 각 앱 schema 에 존재합니다 (<slug>.users).
-│   │   # 각 앱 모듈은 자기 DataSource 로 이 엔티티 클래스를 매핑합니다.
+│   ├── core-user-impl/                # 유저 도메인 구현
+│   │   # User 엔티티는 이 모듈에 정의되며, Flyway 는 `.schemas(slug)` 로 각 앱 schema 에 적용합니다.
 │   │   └── src/
 │   │       ├── main/
 │   │       │   ├── java/com/factory/core/user/impl/
-│   │       │   │   ├── UserServiceImpl.java         # UserPort 구현
+│   │       │   │   ├── UserServiceImpl.java         # UserPort 구현 + Entity.to*() 메서드로 DTO 변환
 │   │       │   │   ├── entity/
-│   │       │   │   │   ├── User.java                # @Entity (schema = 앱별로 다름)
-│   │       │   │   │   └── SocialIdentity.java      # @Entity <slug>.social_identities
-│   │       │   │   │   # UserAppAccess.java 삭제됨 (통합 계정 폐기)
+│   │       │   │   │   ├── User.java                # @Entity — toSummary/toProfile/toAccount 메서드 제공
+│   │       │   │   │   ├── SocialIdentity.java      # @Entity
+│   │       │   │   │   └── SocialIdentityId.java    # 복합키 EmbeddedId
 │   │       │   │   ├── repository/
 │   │       │   │   │   ├── UserRepository.java
 │   │       │   │   │   └── SocialIdentityRepository.java
-│   │       │   │   │   # UserAppAccessRepository.java 삭제됨
-│   │       │   │   ├── mapper/
-│   │       │   │   │   └── UserMapper.java          # Entity ↔ DTO 변환
+│   │       │   │   ├── controller/
+│   │       │   │   │   └── UserController.java      # 스캐폴딩 레퍼런스 (런타임 미등록)
 │   │       │   │   └── UserAutoConfiguration.java
-│   │       │   └── resources/db/migration/
-│   │       │       # core schema 마이그레이션 없음 — 유저 테이블은 앱 schema 에 있음
-│   │       │       # new-app.sh 가 각 앱 schema 에 V001~V006 생성
+│   │       │   └── resources/db/migration/core/
+│   │       │       ├── V001__init_users.sql
+│   │       │       ├── V002__init_social_identities.sql
+│   │       │       └── V003__add_users_email_index.sql
+│   │       │       # Mapper 디렉토리 없음 — ArchUnit r22 로 *Mapper 금지,
+│   │       │       # Entity 의 to<Dto>() 메서드로 대체
 │   │       └── test/
 │   │
 │   ├── core-auth-api/                 # 인증 포트 (인터페이스만)
@@ -432,7 +447,7 @@ UserRepository.findById(...)            (Spring Data JPA, sumtally DataSource)
 HikariCP (sumtally 전용 풀) → Postgres (Supabase, sumtally schema)
       │
       ▼ (응답 경로)
-User 엔티티 → UserMapper.toProfile() → UserProfile DTO
+User 엔티티 → User.toProfile() → UserProfile DTO
       │
       ▼
 UserController → ApiResponse.ok(profile) → JSON 응답
@@ -449,13 +464,13 @@ UserController → ApiResponse.ok(profile) → JSON 응답
 어떤 레이어에서든 예외가 발생하면 `GlobalExceptionHandler` 가 가로채서 `ApiResponse.error(ApiError)` 형태로 변환합니다. 클라이언트는 항상 같은 구조의 응답을 받습니다.
 
 ```
-throw new NotFoundException("user", userId)
+throw new UserException(UserError.USER_NOT_FOUND, Map.of("id", String.valueOf(userId)))
       │
       ▼
-GlobalExceptionHandler.handleNotFound()
-      │
+GlobalExceptionHandler.handleBaseException(BaseException)
+      │ ErrorInfo → ApiError 로 변환
       ▼
-ApiResponse.error(new ApiError("NOT_FOUND", "user not found", {id: userId}))
+ApiResponse.error(new ApiError("USR_001", "유저를 찾을 수 없습니다", {id: userId}))
       │
       ▼
 HTTP 404 + JSON 응답

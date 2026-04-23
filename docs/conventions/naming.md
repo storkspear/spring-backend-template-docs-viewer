@@ -133,15 +133,27 @@ DTO 는 용도에 따라 접미사를 달리합니다.
 
 ### 예외
 
-모든 커스텀 예외는 `XxxException` 접미사를 사용합니다.
+예외는 **도메인 단위**로 하나의 `XxxException` 만 만들고, 구체적인 에러는 `XxxError` enum 으로 구분합니다. `NotFoundException` 같은 상황 기반 예외를 새로 만들지 않습니다.
 
 ```java
-public class UserNotFoundException extends NotFoundException {
-    public UserNotFoundException(Long userId) {
-        super("user", userId);
-    }
+// 에러 enum — 3자 도메인 약어 + 숫자 (USR_001 등)
+public enum UserError implements ErrorInfo {
+    USER_NOT_FOUND(404, "USR_001", "유저를 찾을 수 없습니다"),
+    EMAIL_ALREADY_EXISTS(409, "USR_002", "이미 사용 중인 이메일입니다");
+    // ...
 }
+
+// 도메인 예외 — BaseException 상속
+public class UserException extends BaseException {
+    public UserException(UserError error) { super(error); }
+    public UserException(UserError error, Map<String, Object> details) { super(error, details); }
+}
+
+// 사용
+throw new UserException(UserError.USER_NOT_FOUND, Map.of("id", String.valueOf(userId)));
 ```
+
+자세한 체계는 [`exception-handling.md`](./exception-handling.md) 를 참고하세요.
 
 ### 설정 클래스
 
@@ -173,7 +185,7 @@ Optional<User> findByEmail(String email);
 **`getXxx`** — 반드시 있어야 함. 없으면 예외를 던집니다.
 
 ```java
-User getById(Long id);  // 없으면 UserNotFoundException
+User getById(Long id);  // 없으면 UserException(UserError.USER_NOT_FOUND)
 ```
 
 **`existsXxx`** — boolean 을 반환합니다.

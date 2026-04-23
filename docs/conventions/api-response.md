@@ -42,7 +42,7 @@
 {
   "data": null,
   "error": {
-    "code": "VALIDATION_ERROR",
+    "code": "CMN_001",
     "message": "이메일 형식이 올바르지 않습니다",
     "details": {
       "field": "email",
@@ -132,13 +132,13 @@ Content-Type: application/json
 
 | 키 형식 | 의미 | 값 타입 |
 |---|---|---|
-| `field` 또는 `field_eq` | 일치 | 단일 값 |
-| `field_not` | 불일치 | 단일 값 |
+| `field_eq` | 일치 | 단일 값 |
 | `field_gte` / `field_lte` | 이상 / 이하 | 단일 값 (숫자, 날짜) |
 | `field_gt` / `field_lt` | 초과 / 미만 | 단일 값 |
 | `field_like` | 부분 매칭 (대소문자 무시) | 문자열 |
-| `field_in` / `field_notIn` | 목록 포함 / 미포함 | 배열 |
 | `field_isNull` / `field_isNotNull` | null 여부 | `true` |
+
+현재 `QueryDslPredicateBuilder` 가 지원하는 연산자는 위 8가지입니다. 필요한 연산자가 있으면 해당 클래스의 `switch` 문에 case 를 추가하면 됩니다.
 
 ### 왜 POST 인가
 
@@ -178,15 +178,24 @@ public record ApiResponse<T>(T data, ApiError error) {
 ```java
 public record ApiError(String code, String message, Map<String, Object> details) {
 
-    public static ApiError of(ErrorCode code, String message) {
-        return new ApiError(code.name(), message, null);
+    /** defensive deep-copy details to prevent external mutation. */
+    public ApiError {
+        if (details != null) {
+            details = Map.copyOf(details);
+        }
     }
 
-    public static ApiError of(ErrorCode code, String message, Map<String, Object> details) {
-        return new ApiError(code.name(), message, details);
+    public static ApiError of(String code, String message) {
+        return new ApiError(code, message, null);
+    }
+
+    public static ApiError of(String code, String message, Map<String, Object> details) {
+        return new ApiError(code, message, details);
     }
 }
 ```
+
+`code` 는 `String` 입니다. 실제로는 `ErrorInfo.getCode()` 의 반환값(예: `"CMN_007"`, `"ATH_001"`)을 넘깁니다. enum constant 이름(`ACCESS_TOKEN_EXPIRED`)이 아닙니다.
 
 ### 컨트롤러 사용 예시
 
@@ -258,7 +267,7 @@ ErrorCode enum, 예외 계층 구조, ExceptionHandler 매핑, 새 예외 추가
 
 - `ErrorCode` enum 이 모든 에러 코드의 단일 정본
 - 컨트롤러는 `ApiResponse.error(...)` 를 직접 반환하지 않음 — 예외를 던지고 `ExceptionHandler` 가 변환
-- 클라이언트는 HTTP 상태 코드가 아닌 **ErrorCode 값으로 분기** (같은 401 이라도 `TOKEN_EXPIRED` vs `INVALID_CREDENTIALS` 는 다름)
+- 클라이언트는 HTTP 상태 코드가 아닌 **ErrorCode 값으로 분기** (같은 401 이라도 `CMN_007`(access token 만료) vs `ATH_001`(비밀번호 불일치) 는 다름)
 
 ---
 
@@ -415,13 +424,13 @@ public ApiResponse<AuthResponse> signUp(@RequestBody @Valid SignUpRequest reques
 }
 ```
 
-### 400 Bad Request (검증 실패)
+### 422 Unprocessable Entity (검증 실패)
 
 ```json
 {
   "data": null,
   "error": {
-    "code": "VALIDATION_ERROR",
+    "code": "CMN_001",
     "message": "올바른 이메일 형식이 아닙니다",
     "details": {
       "field": "email"
@@ -430,13 +439,13 @@ public ApiResponse<AuthResponse> signUp(@RequestBody @Valid SignUpRequest reques
 }
 ```
 
-### 401 Unauthorized (토큰 만료)
+### 401 Unauthorized (access token 만료)
 
 ```json
 {
   "data": null,
   "error": {
-    "code": "TOKEN_EXPIRED",
+    "code": "CMN_007",
     "message": "액세스 토큰이 만료되었습니다"
   }
 }
@@ -448,10 +457,9 @@ public ApiResponse<AuthResponse> signUp(@RequestBody @Valid SignUpRequest reques
 {
   "data": null,
   "error": {
-    "code": "NOT_FOUND",
+    "code": "USR_001",
     "message": "유저를 찾을 수 없습니다",
     "details": {
-      "resource": "user",
       "id": 9999
     }
   }
@@ -464,7 +472,7 @@ public ApiResponse<AuthResponse> signUp(@RequestBody @Valid SignUpRequest reques
 {
   "data": null,
   "error": {
-    "code": "EMAIL_ALREADY_EXISTS",
+    "code": "USR_002",
     "message": "이미 사용 중인 이메일입니다"
   }
 }

@@ -8,7 +8,7 @@
 
 ```
 ErrorInfo (인터페이스)
-    ├── CommonError (enum)     ← CMN_001 ~ CMN_008
+    ├── CommonError (enum)     ← CMN_001 ~ CMN_008, CMN_429
     ├── AuthError (enum)       ← ATH_001 ~ ATH_006
     ├── UserError (enum)       ← USR_001 ~ USR_002
     └── BillingError (enum)    ← BIL_XXX (향후)
@@ -57,6 +57,7 @@ GlobalExceptionHandler
 | CMN_006 | 500 | INTERNAL_ERROR | 서버 내부 오류 |
 | CMN_007 | 401 | ACCESS_TOKEN_EXPIRED | JWT access token 만료 |
 | CMN_008 | 401 | ACCESS_TOKEN_INVALID | JWT access token 무효 |
+| CMN_429 | 429 | RATE_LIMIT_EXCEEDED | Rate limit 초과 (Retry-After 헤더 포함) |
 
 ### AuthError (ATH)
 
@@ -191,7 +192,7 @@ assertThatCode(() -> service.requestReset("nobody@example.com"))
 |------|------|
 | `common-web/.../exception/ErrorInfo.java` | Error enum 인터페이스 |
 | `common-web/.../exception/BaseException.java` | 모든 비즈니스 예외 부모 |
-| `common-web/.../exception/CommonError.java` | 공통 에러 enum (CMN_001~008) |
+| `common-web/.../exception/CommonError.java` | 공통 에러 enum (CMN_001~008, CMN_429) |
 | `common-web/.../exception/CommonException.java` | 공통 예외 |
 | `common-web/.../exception/GlobalExceptionHandler.java` | BaseException 통합 핸들러 |
 | `common-web/.../response/ApiError.java` | 에러 응답 구조 |
