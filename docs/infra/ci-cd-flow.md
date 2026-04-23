@@ -2,7 +2,7 @@
 
 > 결정 근거: [`../conventions/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md)
 > 셋업 가이드: [`../journey/dogfood-setup.md`](../journey/dogfood-setup.md)
-> 함정 모음: [`../reference/dogfood-pitfalls.md`](./dogfood-pitfalls.md)
+> 함정 모음: [`../journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md)
 
 ---
 
@@ -354,7 +354,7 @@ cloudflared tunnel 이 외부 도메인을 Mac mini :80 으로 outbound 연결. 
 
 ---
 
-## 6. 함정 11개 (자세히 → [pitfalls](./dogfood-pitfalls.md))
+## 6. 함정 11개 (자세히 → [pitfalls](../journey/dogfood-pitfalls.md))
 
 | # | 단계 | 키워드 | 자동화로 회피? |
 |---|---|---|---|
@@ -378,7 +378,7 @@ cloudflared tunnel 이 외부 도메인을 Mac mini :80 으로 outbound 연결. 
 ## 7. 관련 문서
 
 - [`../journey/dogfood-setup.md`](../journey/dogfood-setup.md) — 셋업 가이드 (정상 흐름)
-- [`../reference/dogfood-pitfalls.md`](./dogfood-pitfalls.md) — 함정 모음 (사고 실록)
+- [`../journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) — 함정 모음 (사고 실록)
 - [`../journey/dogfood-faq.md`](../journey/dogfood-faq.md) — 자주 묻는 질문
 - [`../journey/deployment.md`](../journey/deployment.md) — 운영 배포 (cloudflared, observability)
 - [`../infra/runbook.md`](../infra/runbook.md) — 평시 운영 / 장애 대응

@@ -167,7 +167,7 @@ dependencies {
   config : implementation
   depends: :core:core-auth-impl
   reason : forbidden pattern
-See docs/conventions/module-dependencies.md
+See docs/architecture/module-dependencies.md
 ```
 
 → 해결: `project(':core:core-auth-impl')` 을 `project(':core:core-auth-api')` 로 교체.
@@ -195,4 +195,4 @@ Rule 'r9: core-*-api must not depend on JPA/Hibernate' was violated (1 time):
 
 - `docs/journey/philosophy.md` 결정 3 (api/impl 분리), 결정 4 (ArchUnit), 결정 14 (delegation mock 금지)
 - `docs/journey/architecture.md` "의존 규칙" 및 6중 방어선
-- `docs/conventions/contract-testing.md` (Port 계약 테스트)
+- `docs/testing/contract-testing.md` (Port 계약 테스트)

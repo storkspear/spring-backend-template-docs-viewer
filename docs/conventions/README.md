@@ -6,22 +6,25 @@
 
 ---
 
-## 문서 구성
+## 이 폴더의 문서 (순수 코드 작성 규약)
 
+- [`design-principles.md`](./design-principles.md) — SOLID · DRY · YAGNI · 포트/어댑터 · 의존 방향
 - [`naming.md`](./naming.md) — 패키지/클래스/메서드/DB 네이밍 규칙
-- [`api-response.md`](./api-response.md) — API 응답 포맷, 에러 코드, HTTP 상태, 페이지네이션
-- [`design-principles.md`](./design-principles.md) — SOLID, DRY, YAGNI, 포트/어댑터, 의존 방향
-- [`exception-handling.md`](./exception-handling.md) — 예외 계층, ErrorCode enum, HTTP 매핑, 추가 절차, 테스트 검증
-- [`contract-testing.md`](./contract-testing.md) — 3층 테스트 구조, Port 계약, Fake adapter 패턴
-- [`json-contract.md`](./json-contract.md) — DTO JSON 직렬화 정책, `AbstractJsonContractTest` 사용법
-- [`module-dependencies.md`](./module-dependencies.md) — 모듈 의존 허용 매트릭스, Gradle convention plugin, ArchUnit 12개 규칙
-- [`git-workflow.md`](./git-workflow.md) — 브랜치 · 커밋 규약 · Merge 전략 · Conventional Commits
-- [`versioning.md`](./versioning.md) — semver · CHANGELOG · Deprecation · 릴리스 프로세스
-- [`dto-factory.md`](./dto-factory.md) — DTO 팩토리 패턴 (from/of/with), Mapper 폐기, Entity `to<Dto>()` 패턴
 - [`records-and-classes.md`](./records-and-classes.md) — record vs class 결정 기준
-- [`observability.md`](./observability.md) — 메트릭·로그·알림 3축, `appSlug` 의무 태깅, 임계치
-- [`rate-limiting.md`](./rate-limiting.md) — Bucket4j 키 설계, 민감 엔드포인트, 초과 응답
-- [`storage.md`](./storage.md) — StoragePort Signed URL 패턴, bucket naming, retention, 용량 계산
+- [`dto-factory.md`](./dto-factory.md) — DTO 팩토리 패턴 (from/of/with) · Entity `to<Dto>()` 패턴
+- [`exception-handling.md`](./exception-handling.md) — 예외 계층 · ErrorCode enum · HTTP 매핑
+- [`git-workflow.md`](./git-workflow.md) — 브랜치 · 커밋 규약 · Merge 전략 · Conventional Commits
+
+---
+
+## 같은 성격의 인접 그룹
+
+구조 재편으로 **코드 작성 규약** 과 다른 성격의 문서들은 별도 폴더에서 관리합니다.
+
+- 시스템 구조 → [`../architecture/`](../architecture/) — Module Dependencies · Architecture Rules (ArchUnit) · Multitenant · JWT
+- API 계약 → [`../api-contract/`](../api-contract/) — API Response · JSON Contract · Versioning · Flutter Integration
+- 기능 가이드 → [`../features/`](../features/) — Push · Email · Observability · Rate Limiting · Storage · Migration · Seed Data
+- 테스팅 → [`../testing/`](../testing/) — Contract Testing · Testing Strategy
 
 ---
 
@@ -41,7 +44,7 @@
 **자동화가 1순위입니다.** 가능한 한 IDE, 빌드, CI 가 규약을 강제하도록 만듭니다.
 
 - **Gradle 빌드** — 모듈 의존 관계 강제
-- **ArchUnit 테스트** — 패키지 구조 및 네이밍 강제
+- **ArchUnit 테스트** — 패키지 구조 및 네이밍 강제 (전체 22개 규칙: [`../architecture/architecture-rules.md`](../architecture/architecture-rules.md))
 - **checkstyle / spotless** — 포맷팅 강제 (Phase 1+ 도입 예정)
 - **pre-commit hook** — 커밋 메시지 형식 검증 (선택)
 

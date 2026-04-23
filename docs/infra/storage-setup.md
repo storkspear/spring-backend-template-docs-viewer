@@ -4,7 +4,7 @@
 > **파생 레포 개발자** 는 [`onboarding.md`](../journey/onboarding.md) §3.3 를 참조하세요 (`dev-shared` 또는 본인 환경 이름).
 >
 > 인프라 전체 구성 / 책임 분담: [`../infra/infrastructure.md`](./infrastructure.md)
-> bucket 네이밍 / key 패턴 규약: [`../conventions/storage.md`](../conventions/storage.md)
+> bucket 네이밍 / key 패턴 규약: [`../features/storage.md`](../features/storage.md)
 > 선택 근거 (왜 NAS MinIO?): [`../conventions/decisions-infra.md`](./decisions-infra.md) I-03
 
 ## 로컬 개발
@@ -112,5 +112,5 @@ NAS 자체 RAID/Snapshot 활용 권장. docker volume 은 NAS 볼륨 안이라 N
 
 ## 관련 문서
 
-- `docs/conventions/storage.md` — StoragePort 사용 패턴
+- `docs/features/storage.md` — StoragePort 사용 패턴
 - `docs/infra/monitoring-setup.md` — Grafana/Prometheus 연동

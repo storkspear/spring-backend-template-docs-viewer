@@ -79,4 +79,4 @@ Prometheus scrape 시 Micrometer 가 `.` → `_` 변환: `http_server_requests_s
 ## 관련 문서
 
 - `docs/infra/monitoring-setup.md` — 프로덕션 모니터링 스택 배포
-- `docs/conventions/rate-limiting.md` — Rate limit 정책
+- `docs/features/rate-limiting.md` — Rate limit 정책

@@ -3,7 +3,7 @@
 이 문서는 DTO JSON 직렬화/역직렬화의 전역 정책과 테스트 규약을 정의합니다.
 
 **관련 문서**:
-- `docs/conventions/contract-testing.md` — 3층 테스트 구조 전체
+- `docs/testing/contract-testing.md` — 3층 테스트 구조 전체
 - `docs/conventions/naming.md` — DTO 네이밍 규칙
 
 ---
@@ -218,7 +218,7 @@ ISO-8601 문자열 강제:
 
 - 이런 변경은 **Item 3 (버저닝) 의 breaking change** 에 해당.
 - `@Deprecated` 로 기존 필드 유지하고 새 필드 추가 → 한 번에 교체 금지.
-- 자세한 절차는 `docs/conventions/versioning.md` (향후 추가 예정, Item 3 구현 시).
+- 자세한 절차는 `docs/api-contract/versioning.md` (향후 추가 예정, Item 3 구현 시).
 
 ### 필드 제거
 

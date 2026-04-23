@@ -6,7 +6,7 @@
 
 각 단계 끝에는 다음 단계로 넘어가는 링크가 있습니다. 책처럼 위에서 아래로 한 번 흐르듯 읽으면 자연스럽게 전체 그림이 잡힙니다.
 
-> 💡 막히면: [도그푸딩 함정 모음](../reference/dogfood-pitfalls.md) / [도그푸딩 FAQ](./dogfood-faq.md) 부터 검색해 보세요.
+> 💡 막히면: [도그푸딩 함정 모음](../journey/dogfood-pitfalls.md) / [도그푸딩 FAQ](./dogfood-faq.md) 부터 검색해 보세요.
 
 ---
 
@@ -113,7 +113,7 @@ template 은 비즈니스 로직 없이 뼈대만 가지고 있습니다. 실제
 읽을 문서:
 
 - [`guides/dogfood-setup.md`](./dogfood-setup.md) **§4 ~ §6** (작성 + 실행 + 동작 확인).
-- 막히면 [`troubleshooting/dogfood-pitfalls.md`](../reference/dogfood-pitfalls.md).
+- 막히면 [`troubleshooting/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md).
 
 핵심 명령은 두 줄입니다.
 
@@ -125,7 +125,7 @@ bash tools/dogfooding/setup.sh
 
 `setup.sh` 가 GitHub Actions Variables / Secrets 일괄 등록 + GHA 용 SSH 키 발급 + DEPLOY_ENABLED 토글 + 자동 배포 trigger 까지 한 번에 처리합니다.
 
-배포가 실행되는 전체 흐름이 궁금하다면 [`architecture/ci-cd-flow.md`](../reference/ci-cd-flow.md) 의 다이어그램을 참고하세요.
+배포가 실행되는 전체 흐름이 궁금하다면 [`architecture/ci-cd-flow.md`](../infra/ci-cd-flow.md) 의 다이어그램을 참고하세요.
 
 ---
 
@@ -149,7 +149,7 @@ bash tools/dogfooding/cleanup.sh
 - Mac mini 의 spring 컨테이너 + kamal-proxy + authorized_keys 의 GHA 키 정리
 - GHCR 의 도그푸딩 이미지 삭제
 
-외부 서비스 (PAT / Tailscale OAuth) 의 키 자체는 **본인이 직접 폐기** 해야 합니다. 절차는 [`security/key-rotation.md`](../reference/key-rotation.md) 에 있습니다.
+외부 서비스 (PAT / Tailscale OAuth) 의 키 자체는 **본인이 직접 폐기** 해야 합니다. 절차는 [`security/key-rotation.md`](../infra/key-rotation.md) 에 있습니다.
 
 ---
 
@@ -183,11 +183,11 @@ template 의 구조와 자동화를 이해했으니, 이제 실제 본인 프로
 | 평시 배포 / 롤백 / 장애 | [`runbook.md`](../infra/runbook.md) | 운영자용 절차서 |
 | 장애 시나리오 분석 | [`edge-cases.md`](../infra/edge-cases.md) | 무엇이 깨질 수 있나 |
 | 미완 항목 추적 | [`backlog.md`](../reference/backlog.md) | 진행 중 / 대기 |
-| 키 교체 절차 | [`security/key-rotation.md`](../reference/key-rotation.md) | PAT / Tailscale OAuth / Supabase / SSH 주기 |
+| 키 교체 절차 | [`security/key-rotation.md`](../infra/key-rotation.md) | PAT / Tailscale OAuth / Supabase / SSH 주기 |
 | Mac mini 운영 호스트 | [`guides/mac-mini-setup.md`](../infra/mac-mini-setup.md) | 물리 호스트 셋업 가이드 (template 버전) |
 | 관측성 스택 | [`guides/monitoring-setup.md`](../infra/monitoring-setup.md) | Loki / Grafana / Prometheus / Alertmanager |
 | 오브젝트 스토리지 | [`guides/storage-setup.md`](../infra/storage-setup.md) | MinIO 로컬 / NAS |
-| 마이그레이션 | [`migration/README.md`](../reference/migration.md) | Flyway 규칙 + 포트/어댑터 |
+| 마이그레이션 | [`migration/README.md`](../features/migration.md) | Flyway 규칙 + 포트/어댑터 |
 
 ---
 

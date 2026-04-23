@@ -2,7 +2,7 @@
 
 > 결정 근거: [`../conventions/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md)
 > 정상 흐름: [`../journey/dogfood-setup.md`](../journey/dogfood-setup.md)
-> 전체 플로우: [`../reference/ci-cd-flow.md`](./ci-cd-flow.md)
+> 전체 플로우: [`../infra/ci-cd-flow.md`](../infra/ci-cd-flow.md)
 
 ---
 
@@ -248,6 +248,6 @@ DB_PASSWORD=<password>
 ## 관련 문서
 
 - [`../journey/dogfood-setup.md`](../journey/dogfood-setup.md) — 정상 흐름 (이 함정들 없이 가는 길)
-- [`../reference/ci-cd-flow.md`](./ci-cd-flow.md) — 다이어그램 + phase 별 안전망
+- [`../infra/ci-cd-flow.md`](../infra/ci-cd-flow.md) — 다이어그램 + phase 별 안전망
 - [`../conventions/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md) — ADR (왜 이 결정을)
-- [`../reference/key-rotation.md`](./key-rotation.md) — 키 노출 시 절차
+- [`../infra/key-rotation.md`](../infra/key-rotation.md) — 키 노출 시 절차

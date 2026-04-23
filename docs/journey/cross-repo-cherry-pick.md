@@ -4,7 +4,7 @@
 
 **관련 문서**:
 - `docs/conventions/git-workflow.md` — 브랜치 · 커밋 규약
-- `docs/conventions/versioning.md` — 버전 · Deprecation
+- `docs/api-contract/versioning.md` — 버전 · Deprecation
 
 ---
 
@@ -103,7 +103,7 @@ git push origin fix/refresh-token-race
 |---|---|
 | 파일이 파생 레포에서 이미 수정됨 | 수동 merge 후 `git cherry-pick --continue` |
 | 기반 버전이 너무 옛날 (v0.1 → v0.5 점프) | 한 단계씩: v0.1 → v0.2 먼저, 그 다음 v0.2 → v0.3 ... |
-| deprecated API 이미 쓰고 있음 | `docs/reference/migration.md` 참고 후 신규 API 로 교체 |
+| deprecated API 이미 쓰고 있음 | `docs/features/migration.md` 참고 후 신규 API 로 교체 |
 | 공통 코드와 도메인 코드가 한 커밋에 섞임 | `git cherry-pick -n <sha>` 로 staged 상태만 가져와 선별 |
 
 ### 커밋 위생 원칙
@@ -135,8 +135,8 @@ git push origin fix/refresh-token-race
 ## 참조
 
 - `docs/journey/philosophy.md` 결정 2 (템플릿 전파 방식)
-- `docs/conventions/versioning.md` (버전 · Deprecation)
-- `docs/reference/migration.md` (버전별 migration guide — breaking 있을 때만)
+- `docs/api-contract/versioning.md` (버전 · Deprecation)
+- `docs/features/migration.md` (버전별 migration guide — breaking 있을 때만)
 
 ---
 

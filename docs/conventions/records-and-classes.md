@@ -117,4 +117,4 @@ record 컴포넌트 이름이 자동으로 JSON 키가 됨. 네이밍 충돌 시
 
 - `docs/conventions/dto-factory.md` (DTO 패턴)
 - `docs/conventions/naming.md` (네이밍)
-- `docs/conventions/module-dependencies.md` (ArchUnit 규칙 18, 19)
+- `docs/architecture/module-dependencies.md` (ArchUnit 규칙 18, 19)

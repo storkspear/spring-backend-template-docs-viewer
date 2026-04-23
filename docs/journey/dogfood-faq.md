@@ -1,8 +1,8 @@
 # 도그푸딩 FAQ
 
 > 셋업 가이드: [`./dogfood-setup.md`](./dogfood-setup.md)
-> 함정 모음: [`../reference/dogfood-pitfalls.md`](../reference/dogfood-pitfalls.md)
-> 다이어그램: [`../reference/ci-cd-flow.md`](../reference/ci-cd-flow.md)
+> 함정 모음: [`../journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md)
+> 다이어그램: [`../infra/ci-cd-flow.md`](../infra/ci-cd-flow.md)
 
 ---
 
@@ -28,7 +28,7 @@
 
 ### Q3. PAT 안 쓰고 `GITHUB_TOKEN` 으로만 가능한가요?
 
-**현재 안 됨** (2026-04 기준). 이유는 [pitfalls #5 ~ #7](../reference/dogfood-pitfalls.md):
+**현재 안 됨** (2026-04 기준). 이유는 [pitfalls #5 ~ #7](../journey/dogfood-pitfalls.md):
 - 첫 GHCR 패키지 생성 시 repo↔package 자동 연결이 안 되어 GITHUB_TOKEN 으로 push 시 403
 - `workflow permissions = write` + `provenance/sbom: false` 다 적용해도 동일
 
@@ -70,7 +70,7 @@ template 상태에서 DEPLOY_ENABLED 기본 미설정인 이유.
 
 **즉시 행동**:
 1. (가능하면) 새 commit 으로 파일 삭제 + push
-2. **모든 키 즉시 폐기 + 재발급** ([key-rotation.md](../reference/key-rotation.md))
+2. **모든 키 즉시 폐기 + 재발급** ([key-rotation.md](../infra/key-rotation.md))
    - GitHub history 에 남으니 noting 안 됨 — 이미 노출됐다고 가정
 3. (선택) `git filter-repo` 또는 BFG 로 history 재작성 + force push
 
@@ -124,14 +124,14 @@ curl -H "Host: server.<도메인>" http://100.X.X.X/actuator/health/liveness
 
 → 가이드 따라 1번에 setup → 자동 trigger → 배포 success 가 정상 흐름.
 
-(만약 새로운 함정 만나면 [pitfalls.md](../reference/dogfood-pitfalls.md) §"새 함정 발견 시" 절차로 추가 PR.)
+(만약 새로운 함정 만나면 [pitfalls.md](../journey/dogfood-pitfalls.md) §"새 함정 발견 시" 절차로 추가 PR.)
 
 ---
 
 ## 더 궁금한 게 있다면
 
 - [`./dogfood-setup.md`](./dogfood-setup.md) — 정상 흐름
-- [`../reference/dogfood-pitfalls.md`](../reference/dogfood-pitfalls.md) — 11회 함정 자세히
-- [`../reference/ci-cd-flow.md`](../reference/ci-cd-flow.md) — 다이어그램
-- [`../reference/key-rotation.md`](../reference/key-rotation.md) — 키 교체
+- [`../journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) — 11회 함정 자세히
+- [`../infra/ci-cd-flow.md`](../infra/ci-cd-flow.md) — 다이어그램
+- [`../infra/key-rotation.md`](../infra/key-rotation.md) — 키 교체
 - [`../conventions/decisions-infra.md`](../infra/decisions-infra.md) — 결정 근거 (I-09 ~ I-14)

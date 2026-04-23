@@ -30,7 +30,7 @@
 | 알림 (Discord webhook) | `provisioned (임계치 미정)` | Alertmanager 컨테이너 · Slack-compat Discord receiver 구성 완료. `DISCORD_WEBHOOK_URL` env 로 즉시 동작. 실제 알림 룰(CPU/메모리/5xx/p95 임계치)은 Phase 2 |
 | 운영 관측성 스택 | `template-ready` | `infra/docker-compose.observability.yml` (retention 7일, mem_limit 명시). Mac mini 에서 `docker compose up -d` 한 번 |
 | 로컬 docker 관측성 | `deprecated` | 로컬에서는 기동하지 않음 (2026-04-19 변경). 운영 전용으로 범위 재조정 (I-06 노트) |
-| 2-tier bucket 정책 | `provisioned` (로컬 `dev-shared`) / `planned` (운영 `{slug}-{category}`) | `BucketProvisioner` 자동 생성. 상세: `conventions/storage.md` I-07 |
+| 2-tier bucket 정책 | `provisioned` (로컬 `dev-shared`) / `planned` (운영 `{slug}-{category}`) | `BucketProvisioner` 자동 생성. 상세: `features/storage.md` I-07 |
 
 상태 필드 정의 (`planned` / `provisioned` / `in-prod` / `hardware-acquired`) 및 전이 규칙: [`decisions-infra.md`](./decisions-infra.md) 참조.
 
@@ -177,7 +177,7 @@ ingress:
 | **TLS 종료** | Cloudflare | planned | Item Ops-1 |
 | **DDoS 방어** | Cloudflare | planned | Item Ops-1 |
 | **Rate limit (엣지)** | Cloudflare | planned | Item Ops-1 |
-| **Rate limit (앱 내)** | Spring (`bucket4j`) | provisioned | `conventions/rate-limiting.md` |
+| **Rate limit (앱 내)** | Spring (`bucket4j`) | provisioned | `features/rate-limiting.md` |
 | **DB (운영)** | Supabase | provisioned | I-01, keep-alive.sh |
 | **DB (로컬)** | docker postgres | provisioned | compose |
 | **오브젝트 스토리지** | NAS MinIO | provisioned (LAN-only) | I-03, `storage.md` |
@@ -351,8 +351,8 @@ V009__add_devices_updated_at.sql
 - [`architecture.md`](../journey/architecture.md) — 코드 아키텍처 (포트/어댑터, 모듈 의존성)
 - [`philosophy.md`](../journey/philosophy.md) — 코드 설계 결정 (모듈러 모놀리스, Mapper 금지 등)
 - [`conventions/decisions-infra.md`](./decisions-infra.md) — 인프라 결정 카드 I-01~I-07
-- [`conventions/storage.md`](../conventions/storage.md) — MinIO 2-tier bucket 정책
-- [`conventions/observability.md`](../conventions/observability.md) — 관측성 규약
+- [`features/storage.md`](../features/storage.md) — MinIO 2-tier bucket 정책
+- [`features/observability.md`](../features/observability.md) — 관측성 규약
 - [`guides/onboarding.md`](../journey/onboarding.md) — 템플릿 첫 사용 가이드
 - [`guides/storage-setup.md`](./storage-setup.md) — MinIO 로컬/NAS 셋업
 - [`guides/monitoring-setup.md`](./monitoring-setup.md) — 관측성 스택 기동

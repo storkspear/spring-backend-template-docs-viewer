@@ -5,7 +5,7 @@
 **관련 문서**:
 - `docs/conventions/records-and-classes.md` — record vs class 선택 기준
 - `docs/conventions/naming.md` — DTO 네이밍 규칙
-- `docs/conventions/json-contract.md` — JSON 직렬화 정책
+- `docs/api-contract/json-contract.md` — JSON 직렬화 정책
 
 ---
 
@@ -214,4 +214,4 @@ public DetailedProfile getDetailedProfile(long userId) {
 
 - `docs/journey/philosophy.md` 결정 3 (api/impl 분리), 결정 11 (포트/어댑터)
 - `docs/conventions/records-and-classes.md` (record vs class)
-- `docs/conventions/json-contract.md` (JSON 정책)
+- `docs/api-contract/json-contract.md` (JSON 정책)

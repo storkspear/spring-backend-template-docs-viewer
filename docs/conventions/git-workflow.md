@@ -3,7 +3,7 @@
 이 문서는 `spring-backend-template` 의 Git 사용 규약을 정의합니다.
 
 **관련 문서**:
-- `docs/conventions/versioning.md` — 버전 규약 · 릴리스 프로세스 · Deprecation
+- `docs/api-contract/versioning.md` — 버전 규약 · 릴리스 프로세스 · Deprecation
 - `docs/journey/cross-repo-cherry-pick.md` — 템플릿 ↔ 파생 레포 동기화
 
 ---
@@ -248,6 +248,6 @@ Item 시작 전에 **반드시** backlog 를 점검:
 ## 참조
 
 - `docs/journey/philosophy.md` 결정 2 (템플릿 전파 방식)
-- `docs/conventions/versioning.md` (버전 규약 · Deprecation)
+- `docs/api-contract/versioning.md` (버전 규약 · Deprecation)
 - `docs/journey/cross-repo-cherry-pick.md` (파생 레포 동기화)
 - `docs/backlog.md` (실제 목록)

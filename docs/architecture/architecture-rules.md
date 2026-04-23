@@ -202,7 +202,7 @@ bootstrap/src/test/java/.../BootstrapArchitectureTest.java
 
 **내용:** `..dto..` 패키지의 record 는 이름이 다음 중 하나로 끝나야 합니다: `Request`, `Response`, `Dto`, `Summary`, `Profile`, `Account`, `Tokens`, `Message`, `Result`, `Status`.
 
-**목적:** DTO 네이밍을 통일하면 이름만 보고 용도 (입력/출력/뷰/결과) 를 구분할 수 있습니다. 허용 suffix 목록은 [naming.md](./naming.md) 의 DTO 규칙과 일치합니다.
+**목적:** DTO 네이밍을 통일하면 이름만 보고 용도 (입력/출력/뷰/결과) 를 구분할 수 있습니다. 허용 suffix 목록은 [naming.md](../conventions/naming.md) 의 DTO 규칙과 일치합니다.
 
 **위반 예시:** `core.auth.api.dto.AuthData` — 허용되지 않은 suffix.
 
@@ -223,7 +223,7 @@ public void oldMethod() { ... }
 public void oldMethod() { ... }
 ```
 
-[versioning.md](./versioning.md) 의 Deprecation 절차와 연동됩니다.
+[versioning.md](../api-contract/versioning.md) 의 Deprecation 절차와 연동됩니다.
 
 ### r21: ENTITIES_MUST_RESIDE_IN_IMPL_ENTITY
 
@@ -239,7 +239,7 @@ public void oldMethod() { ... }
 
 **목적:** `UserMapper.toDto(user)` 같은 별도 Mapper 클래스 대신 **Entity 내부에 `toDto()` 메서드** 를 두는 패턴을 강제합니다. Mapper 클래스는 Entity 와 DTO 양쪽을 알아야 해서 변경 추적이 어렵고, 엔티티의 도메인 지식을 외부로 끄집어냅니다.
 
-상세는 [dto-factory.md](./dto-factory.md) 를 참조하세요.
+상세는 [dto-factory.md](../conventions/dto-factory.md) 를 참조하세요.
 
 **위반 예시:** `core.user.impl.mapper.UserMapper` 클래스.
 
@@ -312,5 +312,5 @@ Architecture Violation [r1: apps/* must not depend on core-*-impl (ports only)]
 | `common-testing/.../architecture/ArchitectureTest.java` | common-testing classpath 용 (빠른 피드백) |
 | `bootstrap/.../BootstrapArchitectureTest.java` | 전체 프로젝트 classpath 용 (실제 검증) |
 | `conventions/naming.md` | r14~r22 와 짝을 이루는 네이밍 규칙 |
-| `conventions/module-dependencies.md` | r1~r8 과 짝을 이루는 의존 매트릭스 |
+| `architecture/module-dependencies.md` | r1~r8 과 짝을 이루는 의존 매트릭스 |
 | `conventions/dto-factory.md` | r22 의 배경 (Mapper 대신 `to<Dto>()` 패턴) |

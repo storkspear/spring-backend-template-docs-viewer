@@ -743,7 +743,7 @@ APP_STORAGE_MINIO_SECRET_KEY=<secret>
 ### 16.3 Bucket 정책
 템플릿의 `BucketProvisioner` 가 Spring 기동 시 `.env` 의 `APP_STORAGE_MINIO_BUCKETS_<N>=<name>` 항목을 읽어 자동 생성. `new-app.sh` 가 `.env` 에 `APP_STORAGE_MINIO_BUCKETS_<N>=<slug>-uploads` 항목을 append.
 
-자세한 2-tier bucket 규약: [`../conventions/storage.md`](../conventions/storage.md).
+자세한 2-tier bucket 규약: [`../features/storage.md`](../features/storage.md).
 
 ---
 

@@ -118,7 +118,7 @@ Phase 1+ 에는 우선순위 재조정 (예: 보안 기준 상향).
   - 파생 레포 5+ → 공용 인프라 분리 검토
 - **관련 문서**:
   - `infrastructure.md §4`
-  - `conventions/storage.md` — 2-tier bucket 정책 (I-07)
+  - `features/storage.md` — 2-tier bucket 정책 (I-07)
   - `onboarding.md` — LAN 한계 명시
 
 ---
@@ -210,7 +210,7 @@ Phase 1+ 에는 우선순위 재조정 (예: 보안 기준 상향).
   - 로그 retention 요구 > 30일 → 단일 인스턴스 Loki 부담
   - 팀 3명+ → 관리형 (Grafana Cloud Pro)
 - **관련 문서**:
-  - `conventions/observability.md`
+  - `features/observability.md`
   - `guides/monitoring-setup.md`
   - `infra/docker-compose.dev.yml`
   - Item Ops-1 — 알림 종류/임계치 정의
@@ -244,7 +244,7 @@ Phase 1+ 에는 우선순위 재조정 (예: 보안 기준 상향).
   - 운영 bucket 수 20+ → IAM 관리 부담
   - S3 (AWS/R2) 이관 시점 — 해당 provider 의 bucket 네이밍 제한 확인
 - **관련 문서**:
-  - `conventions/storage.md` — 상세 규약
+  - `features/storage.md` — 상세 규약
   - `infrastructure.md §4`
   - `core/core-storage-impl/` — `BucketProvisioner`, `MinIOStorageAdapter`
 
@@ -333,14 +333,14 @@ Phase 1+ 에는 우선순위 재조정 (예: 보안 기준 상향).
   - **Docker Hub 전환** — 한도 더 넉넉하지만 외부 의존성 추가. 탈락 (현 단계 불필요).
 - **Trade-off**:
   - PAT expiration 관리 부담 (90일 권장).
-  - 노출 시 즉시 폐기 + 재발급 필요 (`docs/reference/key-rotation.md` 참조).
+  - 노출 시 즉시 폐기 + 재발급 필요 (`docs/infra/key-rotation.md` 참조).
 - **재검토 트리거**:
   - GitHub 의 GHCR + GITHUB_TOKEN 권한 매핑 개선 발표
   - PAT expiration 관리 자동화 필요해짐 (3개월 주기 reminder 만으론 부족)
 - **관련 문서**:
   - `../journey/dogfood-setup.md §3.1` — PAT 발급 절차
-  - `../reference/key-rotation.md` — rotation 정책
-  - `../reference/dogfood-pitfalls.md #5 ~ #7` — 403 함정 분석
+  - `../infra/key-rotation.md` — rotation 정책
+  - `../journey/dogfood-pitfalls.md #5 ~ #7` — 403 함정 분석
   - `../../.github/workflows/deploy.yml` — 사용 위치
 
 ---
@@ -391,9 +391,9 @@ Phase 1+ 에는 우선순위 재조정 (예: 보안 기준 상향).
   - artifact storage 한도 임박 (500MB) → retention 줄이기 또는 다른 방식
   - CI / deploy 분리가 디버그 어려움 만들면 단일 workflow 재검토
 - **관련 문서**:
-  - `../reference/ci-cd-flow.md §6` — workflow_run + deploy phase
+  - `../infra/ci-cd-flow.md §6` — workflow_run + deploy phase
   - `../../.github/workflows/ci.yml`, `../../.github/workflows/deploy.yml`
-  - `../reference/dogfood-pitfalls.md #1, #2` — artifact 함정
+  - `../journey/dogfood-pitfalls.md #1, #2` — artifact 함정
 
 ---
 
@@ -419,7 +419,7 @@ Phase 1+ 에는 우선순위 재조정 (예: 보안 기준 상향).
 - **관련 문서**:
   - `../../.github/workflows/deploy.yml` — `docker/build-push-action` + `kamal deploy --skip-push`
   - `../../Dockerfile.runtime`
-  - `../reference/dogfood-pitfalls.md #10a #10b` — image 경로 / service label 함정
+  - `../journey/dogfood-pitfalls.md #10a #10b` — image 경로 / service label 함정
   - https://kamal-deploy.org/docs/commands/deploy/
 
 ---
@@ -441,14 +441,14 @@ Phase 1+ 에는 우선순위 재조정 (예: 보안 기준 상향).
   - **Self-hosted runner on Mac mini** — Tailscale 자체가 불필요. 탈락 ([I-12](#결정-i-12-workflow_run-게이트--jar-artifact-패스) 와 같은 이유).
 - **Trade-off**:
   - OAuth client scope 변경 시 client 재발급 필요 (편집 불가).
-  - 노출 시 즉시 폐기 (`docs/reference/key-rotation.md`).
+  - 노출 시 즉시 폐기 (`docs/infra/key-rotation.md`).
 - **재검토 트리거**:
   - Tailscale 의 OAuth API 변경 (scope 이름 바뀜 등)
   - GHA runner 가 tailscale 없이 Mac mini 에 도달 가능한 다른 경로 등장 (예: Cloudflare Tunnel SSH)
 - **관련 문서**:
   - `../journey/dogfood-setup.md §3.2` — 발급 절차 (ACL HuJSON 포함)
-  - `../reference/dogfood-pitfalls.md #3 #4` — 함정 분석
-  - `../reference/key-rotation.md` — rotation
+  - `../journey/dogfood-pitfalls.md #3 #4` — 함정 분석
+  - `../infra/key-rotation.md` — rotation
   - https://tailscale.com/kb/1215/oauth-clients
 
 ---
@@ -490,7 +490,7 @@ Phase 1+ 에는 우선순위 재조정 (예: 보안 기준 상향).
 
 - [`philosophy.md`](../journey/philosophy.md) — 코드 설계 결정
 - [`../infra/infrastructure.md`](./infrastructure.md) — 인프라 현재 상태 + 구성도
-- [`storage.md`](../conventions/storage.md) — 2-tier bucket 상세 규약
-- [`observability.md`](../conventions/observability.md) — 관측성 규약
+- [`storage.md`](../features/storage.md) — 2-tier bucket 상세 규약
+- [`observability.md`](../features/observability.md) — 관측성 규약
 - [`../infra/edge-cases.md`](./edge-cases.md) — 리스크 시나리오 분석
 - Item Ops-1 (예정) — 운영 배포 구현

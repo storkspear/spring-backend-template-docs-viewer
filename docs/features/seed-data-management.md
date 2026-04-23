@@ -2,7 +2,7 @@
 
 이 문서는 `spring-backend-template` 및 그 파생 레포가 **초기 데이터(seed data)** 를 관리하는 전략을 정리합니다. Flyway 스키마 마이그레이션과 구분되는 "데이터 채우기" 작업의 위치, 권장 방식, 피해야 할 함정을 다룹니다.
 
-스키마 변경 자체는 Flyway 마이그레이션의 영역이며, 상세한 마이그레이션 가이드는 [`reference/migration.md`](./migration.md) 에서 관리합니다. 여기서는 **"스키마는 이미 있다, 이제 어떤 데이터를 넣을 것인가"** 에 집중합니다.
+스키마 변경 자체는 Flyway 마이그레이션의 영역이며, 상세한 마이그레이션 가이드는 [`migration.md`](./migration.md) 에서 관리합니다. 여기서는 **"스키마는 이미 있다, 이제 어떤 데이터를 넣을 것인가"** 에 집중합니다.
 
 ---
 
@@ -163,7 +163,7 @@ public class JpaAuthFixtures implements AuthFixtures {
 }
 ```
 
-이 방식의 장점은 **테스트마다 필요한 최소한의 데이터만** 생성하고, `@Sql(contract-cleanup.sql)` 로 매 테스트 전에 깨끗이 지운다는 점입니다. 상세는 [`conventions/contract-testing.md`](../conventions/contract-testing.md) 를 참조하세요.
+이 방식의 장점은 **테스트마다 필요한 최소한의 데이터만** 생성하고, `@Sql(contract-cleanup.sql)` 로 매 테스트 전에 깨끗이 지운다는 점입니다. 상세는 [`testing/contract-testing.md`](../testing/contract-testing.md) 를 참조하세요.
 
 **운영/개발 DB 에는 전혀 영향을 주지 않습니다** — Testcontainers 가 ephemeral Docker Postgres 를 기동하기 때문입니다.
 

@@ -717,7 +717,7 @@ apps/app-<slug>/config/<Slug>DataSourceConfig (slug="<slug>")
 
 `build-logic/` 의 역할별 convention plugin (`factory.common-module`, `factory.core-api-module`, `factory.core-impl-module`, `factory.app-module`, `factory.bootstrap-module`) 이 `afterEvaluate` 에서 `ProjectDependency` 를 순회하며 허용/금지 규칙 검증. 위반 시 `GradleException` throw.
 
-자세한 매트릭스와 규칙은 [`conventions/module-dependencies.md`](../conventions/module-dependencies.md).
+자세한 매트릭스와 규칙은 [`architecture/module-dependencies.md`](../architecture/module-dependencies.md).
 
 ### 방어선 5 — ArchUnit CI 강제
 
@@ -727,7 +727,7 @@ apps/app-<slug>/config/<Slug>DataSourceConfig (slug="<slug>")
 
 포트가 약속한 행위를 `AbstractXxxPortContractTest` 로 명문화합니다. 모든 impl 은 이 abstract 를 상속하여 통과해야 머지 가능. JSON 직렬화 계약은 `AbstractJsonContractTest<T>` 로 강제됩니다. 테스트 실패 시 CI 에서 빌드가 멈춥니다.
 
-이 방어선은 **추출 가능성의 형식적 보증** — impl 을 HTTP 어댑터로 교체해도 같은 abstract 를 통과하면 정상 작동이 확정됩니다. 자세한 규약은 [`conventions/contract-testing.md`](../conventions/contract-testing.md) 참조.
+이 방어선은 **추출 가능성의 형식적 보증** — impl 을 HTTP 어댑터로 교체해도 같은 abstract 를 통과하면 정상 작동이 확정됩니다. 자세한 규약은 [`testing/contract-testing.md`](../testing/contract-testing.md) 참조.
 
 이 여섯 개가 모두 있으면 **"나중에 뽑을 수 있다"** 가 빈 약속이 아닌 **보장** 이 됩니다. 추출 작업이 필요해지는 시점에는 대략 다음 7~10 영업일 정도로 진행 가능합니다.
 
@@ -756,5 +756,5 @@ apps/app-<slug>/config/<Slug>DataSourceConfig (slug="<slug>")
 | ← 이전 | [`philosophy.md`](./philosophy.md) | 같은 1단계, 핵심 결정 1~3 |
 | → 다음 | [`guides/onboarding.md`](./onboarding.md) | 2단계 — 어떻게 써? (로컬 dev) |
 
-**막혔을 때**: [도그푸딩 함정](../reference/dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
+**막혔을 때**: [도그푸딩 함정](../journey/dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
 **왜 이렇게?**: [`philosophy.md`](./philosophy.md) (설계 결정 22개) / [`conventions/decisions-infra.md`](../infra/decisions-infra.md) (인프라 결정 I-01~I-14)

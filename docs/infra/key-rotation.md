@@ -142,4 +142,4 @@
 
 - [`../journey/dogfood-setup.md`](../journey/dogfood-setup.md) — 외부 리소스 발급 절차
 - [`../conventions/decisions-infra.md` I-10, I-14](../infra/decisions-infra.md) — PAT / Tailscale OAuth 결정 근거
-- [`../reference/dogfood-pitfalls.md`](./dogfood-pitfalls.md) — 키 관련 함정
+- [`../journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) — 키 관련 함정

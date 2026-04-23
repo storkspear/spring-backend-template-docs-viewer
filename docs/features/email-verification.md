@@ -408,7 +408,7 @@ EMAIL_DELIVERY_FAILED(503, "ATH_006", "이메일 발송에 실패했습니다");
 | `ATH_005` EMAIL_NOT_VERIFIED | 401 | 이메일 인증이 필요한 엔드포인트에 미인증 유저 접근 |
 | `ATH_006` EMAIL_DELIVERY_FAILED | 503 | Resend API 장애, 2xx 외 응답, 네트워크 에러 |
 
-`ATH_001`(잘못된 자격 증명) 을 포함한 전체 에러 코드는 [exception-handling.md](./exception-handling.md) 를 참조하세요.
+`ATH_001`(잘못된 자격 증명) 을 포함한 전체 에러 코드는 [exception-handling.md](../conventions/exception-handling.md) 를 참조하세요.
 
 ### 발송 실패가 가입/재설정을 막지 않는 이유
 

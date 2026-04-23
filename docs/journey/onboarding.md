@@ -478,5 +478,5 @@ openssl rand -hex 32   # 64자 출력
 | ← 이전 | [`../journey/architecture.md`](./architecture.md) | 1단계 — 모듈 구조 한 눈 |
 | → 다음 | [`../journey/social-auth-setup.md`](./social-auth-setup.md) | 4단계 — 외부 자격 증명 발급 (Google/Apple) |
 
-**막혔을 때**: §6 흔한 에러 5개 / [도그푸딩 함정](../reference/dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
+**막혔을 때**: §6 흔한 에러 5개 / [도그푸딩 함정](../journey/dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
 **왜 이렇게?**: [`../journey/philosophy.md`](./philosophy.md) (설계 결정 22개) / [`../conventions/decisions-infra.md`](../infra/decisions-infra.md) (I-01~I-14)
