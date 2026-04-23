@@ -20,7 +20,7 @@
         { "path": "journey/dogfood-setup.md",                 "title": "Dogfood Setup",        "desc": "외부 리소스 발급 · 검증 · cleanup (4~6단계)",
           "children": [
             { "path": "journey/dogfood-faq.md",                  "title": "Dogfood FAQ",       "desc": "도그푸딩 자주 묻는 질문" },
-            { "path": "reference/dogfood-pitfalls.md",           "title": "Dogfood Troubleshooting", "desc": "도그푸딩 함정 11개 모음" }
+            { "path": "reference/dogfood-pitfalls.md",           "title": "Dogfood Pitfalls",  "desc": "도그푸딩 함정 11개 모음" }
           ]
         },
         { "path": "journey/deployment.md",                    "title": "Deployment",           "desc": "파생 레포 첫 운영 배포 (7단계)" },
