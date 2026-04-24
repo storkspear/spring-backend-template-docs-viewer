@@ -30,14 +30,14 @@ QuickStart 는 다음을 합니다.
 
 읽을 문서:
 
-1. [`philosophy.md`](./philosophy.md) 의 **결정 1 ~ 3** 만 먼저 읽으세요.
-   - 결정 1: 모듈러 모놀리스 (왜 마이크로서비스가 아닌가)
-   - 결정 2: GitHub Template Repository 패턴 (왜 fork 가 아닌 template 인가)
-   - 결정 3: `core/` 모듈을 `-api` / `-impl` 로 분리 (왜 인터페이스/구현 분리인가)
+1. [`philosophy/README.md`](./philosophy/README.md) 의 **프롤로그** (3 제약 · 독자 페르소나) + **테마 1 의 ADR-001 ~ ADR-003** 만 먼저 읽으세요.
+   - [ADR-001 · 모듈러 모놀리스](./philosophy/adr-001-modular-monolith.md) (왜 마이크로서비스가 아닌가)
+   - [ADR-002 · GitHub Template Repository 패턴](./philosophy/adr-002-use-this-template.md) (왜 fork 가 아닌 template 인가)
+   - [ADR-003 · `-api` / `-impl` 분리](./philosophy/adr-003-api-impl-split.md) (왜 포트 인터페이스 분리인가)
 
-2. [`architecture.md`](./architecture.md) 의 **§ 전체 구성 요약** 한 섹션만 읽으세요. 모듈 3종류 (`common/` · `core/` · `apps/`) 와 기술 스택의 한눈 요약이 있습니다.
+2. [`architecture.md`](./architecture.md) 의 **§ 전체 구성 요약** 한 섹션만 읽으세요. 모듈 4종류 (`common/` · `core/` · `apps/` · `bootstrap`) 와 기술 스택의 한눈 요약이 있습니다.
 
-여기까지 읽으면 "이 레포가 뭘 하려는 도구인지" 감이 잡힙니다. 더 깊은 결정 (4 ~ 22번) 은 나중에 필요할 때 돌아오세요.
+여기까지 읽으면 "이 레포가 뭘 하려는 도구인지" 감이 잡힙니다. 나머지 ADR (총 16 개, 테마 2~5) 은 나중에 해당 영역이 궁금해질 때 돌아오세요.
 
 ---
 
@@ -175,19 +175,23 @@ template 의 구조와 자동화를 이해했으니, 이제 실제 본인 프로
 
 | 궁금한 것 | 문서 | 한 줄 설명 |
 |---|---|---|
-| 왜 이렇게 설계? | [`philosophy.md`](./philosophy.md) | 핵심 결정 22개 (1 ~ 22) |
-| 인프라 결정 근거 | [`infra/decisions-infra.md`](../infra/decisions-infra.md) | I-01 ~ I-14 결정 카드 (Supabase / Mac mini / Kamal / GHCR PAT 등) |
-| 모듈 구조 상세 | [`architecture.md`](./architecture.md) | 731줄 — 파일 트리 + 의존 그래프 + 기술 스택 |
-| 환경별 인프라 현황 | [`infrastructure.md`](../infra/infrastructure.md) | 어떤 서비스가 어디에서 도는지 |
-| 코딩 규약 11종 | [`conventions/`](../conventions) | naming / api-response / exception 등 |
-| 평시 배포 / 롤백 / 장애 | [`runbook.md`](../infra/runbook.md) | 운영자용 절차서 |
-| 장애 시나리오 분석 | [`edge-cases.md`](../infra/edge-cases.md) | 무엇이 깨질 수 있나 |
-| 미완 항목 추적 | [`backlog.md`](../reference/backlog.md) | 진행 중 / 대기 |
-| 키 교체 절차 | [`security/key-rotation.md`](../infra/key-rotation.md) | PAT / Tailscale OAuth / Supabase / SSH 주기 |
-| Mac mini 운영 호스트 | [`guides/mac-mini-setup.md`](../infra/mac-mini-setup.md) | 물리 호스트 셋업 가이드 (template 버전) |
-| 관측성 스택 | [`guides/monitoring-setup.md`](../infra/monitoring-setup.md) | Loki / Grafana / Prometheus / Alertmanager |
-| 오브젝트 스토리지 | [`guides/storage-setup.md`](../infra/storage-setup.md) | MinIO 로컬 / NAS |
-| 마이그레이션 | [`migration/README.md`](../features/migration.md) | Flyway 규칙 + 포트/어댑터 |
+| 왜 이렇게 설계? | [`philosophy/README.md`](./philosophy/README.md) | 16 개 ADR 인덱스 (테마 1~5 · 프롤로그 3 제약) |
+| 문서 작성 규칙 | [`../STYLE_GUIDE.md`](../STYLE_GUIDE.md) | ADR 카드 템플릿 · 톤 · 용어집 · 검증 체크리스트 |
+| 인프라 결정 근거 | [`../infra/decisions-infra.md`](../infra/decisions-infra.md) | I-01~I-13 결정 카드 (Supabase / Mac mini / Kamal / GHCR PAT 등) |
+| 모듈 구조 상세 | [`./architecture.md`](./architecture.md) | 파일 트리 + 의존 그래프 + 기술 스택 + Extraction 6 레이어 |
+| 환경별 인프라 현황 | [`../infra/infrastructure.md`](../infra/infrastructure.md) | 어떤 서비스가 어디에서 도는지 |
+| ArchUnit 22 규칙 | [`../architecture/architecture-rules.md`](../architecture/architecture-rules.md) | r1~r22 경계 강제 규칙 |
+| 코딩 규약 | [`../conventions/`](../conventions/) | naming / api-response / exception / git-workflow 등 |
+| 테스트 전략 | [`../testing/testing-strategy.md`](../testing/testing-strategy.md) | 4층 전략 (Unit · Contract JSON · Contract Port · Integration) |
+| 평시 배포 / 롤백 / 장애 | [`../infra/runbook.md`](../infra/runbook.md) | 운영자용 절차서 |
+| CI/CD 전체 흐름 | [`../infra/ci-cd-flow.md`](../infra/ci-cd-flow.md) | commit → 운영 반영 |
+| 장애 시나리오 분석 | [`../infra/edge-cases.md`](../infra/edge-cases.md) | 무엇이 깨질 수 있나 |
+| 미완 항목 추적 | [`../reference/backlog.md`](../reference/backlog.md) | 진행 중 / 대기 |
+| 키 교체 절차 | [`../infra/key-rotation.md`](../infra/key-rotation.md) | PAT / Tailscale OAuth / Supabase / SSH 주기 |
+| Mac mini 운영 호스트 | [`../infra/mac-mini-setup.md`](../infra/mac-mini-setup.md) | 물리 호스트 셋업 가이드 |
+| 관측성 스택 | [`../infra/monitoring-setup.md`](../infra/monitoring-setup.md) | Loki / Grafana / Prometheus / Alertmanager |
+| 오브젝트 스토리지 | [`../infra/storage-setup.md`](../infra/storage-setup.md) | MinIO 로컬 / NAS |
+| 마이그레이션 | [`../features/migration.md`](../features/migration.md) | Flyway 규칙 + 포트/어댑터 |
 
 ---
 
