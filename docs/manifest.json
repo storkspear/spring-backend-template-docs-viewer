@@ -5,7 +5,7 @@
   },
   "groups": [
     {
-      "name": "📚 입문 (Level 0 · 3~10분)",
+      "name": "입문 (Level 0)",
       "files": [
         { "path": "journey/level0/README.md",                 "title": "Level 0 — 감 잡기",    "desc": "쓸지 말지 3~10분 안에 결정 · 코드 돌리기 전 읽기",
           "children": [
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "name": "🏃 시작하기 (Level 1 · 1~2시간)",
+      "name": "시작하기 (Level 1)",
       "files": [
         { "path": "journey/onboarding.md",                    "title": "Onboarding",           "desc": "로컬 개발 환경 + 첫 앱 모듈 추가" },
         { "path": "journey/social-auth-setup.md",             "title": "Social Auth Setup",    "desc": "Google/Apple 소셜 로그인 자격 증명 발급" },
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "name": "🏗️ 구조 이해하기 (Level 2 · 1시간)",
+      "name": "구조 이해하기 (Level 2)",
       "files": [
         { "path": "journey/architecture.md",                  "title": "Architecture",         "desc": "모듈 구조 · 파일 트리 · 기술 스택" },
         { "path": "architecture/module-dependencies.md",      "title": "Module Dependencies",  "desc": "모듈 의존 방향 규칙" },
@@ -46,7 +46,7 @@
       ]
     },
     {
-      "name": "📖 프로젝트 철학 (Level 3 · 2~3시간)",
+      "name": "프로젝트 철학 (Level 3)",
       "files": [
         { "path": "journey/philosophy/README.md",             "title": "책 안내",              "desc": "프롤로그 (3 제약) + 사용법 + 16 ADR 인덱스",
           "children": [
@@ -71,7 +71,7 @@
       ]
     },
     {
-      "name": "📝 코딩 규약 (Level 2 · 1시간)",
+      "name": "코딩 규약 (Level 2)",
       "files": [
         { "path": "conventions/README.md",                    "title": "Overview",             "desc": "컨벤션 전체 개요" },
         { "path": "conventions/design-principles.md",         "title": "Design Principles",    "desc": "코드 작성 원칙 (SOLID 등)" },
@@ -83,7 +83,7 @@
       ]
     },
     {
-      "name": "🔌 API 및 기능 (Level 2 · 필요 시)",
+      "name": "API 및 기능 (Level 2)",
       "files": [
         { "path": "api-contract/api-response.md",             "title": "API Response",         "desc": "API 응답 형식 표준" },
         { "path": "api-contract/json-contract.md",            "title": "JSON Contract",        "desc": "JSON 계약 규칙" },
@@ -99,14 +99,14 @@
       ]
     },
     {
-      "name": "✅ 테스팅 (Level 2 · 필요 시)",
+      "name": "테스팅 (Level 2)",
       "files": [
         { "path": "testing/testing-strategy.md",              "title": "Testing Strategy",     "desc": "4층 전략 (Unit · Contract · Integration · ArchUnit)" },
         { "path": "testing/contract-testing.md",              "title": "Contract Testing",     "desc": "계약 기반 테스트 전략" }
       ]
     },
     {
-      "name": "🛠️ 운영 (Level 2.5 · 운영자용)",
+      "name": "운영 (Level 2.5)",
       "files": [
         { "path": "infra/infrastructure.md",                  "title": "Infrastructure",       "desc": "맥미니 · Supabase · Cloudflare · 블루그린",
           "children": [
@@ -124,7 +124,7 @@
       ]
     },
     {
-      "name": "📚 참고 (도구 · 메타)",
+      "name": "참고",
       "files": [
         { "path": "reference/backlog.md",                     "title": "Backlog",              "desc": "개발 예정 항목" },
         { "path": "STYLE_GUIDE.md",                           "title": "Documentation Style Guide", "desc": "저자용 · 5 유형 템플릿 · ADR 규격 · 검증 체크리스트" }
