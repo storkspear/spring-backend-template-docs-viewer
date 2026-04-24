@@ -2,11 +2,11 @@
 
 **Status**: Accepted. 현재 유효. 2026-04-20 기준 `common-persistence/entity/BaseEntity.java` 에 구현. 모든 `@Entity` 가 이를 상속.
 
-## 한 문장 직관
+## 결론부터
 
 모든 JPA 엔티티가 **공통으로 가지는 것** (id, 생성/수정 시각, equals/hashCode) 을 **한 클래스** 에 모아두고 상속하는 구조입니다. 새 엔티티를 만들 때 이 6개 필드와 2개 콜백, equals/hashCode 를 매번 복사하는 대신 `extends BaseEntity` 한 줄로 끝내요. Rails 의 `ActiveRecord::Base`, Django 의 `Model`, Spring Data 의 `AbstractPersistable` 과 같은 계보.
 
-## Context — 이 결정이 답해야 했던 물음
+## 왜 이런 고민이 시작됐나?
 
 인증 도메인만 해도 엔티티가 **6~7개** 입니다 — `User`, `RefreshToken`, `EmailVerificationToken`, `PasswordResetToken`, `Device`, `SocialIdentity`, 그리고 `Role` 등. 여기에 앱 모듈이 추가될 때마다 도메인 엔티티가 **N개씩 더** 늘어나요.
 
@@ -27,7 +27,7 @@
 
 > **여러 엔티티가 공통으로 가진 구조를 어떻게 한 곳에서 관리할 것인가?**
 
-## Options Considered
+## 고민했던 대안들
 
 ### Option 1 — 각 엔티티에 개별 선언
 
@@ -126,7 +126,7 @@ public class User extends BaseEntity {
   - 상속 트리가 1단계 생김 (BaseEntity → User). 다만 JPA 가 이 패턴을 전제로 설계되어 있어 실질 문제 없음.
 - **채택 이유**: 가장 단순하면서 목적 달성. JPA 공식 권장 패턴.
 
-## Decision
+## 결정
 
 `common-persistence/entity/BaseEntity.java` 에 공통 슈퍼클래스를 두고, 모든 `@Entity` 가 상속합니다.
 
@@ -253,7 +253,7 @@ BaseEntity 는 JPA 어노테이션에 의존 (`@MappedSuperclass`, `@Id`, `@Colu
 
 대신 **IDE 의 `Generate Getter` 기능** 을 씀. 한 번 생성하면 끝.
 
-## Consequences
+## 이 선택이 가져온 것
 
 ### 긍정적 결과
 
@@ -277,7 +277,7 @@ BaseEntity 는 JPA 어노테이션에 의존 (`@MappedSuperclass`, `@Id`, `@Colu
 
 단점들은 **이론적 제약** 수준. 실제 개발에서 마주치는 빈도는 매우 낮음. 장점 (N 엔티티 유지비용 절감) 이 압도적.
 
-## Lessons Learned
+## 교훈
 
 ### 엔티티 최초 저장 직전 Set 사용 시 주의
 

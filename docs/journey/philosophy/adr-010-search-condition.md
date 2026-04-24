@@ -2,11 +2,11 @@
 
 **Status**: Accepted. 현재 유효. 2026-04-20 기준 `common-web/search/` + `common-persistence/QueryDsl*.java` 에 구현. 8개 연산자 지원.
 
-## 한 문장 직관
+## 결론부터
 
 목록 조회 API — "상품 목록, 주문 목록, 유저 목록" — 가 반복하는 **"필드별 if 조건 → WHERE 절 추가"** 패턴을 한 번에 해결하는 인프라입니다. 프론트엔드가 `{"categoryId_eq": 5, "amount_gte": 10000}` 같은 Map 을 보내면, 백엔드는 `QueryDslPredicateBuilder.build(...)` **한 줄** 로 동적 WHERE 절을 생성해요. 각 앱 모듈이 똑같은 if-else 지옥을 반복하지 않아도 됩니다.
 
-## Context — 이 결정이 답해야 했던 물음
+## 왜 이런 고민이 시작됐나?
 
 모든 앱의 백엔드는 **목록 조회 API** 를 가집니다. 예:
 
@@ -50,7 +50,7 @@ public List<Workout> findWorkouts(String difficulty, Integer durationMin) {
 
 > **프론트엔드와 백엔드의 "검색 조건" 계약을 어떻게 표준화할 것인가?**
 
-## Options Considered
+## 고민했던 대안들
 
 ### Option 1 — 타입 세이프 Condition DTO (각 도메인별)
 
@@ -131,7 +131,7 @@ List<Expense> result = queryFactory.selectFrom(QExpense.expense).where(where).fe
   - **복잡한 쿼리 표현 부족** — "이 조건이 만족되면 저것도" 같은 분기 조건은 Map 으로 표현 어려움.
 - **완화**: 복잡한 쿼리는 **앱 모듈의 커스텀 Repository** 에서 직접 구현. Map 기반은 **일반적인 목록 조회의 공통 인프라** 만 담당.
 
-## Decision
+## 결정
 
 Map 기반 조건을 표준 계약으로 하고, `QueryDslPredicateBuilder` 가 자동 변환합니다.
 
@@ -254,7 +254,7 @@ public PageListResponse<ExpenseSummary> search(PageListRequest req) {
 
 Service 메서드 전체가 **10줄 내외** 로 끝납니다. 필드 추가 시 엔티티에 `@Column` 만 넣으면 프론트가 바로 조건으로 사용 가능.
 
-## Consequences
+## 이 선택이 가져온 것
 
 ### 긍정적 결과
 
@@ -278,7 +278,7 @@ Service 메서드 전체가 **10줄 내외** 로 끝납니다. 필드 추가 시
 
 단점들은 "**일반 목록 조회의 범위 안에서**" 는 거의 발생하지 않음. 복잡한 비즈니스 쿼리는 어차피 커스텀 구현이 맞음. 이 인프라는 "같은 패턴의 반복" 을 없애는 게 목적이고, 그 목적은 완벽히 달성.
 
-## Lessons Learned
+## 교훈
 
 ### `lastIndexOf('_')` 를 쓴 이유
 

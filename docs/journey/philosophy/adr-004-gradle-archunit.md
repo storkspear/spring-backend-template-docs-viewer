@@ -5,11 +5,11 @@
 
 > **이 ADR 의 범위** — [ADR-001](./adr-001-modular-monolith.md) 에서 "**왜** 2단계 방어가 필요한가" 를, [ADR-003](./adr-003-api-impl-split.md) 에서 "**무엇을** 분리하는가 (-api/-impl)" 를 다뤘어요. 본 ADR 은 **"어떤 도구로 어떻게 강제할 것인가"** 의 도구 선택과 DSL 설계, 그리고 앞에서 안 다룬 나머지 ArchUnit 규칙 (r16, r18~r22) 에 초점을 맞춥니다.
 
-## 한 문장 직관
+## 결론부터
 
 Python 의 [`ruff`](https://docs.astral.sh/ruff/), TypeScript 의 `tsc --strict`, Rust 컴파일러처럼 **컨벤션을 문서가 아니라 빌드 자체가 강제** 하는 장치입니다. 우리 프로젝트에서 그 역할을 하는 것이 `DependencyRules.groovy` DSL (빌드 시) 과 ArchUnit (소스 스캔 시) 의 조합이에요. 사람이 "이 규칙 지켜주세요" 라고 부탁하는 대신, **규칙 위반 시 빌드가 실패** 하도록 설계했습니다.
 
-## Context — 이 결정이 답해야 했던 물음
+## 왜 이런 고민이 시작됐나?
 
 [ADR-001](./adr-001-modular-monolith.md) 에서 "2단계 방어" 를 선언했어요. [ADR-003](./adr-003-api-impl-split.md) 에서 "-api/-impl 을 분리해서 추출 가능성을 보장한다" 고 선언했고요. 이 선언들이 **실제로 지켜지려면** 누군가가 규칙 위반을 감지해야 합니다. 이 결정이 답해야 할 물음은 이거예요.
 
@@ -18,7 +18,7 @@ Python 의 [`ruff`](https://docs.astral.sh/ruff/), TypeScript 의 `tsc --strict`
 
 "모듈 경계를 지켜야 한다" 를 문서에 써놓는 것만으로는 부족합니다. **사람은 실수해요**. 특히 솔로 개발자는 피곤한 새벽에 급한 버그 수정하다가 경계를 넘을 수 있습니다. PR 리뷰어도 없고, 내가 내 코드를 리뷰하면 같은 실수를 놓칠 확률이 높아요. **기계가 대신 막아줘야** 합니다.
 
-## Options Considered
+## 고민했던 대안들
 
 ##### Option 1 — PR 리뷰 / 문서에 의존
 
@@ -50,7 +50,7 @@ husky 같은 도구로 로컬 커밋 순간 검증.
 - **단점**: 러닝 커브 (DSL 학습 + Gradle lifecycle + ArchUnit 문법).
 - **채택 이유**: 단점은 **초기 설정 비용**. 장점은 프로젝트 수명 동안 지속.
 
-## Decision
+## 결정
 
 `DependencyRules.groovy` DSL + ArchUnit 조합. 두 도구가 **서로 다른 실수** 를 잡도록 역할 분담.
 
@@ -223,7 +223,7 @@ CI 는 녹색인데 실제로는 규칙 위반이 main 까지 올라갑니다.
 
 **`afterEvaluate` 만이** "선언은 확정, 실행은 미시작" 이라는 타이밍을 제공해요.
 
-## Consequences
+## 이 선택이 가져온 것
 
 ### 긍정적 결과
 
@@ -241,7 +241,7 @@ CI 는 녹색인데 실제로는 규칙 위반이 main 까지 올라갑니다.
 
 **ArchUnit 은 bootstrap 테스트에만 의존** — r1~r22 의 실제 스캔은 `BootstrapArchitectureTest` 에서만 완전히 작동. 개별 모듈 테스트에서는 자기 classpath 안의 클래스만 보여서 일부 규칙은 vacuously true. 완화: CI 에서 반드시 `./gradlew :bootstrap:test` 실행.
 
-## Lessons Learned
+## 교훈
 
 **2026 초 — `testImplementation` 예외 도입 사건**.
 
