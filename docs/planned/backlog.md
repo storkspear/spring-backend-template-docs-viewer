@@ -37,43 +37,33 @@
 
 ### 운영 배포 / 파이프라인 (Item Ops-1 — 파생레포/호스트 작업)
 
-- [ ] [Ops] 파생레포 최초 onboarding 실행 — `guides/deployment.md` 체크리스트 따라 Cloudflare Tunnel 생성, Kamal setup, 관측성 compose 기동, GHA secrets 등록 (2026-04-19)
 - [ ] [Ops] 무지개 스택 cutover — 기존 moojigae vite/webhook/nginx/duckdns cron 종료, 기존 cloudflared tunnel 제거 (2026-04-19)
-- [ ] [Ops] Slack/Discord webhook 연동 + Alertmanager 알림 종류/임계치 정의 — 장애 알림 (2026-04-18)
 - [ ] [Ops] Secrets management 체계 선택 (1Password CLI / sops / Vault / AWS Parameter Store) — `.env` 수기 관리 탈피 (2026-04-18)
-- [ ] [Ops] MinIO 외부 접근 방식 결정 (Tailscale vs Cloudflare Tunnel vs DDNS+포트포워딩) — 파생 레포 개발자 또는 외부 맥미니 접근 (2026-04-18)
 - [ ] [Ops] MinIO root credential → service account 로테이션 (`mc admin user svcacct add`) — root 남용 위험 제거 (2026-04-18)
 - [ ] [Ops] MinIO ↔ Supabase 동일 비번 사용 분리 — 하나 유출 시 연쇄 위험 (2026-04-18)
-- [ ] [Ops] 자동화된 pre-deploy Flyway migration 훅 — 파괴적 DDL 안전장치. 현재는 수동 out-of-band migrate-only 권장 (docs/infra/runbook.md) (2026-04-19)
 
 ### 보안 / 자격증명
 
 - [ ] [Security] TLS/HTTPS 내부 구간 검토 — CF 가 edge 처리 OK, 맥미니 ↔ NAS 내부 통신은? (2026-04-18)
-- [ ] [Security] 공유 시크릿 노출 시 incident response 프로토콜 문서 — 재발급/통보 순서 (2026-04-18)
 
 ### 데이터 / DB
 
 - [ ] [Data] 백업 실행 (pg_dump 주기, NAS 보관, retention) — `backup-to-nas.sh.example` 은 placeholder (2026-04-18)
 - [ ] [Data] 복구 drill — "edge-cases 3-1: 1~2 시간 내 복구" 주장 실측 (2026-04-18)
-- [ ] [Data] Flyway migration rollback 전략 문서 — 실수 breaking migration 대응 (2026-04-18)
 - [ ] [Data] GDPR / 개인정보 export/delete 요청 대응 절차 — 법적 대비 (2026-04-18)
 - [ ] [Data] Supabase pooler 모드 (transaction vs session) 튜닝 가이드 — 성능 이슈 예방 (2026-04-18)
 - [ ] [Data] Supabase Free → Pro 전환 기준 + 절차 — MAU 1K 도달 대비 (2026-04-18)
 
 ### 관측성 / 운영
 
-- [ ] [Obs] 맥미니 vs NAS 관측성 분리 여부 결정 — 맥미니 RAM 여유에 따라 (decisions-infra I-06 재검토 트리거) (2026-04-18)
-- [ ] [Obs] 알림 임계치 정의 (CPU / 메모리 / 디스크 / 에러율 / DB 커넥션 실패 / 5xx / p95 지연) — Alertmanager 에 rules 정의 (2026-04-18)
 - [ ] [Obs] Performance baseline (JMeter / Gatling) — 릴리스 전 기준 RPS / p95 (2026-04-18)
 - [ ] [Obs] On-call 알림 피로 방지 규칙 (솔로 운영 기준) — 중요도별 알림 채널 분리 (2026-04-18)
 
 ### 앱 기능 (Phase 1+)
 
 - [ ] [Feature] Billing 실제 구현 (Apple StoreKit + Google Play Billing) — 현재 Stub (2026-04-18)
-- [ ] [Feature] Push 실제 구현 (FCM 서비스 계정 + APNs) — 현재 NoOp (2026-04-18)
 - [ ] [Feature] 이미지 검열용 Admin 페이지 (유저 업로드 모더레이션) — Cyberduck/콘솔 대체 (2026-04-18)
 - [ ] [Feature] i18n / 다국어 지원 전략 — 모바일 클라이언트와 계약 (2026-04-18)
-- [ ] [Feature] OpenAPI → Flutter 클라이언트 계약 자동 export — 백엔드/앱 싱크 (2026-04-18)
 
 ### 개발자 경험 / 툴링 (DX)
 
@@ -106,6 +96,8 @@
 - [x] [Security] JWT_SECRET prod 전용 생성 + 로테이션 주기 규약 → [`key-rotation.md §5 JWT_SECRET`](../production/setup/key-rotation.md) 에 6개월 주기 + 즉시 폐기 절차 문서화. JwtProperties 가 32자 미만 거부. 완료일: 2026-04-24
 - [x] [Obs] Loki retention 정책 확정 → `infra/loki/loki-config.yml` 에 `retention_period: 336h` (14일) 확정. 완료일: 2026-04-24
 - [x] [Feature] API 버저닝 롤아웃 결정 → [`ADR-008 (API 버전 관리 미도입)`](../philosophy/adr-008-no-api-versioning.md) 으로 의도적 미도입 확정. 도입 경로 (Cloudflare rewrite / ApiEndpoints prefix) 사전 기록. 완료일: 2026-04-24
+- [x] [Feature] Push 실제 구현 → `FcmPushAdapter` 에 Firebase Admin SDK 호출 + MulticastMessage + 토픽 푸시 + 무효 토큰 추적 완료. APNs 는 iOS 고급 기능 필요 시점에 별도. 완료일: 2026-04-24
+- [x] [Feature] OpenAPI → Flutter 클라이언트 계약 export → springdoc-openapi 2.6.0 로 `/v3/api-docs` + Swagger UI 제공. Flutter 측 자동 생성은 `openapi-generator-cli` 사용 (백엔드 쪽 준비 완료). 완료일: 2026-04-24
 
 > 2개월 경과 후 CHANGELOG 로 이관.
 
