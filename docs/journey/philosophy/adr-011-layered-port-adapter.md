@@ -2,6 +2,8 @@
 
 **Status**: Accepted. 현재 유효. 2026-04-20 기준 `core-*-impl` 6개 모듈 모두 동일 레이어 구조. ArchUnit 규칙 r13, r14, r15, r17, r21 이 위치 강제.
 
+> **유형**: ADR · **독자**: Level 3 · **읽는 시간**: ~5분
+
 ## 결론부터
 
 한 `core-*-impl` 모듈 안은 **전통적 Spring Boot 레이어드 아키텍처** (controller → service → repository → entity) 를 따릅니다. 차이점은 **모듈의 바깥 경계** 예요 — 외부(앱 모듈) 로 노출되는 것은 오직 `-api` 의 Port 인터페이스뿐, `-impl` 의 내부 클래스는 절대 노출 안 됩니다. 즉 **안쪽은 익숙한 레이어, 바깥은 엄격한 포트** 의 구조입니다. 우리에게 익숙한 Spring Boot 관용 (`@Service`, `@Repository`, `@Component`) 을 그대로 쓰면서 경계만 강하게 긋는 타협안이에요.

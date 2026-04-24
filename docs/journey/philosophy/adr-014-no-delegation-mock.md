@@ -2,6 +2,8 @@
 
 **Status**: Accepted. 2026-04-24 기준 430개 테스트 중 Mockito 사용처는 외부 인프라 모킹 · 비결정 의존성 고정의 30여 건으로 제한. "A 가 B.foo() 를 호출하는가" 같은 내부 위임 검증은 부재. Port 계약 테스트 + Integration 테스트가 주력 검증 메커니즘.
 
+> **유형**: ADR · **독자**: Level 3 · **읽는 시간**: ~5분
+
 ## 결론부터
 
 테스트는 **외부에서 관측 가능한 행위** 만 검증해요. "A 가 B.foo() 를 호출하는가?" 같은 **내부 위임 경로** 는 mock 으로 검증하지 않습니다. 예를 들어 `AuthController.signUp()` 이 내부적으로 `EmailAuthService.signUp()` 을 호출하는지 `verify(emailAuthService).signUp(...)` 로 체크하는 걸 금지해요. 대신 `AuthPort` 의 실제 행위 (유저가 DB 에 저장되고, 검증 이메일이 발송되고, JWT 가 반환되는지) 를 검증. Mock 은 **외부 시스템 격리** (FCM, Resend) 와 **비결정 의존성 고정** (Clock, TokenGenerator) 에만 허용. 규모는 430 테스트 중 ~30 건으로 제한됨.

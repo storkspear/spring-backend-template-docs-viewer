@@ -2,6 +2,8 @@
 
 **Status**: Accepted. 현재 유효. 2026-04-20 기준 `template-v*` 태그 + 자동 Release 워크플로우 + `cross-repo-cherry-pick.md` 가이드 로 정교화 완료.
 
+> **유형**: ADR · **독자**: Level 3 · **읽는 시간**: ~5분
+
 ## 결론부터
 
 이 레포는 **"완성된 프로젝트" 가 아니라 "프로젝트의 출발점"** 입니다. `create-react-app`, `cargo new`, `django-admin startproject` 와 비슷한 위치에 있어요 — 다만 우리만의 아키텍처와 인프라가 이미 녹아있는 출발점. `Use this template` 버튼을 누르면 깨끗한 사본이 만들어지고, **그 사본부터가 실제 개발이 일어나는 곳** 이에요. 원본 레포는 앞으로도 계속 "깨끗한 출발점" 상태를 유지합니다.

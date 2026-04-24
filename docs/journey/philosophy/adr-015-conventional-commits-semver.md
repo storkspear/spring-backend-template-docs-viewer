@@ -2,6 +2,8 @@
 
 **Status**: Accepted. 2026-04-24 기준 모든 커밋에 Conventional Commits 포맷 강제 (commitlint + husky + CI). Git 태그는 `template-v<major>.<minor>.<patch>` 템플릿 레포 전체 단위. CHANGELOG 는 Keep a Changelog 포맷. Breaking change 는 Deprecation 3단계 경유 (ArchUnit r20 강제).
 
+> **유형**: ADR · **독자**: Level 3 · **읽는 시간**: ~5분
+
 ## 결론부터
 
 커밋 메시지 포맷을 기계가 강제하고 (`commitlint`), 버전은 **모듈별이 아니라 템플릿 레포 전체** 를 한 단위로 SemVer 관리해요. 이렇게 한 이유는 단 하나 — **파생 레포의 cherry-pick 을 가능하게 만들기 위해서**. Conventional Commits 는 "어느 커밋이 공통 코드 개선인지" 를 `git log --grep="^feat\\|^fix"` 같은 명령으로 기계가 읽을 수 있게 해줘요. 파생 레포는 "template-v0.3.0 기반" 한 줄로 간단하게 추적. Breaking change 는 반드시 Deprecation 3단계 (Active → Deprecated → Removed) 를 거치며, ArchUnit r20 이 `@Deprecated(since, forRemoval)` 선언을 기계 강제.

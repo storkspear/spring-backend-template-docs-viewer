@@ -2,6 +2,8 @@
 
 **Status**: Accepted. 2026-04-24 기준 모든 인증 엔드포인트가 `/api/apps/{appSlug}/auth/*` 형태로 통일. `core-auth-impl/AuthController.java` 는 레퍼런스 소스로만 존재하며 런타임 Bean 이 아님. `new-app.sh` 가 앱 스캐폴딩 시 앱별 Controller 를 자동 생성.
 
+> **유형**: ADR · **독자**: Level 3 · **읽는 시간**: ~5분
+
 ## 결론부터
 
 인증은 앱마다 **자기 Controller** 가 있어요. sumtally 는 `SumtallyAuthController` 가 `/api/apps/sumtally/auth/*` 를 처리하고, rny 는 `RnyAuthController` 가 `/api/apps/rny/auth/*` 를 처리합니다. 그런데 실제 **로직은 한 곳에 있어요** — `core-auth-impl` 의 `AuthServiceImpl` (`AuthPort` 구현) 이 11개 메서드로 인증 도메인 전체를 담당. 각 앱 Controller 는 **얇은 HTTP 어댑터** 로 `AuthPort` 를 주입받아 호출만 합니다. 즉 **core-auth-impl 은 "앱이 가져다 쓰는 라이브러리"** 역할이고, Controller 런타임 등록은 앱 모듈이 담당해요.

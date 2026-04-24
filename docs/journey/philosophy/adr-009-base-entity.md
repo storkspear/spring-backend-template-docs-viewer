@@ -2,6 +2,8 @@
 
 **Status**: Accepted. 현재 유효. 2026-04-20 기준 `common-persistence/entity/BaseEntity.java` 에 구현. 모든 `@Entity` 가 이를 상속.
 
+> **유형**: ADR · **독자**: Level 3 · **읽는 시간**: ~5분
+
 ## 결론부터
 
 모든 JPA 엔티티가 **공통으로 가지는 것** (id, 생성/수정 시각, equals/hashCode) 을 **한 클래스** 에 모아두고 상속하는 구조입니다. 새 엔티티를 만들 때 이 6개 필드와 2개 콜백, equals/hashCode 를 매번 복사하는 대신 `extends BaseEntity` 한 줄로 끝내요. Rails 의 `ActiveRecord::Base`, Django 의 `Model`, Spring Data 의 `AbstractPersistable` 과 같은 계보.

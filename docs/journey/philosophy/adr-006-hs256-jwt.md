@@ -2,6 +2,8 @@
 
 **Status**: Accepted. 2026-04-24 기준 `common-security/jwt/JwtService.java` 에서 HS256 로 발급/검증. jjwt 0.13.0 사용. 서명 키는 환경변수 `JWT_SECRET` 주입. 로테이션 전략은 `docs/infra/key-rotation.md` 에 기록.
 
+> **유형**: ADR · **독자**: Level 3 · **읽는 시간**: ~5분
+
 ## 결론부터
 
 우리가 쓰는 JWT 는 **가장 단순한 서명** 방식인 HS256 (대칭키) 입니다. 비밀 키 **하나** 로 서명도 하고 검증도 해요. 공개키/개인키 쌍 같은 비대칭 구조는 없어요. 이유는 단 하나 — 우리는 **한 JVM 프로세스 안에서** 토큰을 만들고 같은 프로세스에서 검증하기 때문. 마이크로서비스가 여러 개 있고 각자가 토큰을 **독립적으로 검증** 해야 하는 상황이 아니라면, RS256 의 공개키 배포 이점은 쓸 데가 없어요. access 는 15분, refresh 는 30일. claims 는 `sub / email / appSlug / role / iss / iat / exp`.

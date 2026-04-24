@@ -2,6 +2,8 @@
 
 **Status**: Accepted. 현재 유효. 2026-04-20 기준 `common-web/search/` + `common-persistence/QueryDsl*.java` 에 구현. 8개 연산자 지원.
 
+> **유형**: ADR · **독자**: Level 3 · **읽는 시간**: ~5분
+
 ## 결론부터
 
 목록 조회 API — "상품 목록, 주문 목록, 유저 목록" — 가 반복하는 **"필드별 if 조건 → WHERE 절 추가"** 패턴을 한 번에 해결하는 인프라입니다. 프론트엔드가 `{"categoryId_eq": 5, "amount_gte": 10000}` 같은 Map 을 보내면, 백엔드는 `QueryDslPredicateBuilder.build(...)` **한 줄** 로 동적 WHERE 절을 생성해요. 각 앱 모듈이 똑같은 if-else 지옥을 반복하지 않아도 됩니다.

@@ -3,6 +3,8 @@
 
 **Status**: Accepted. 2026-04-20 기준 [`DependencyRules.groovy`](https://github.com/storkspear/spring-backend-template/blob/main/build-logic/src/main/groovy/com/factory/DependencyRules.groovy) DSL + [`ArchitectureRules.java`](https://github.com/storkspear/spring-backend-template/blob/main/common/common-testing/src/main/java/com/factory/common/testing/architecture/ArchitectureRules.java) 22 규칙 공존.
 
+> **유형**: ADR · **독자**: Level 3 · **읽는 시간**: ~5분
+
 > **이 ADR 의 범위** — [ADR-001](./adr-001-modular-monolith.md) 에서 "**왜** 2단계 방어가 필요한가" 를, [ADR-003](./adr-003-api-impl-split.md) 에서 "**무엇을** 분리하는가 (-api/-impl)" 를 다뤘어요. 본 ADR 은 **"어떤 도구로 어떻게 강제할 것인가"** 의 도구 선택과 DSL 설계, 그리고 앞에서 안 다룬 나머지 ArchUnit 규칙 (r16, r18~r22) 에 초점을 맞춥니다.
 
 ## 결론부터

@@ -2,6 +2,8 @@
 
 **Status**: Accepted. 2026-04-20 기준 Entity 에 `to<Dto>()` 메서드 패턴 적용. ArchUnit r22 (`NO_MAPPER_CLASSES`) 가 `*Mapper` 클래스를 빌드 시간에 차단.
 
+> **유형**: ADR · **독자**: Level 3 · **읽는 시간**: ~5분
+
 ## 결론부터
 
 `UserMapper`, `ExpenseMapper` 같은 **별도 매핑 클래스를 두지 않습니다**. 대신 엔티티가 자기 DTO 변환 방법을 **직접 메서드로** 제공해요 — `user.toSummary()`, `user.toProfile()`. "엔티티가 자기 표현을 가장 잘 안다" 는 OOP 원칙 그대로. 많은 Spring Boot 프로젝트가 당연하게 쓰는 MapStruct / ModelMapper / 수동 Mapper 계층 — 이게 **없는** 게 우리 선택입니다.

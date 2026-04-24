@@ -171,29 +171,41 @@ template 의 구조와 자동화를 이해했으니, 이제 실제 본인 프로
 
 ---
 
-## 깊이 있는 참조 (필요할 때 돌아오는 곳)
+## 사이드바 9 그룹 — 어떤 순서로 읽을까
 
-위 책 본문에서는 "왜?" 를 자세히 다루지 않습니다. 본문이 가볍게 흘러가게 하기 위함입니다. 깊이 들어가고 싶을 때 다음 문서들을 참고하세요.
+문서는 독자 Level 별로 9 그룹으로 묶여 있습니다. 처음 방문이라면 위에서 아래로, 숙련되면 관심 그룹만 펼쳐 보세요.
 
-| 궁금한 것 | 문서 | 한 줄 설명 |
+| 그룹 | Level | 시간 | 무엇을 찾을 수 있나 |
+|---|---|---|---|
+| 📚 입문 | 0 | 3~10분 | [Level 0 진입점](./level0/README.md) · [5분 투어](./level0/five-minute-tour.md) · 용어 사전 · 첫 실행/수정/배포 맛보기 |
+| 🏃 시작하기 | 1 | 1~2시간 | [Onboarding](./onboarding.md) · Social Auth · App Scaffolding · Dogfood · Cherry-pick |
+| 🏗️ 구조 이해하기 | 2 | 1시간 | [Architecture](./architecture.md) · Module Deps · ArchUnit Rules · Multitenant · JWT Auth |
+| 📖 프로젝트 철학 | 3 | 2~3시간 | [16 ADR 인덱스](./philosophy/README.md) · 테마 1~6 (모듈/데이터/운영/엔티티/레이어/테스트) |
+| 📝 코딩 규약 | 2 | 1시간 | Design Principles · Naming · DTO · Exception · Git Workflow |
+| 🔌 API 및 기능 | 2 | 필요 시 | API Response · Push · Email · Storage · Migration · Observability |
+| ✅ 테스팅 | 2 | 필요 시 | [Testing Strategy](../testing/testing-strategy.md) · Contract Testing |
+| 🛠️ 운영 | 2.5+ | 운영자용 | Infrastructure · CI/CD · Deployment · [Runbook](../infra/runbook.md) · Edge Cases · Key Rotation |
+| 📚 참고 | — | — | App Scaffolding · Backlog · [STYLE_GUIDE](../STYLE_GUIDE.md) (저자용) |
+
+## 깊이 있는 참조 — 자주 찾는 것
+
+| 궁금한 것 | 문서 | 한 줄 |
 |---|---|---|
-| 왜 이렇게 설계? | [`philosophy/README.md`](./philosophy/README.md) | 16 개 ADR 인덱스 (테마 1~5 · 프롤로그 3 제약) |
-| 문서 작성 규칙 | [`../STYLE_GUIDE.md`](../STYLE_GUIDE.md) | ADR 카드 템플릿 · 톤 · 용어집 · 검증 체크리스트 |
-| 인프라 결정 근거 | [`../infra/decisions-infra.md`](../infra/decisions-infra.md) | I-01~I-13 결정 카드 (Supabase / Mac mini / Kamal / GHCR PAT 등) |
-| 모듈 구조 상세 | [`./architecture.md`](./architecture.md) | 파일 트리 + 의존 그래프 + 기술 스택 + Extraction 6 레이어 |
+| 왜 이렇게 설계? | [`philosophy/README.md`](./philosophy/README.md) | 16 ADR · 프롤로그 3 제약 |
+| 문서 작성 규칙 (저자) | [`../STYLE_GUIDE.md`](../STYLE_GUIDE.md) | 5 유형 템플릿 · 메타블록 규격 · 검증 체크리스트 |
+| 모듈 구조 상세 | [`./architecture.md`](./architecture.md) | 파일 트리 + 의존 그래프 + Extraction 6 레이어 |
 | 환경별 인프라 현황 | [`../infra/infrastructure.md`](../infra/infrastructure.md) | 어떤 서비스가 어디에서 도는지 |
-| ArchUnit 22 규칙 | [`../architecture/architecture-rules.md`](../architecture/architecture-rules.md) | r1~r22 경계 강제 규칙 |
-| 코딩 규약 | [`../conventions/`](../conventions/) | naming / api-response / exception / git-workflow 등 |
-| 테스트 전략 | [`../testing/testing-strategy.md`](../testing/testing-strategy.md) | 4층 전략 (Unit · Contract JSON · Contract Port · Integration) |
-| 평시 배포 / 롤백 / 장애 | [`../infra/runbook.md`](../infra/runbook.md) | 운영자용 절차서 |
+| 인프라 결정 근거 | [`../infra/decisions-infra.md`](../infra/decisions-infra.md) | I-01~I-13 |
+| ArchUnit 22 규칙 | [`../architecture/architecture-rules.md`](../architecture/architecture-rules.md) | r1~r22 |
+| 평시 배포/롤백/장애 | [`../infra/runbook.md`](../infra/runbook.md) | 운영자용 절차서 |
 | CI/CD 전체 흐름 | [`../infra/ci-cd-flow.md`](../infra/ci-cd-flow.md) | commit → 운영 반영 |
 | 장애 시나리오 분석 | [`../infra/edge-cases.md`](../infra/edge-cases.md) | 무엇이 깨질 수 있나 |
-| 미완 항목 추적 | [`../reference/backlog.md`](../reference/backlog.md) | 진행 중 / 대기 |
-| 키 교체 절차 | [`../infra/key-rotation.md`](../infra/key-rotation.md) | PAT / Tailscale OAuth / Supabase / SSH 주기 |
-| Mac mini 운영 호스트 | [`../infra/mac-mini-setup.md`](../infra/mac-mini-setup.md) | 물리 호스트 셋업 가이드 |
-| 관측성 스택 | [`../infra/monitoring-setup.md`](../infra/monitoring-setup.md) | Loki / Grafana / Prometheus / Alertmanager |
-| 오브젝트 스토리지 | [`../infra/storage-setup.md`](../infra/storage-setup.md) | MinIO 로컬 / NAS |
-| 마이그레이션 | [`../features/migration.md`](../features/migration.md) | Flyway 규칙 + 포트/어댑터 |
+| 미완 항목 | [`../reference/backlog.md`](../reference/backlog.md) | 진행 중 / 대기 |
+| 키 교체 절차 | [`../infra/key-rotation.md`](../infra/key-rotation.md) | PAT / Tailscale / Supabase / SSH |
+| Mac mini 셋업 | [`../infra/mac-mini-setup.md`](../infra/mac-mini-setup.md) | 물리 호스트 셋업 |
+| 관측성 스택 | [`../infra/monitoring-setup.md`](../infra/monitoring-setup.md) | Loki / Grafana / Prometheus |
+| 스토리지 셋업 | [`../infra/storage-setup.md`](../infra/storage-setup.md) | MinIO / NAS |
+| 마이그레이션 | [`../features/migration.md`](../features/migration.md) | Flyway 규칙 |
 
 ---
 

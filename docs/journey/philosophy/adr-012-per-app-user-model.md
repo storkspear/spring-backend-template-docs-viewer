@@ -2,6 +2,8 @@
 
 **Status**: Accepted. 2026-04-24 기준 현재 유효. `core.users` + `user_app_access` + `apps[]` claim 구조를 폐기하고, 각 앱이 자기 schema 에 독립 users 테이블을 가지는 모델로 전환 완료. `AppSlugVerificationFilter` 가 런타임 경계를 강제.
 
+> **유형**: ADR · **독자**: Level 3 · **읽는 시간**: ~5분
+
 ## 결론부터
 
 같은 사람이 두 앱을 써도 **계정은 완전히 별개**예요. `sumtally` 의 `users` 테이블과 `rny` 의 `users` 테이블은 같은 이메일을 가져도 서로 모르는 레코드입니다. JWT 는 `appSlug` 단일 claim 만 가지고, 다른 앱 엔드포인트를 치면 **필터 하나** 가 403 으로 차단해요. 초기에 생각했던 "통합 계정 + ThreadLocal 라우팅" 모델은 **전부** 폐기했습니다. 이유는 UX · 프라이버시 · 구현 복잡도 세 전선에서 동시에 지고 있었기 때문.

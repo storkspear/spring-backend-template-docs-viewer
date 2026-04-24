@@ -2,6 +2,8 @@
 
 **Status**: Accepted. 2026-04-20 기준 core × 6 도메인 (user, auth, device, push, billing, storage) 전부 -api/-impl 쌍으로 구성. ArchUnit 9개 규칙 (r6, r9~r11, r13~r15, r17, r21) 이 구조 강제.
 
+> **유형**: ADR · **독자**: Level 3 · **읽는 시간**: ~5분
+
 ## 결론부터
 
 REST API 서버와 클라이언트를 떠올려보세요. 클라이언트는 **API 스펙 (OpenAPI 문서)** 만 알고 HTTP 호출을 합니다. 서버 내부가 PostgreSQL 을 쓰는지 MongoDB 를 쓰는지, Java 로 짜였는지 Go 로 짜였는지 전혀 신경 쓰지 않아요. 같은 원리를 **한 JVM 안의 모듈 간 호출** 에 적용한 것이 `-api` / `-impl` 분리예요. `-api` 모듈은 "스펙과 DTO", `-impl` 은 "내부 구현". 앱 모듈은 스펙만 보고 호출합니다.

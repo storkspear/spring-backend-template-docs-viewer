@@ -2,6 +2,8 @@
 
 **Status**: Accepted. 현재 유효. 2026-04-24 기준 `infra/scripts/init-app-schema.sql` + `common-persistence/AbstractAppDataSourceConfig.java` 로 구현. Supabase production 도 동일 구조.
 
+> **유형**: ADR · **독자**: Level 3 · **읽는 시간**: ~5분
+
 ## 결론부터
 
 앱이 늘어나도 **database 는 하나 (`postgres`)** 만 유지하고, 각 앱에게 **자기 schema** (`sumtally`, `rny`, `gymlog` 등) 를 분리해서 줍니다. schema 안에는 그 앱의 유저 테이블부터 도메인 테이블까지 전부 들어가요. 한 앱이 다른 앱의 schema 를 못 건드리게 하는 방어선은 **5개** — DB role · DataSource · Flyway · 포트 인터페이스 · ArchUnit. Postgres 의 `CREATE SCHEMA` 한 줄이 사실상 "앱 한 개" 의 경계예요.
