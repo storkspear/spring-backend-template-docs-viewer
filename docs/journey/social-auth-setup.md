@@ -215,4 +215,4 @@ docker restart factory-app
 | → 다음 | [`guides/dogfood-setup.md`](./dogfood-setup.md) §3 | 4단계 두 번째, 운영 자격 증명 (Tailscale OAuth · GitHub PAT · Supabase) |
 
 **막혔을 때**: [도그푸딩 함정](../journey/dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
-**왜 이렇게?**: [`philosophy.md`](./philosophy.md) (앱별 social credential 분리 결정) / [`infra/decisions-infra.md`](../infra/decisions-infra.md)
+**왜 이렇게?**: [ADR-002 (template 패턴)](./philosophy/adr-002-use-this-template.md), [ADR-012 (앱별 독립 유저 모델)](./philosophy/adr-012-per-app-user-model.md) / [`infra/decisions-infra.md`](../infra/decisions-infra.md)

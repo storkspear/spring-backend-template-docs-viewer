@@ -8,7 +8,7 @@
 
 이 템플릿은 **Use this template** 모델을 사용합니다. 파생 레포는 git 히스토리가 분리되어 있어 fork 와 달리 merge 로 동기화할 수 없습니다. 공통 코드 개선은 **cherry-pick** 으로 전파합니다.
 
-자세한 철학: `docs/journey/philosophy.md` 결정 2.
+자세한 철학: [ADR-002 (GitHub Template Repository 패턴)](./philosophy/adr-002-use-this-template.md), [ADR-015 (Conventional Commits + SemVer)](./philosophy/adr-015-conventional-commits-semver.md).
 
 ---
 
@@ -81,7 +81,7 @@ git checkout -b fix/refresh-token-race
 git cherry-pick abc9999
 
 # 5. (중요) 파생 레포 고유 도메인 코드가 딸려왔는지 검증
-#    philosophy.md 의 커밋 위생 원칙: "공통·도메인 분리"
+#    ADR-002 의 커밋 위생 원칙: "공통·도메인 분리" (cherry-pick 기계 필터링 가능하도록)
 #    딸려왔다면 해당 부분 revert 후 다시 커밋
 
 # 6. CHANGELOG [Unreleased] 에 추가 → PR → main
@@ -132,7 +132,8 @@ git push origin fix/refresh-token-race
 
 - [`conventions/git-workflow.md`](../conventions/git-workflow.md) — 브랜치 · 커밋 규약
 - [`api-contract/versioning.md`](../api-contract/versioning.md) — 버전 · Deprecation
-- [`journey/philosophy.md`](./philosophy.md) — 결정 2 (템플릿 전파 방식)
+- [`philosophy/adr-002-use-this-template.md`](./philosophy/adr-002-use-this-template.md) — template 패턴 + cherry-pick 전파
+- [`philosophy/adr-015-conventional-commits-semver.md`](./philosophy/adr-015-conventional-commits-semver.md) — Conventional Commits + template-v* SemVer
 - [`features/migration.md`](../features/migration.md) — 버전별 migration guide (breaking 있을 때만)
 
 ---
@@ -147,4 +148,4 @@ git push origin fix/refresh-token-race
 | → 다음 | (책 끝) — 본인 도메인 작업 시작 | 막히면 [`infra/runbook.md`](../infra/runbook.md) (운영 절차) 참고 |
 
 **막혔을 때**: [`infra/runbook.md`](../infra/runbook.md) (장애 대응) / [`infra/edge-cases.md`](../infra/edge-cases.md) (리스크 시나리오)
-**왜 이렇게?**: [`journey/philosophy.md`](./philosophy.md) 결정 2 (template 패턴)
+**왜 이렇게?**: [ADR-002 (template 패턴)](./philosophy/adr-002-use-this-template.md) + [ADR-015 (Conventional Commits)](./philosophy/adr-015-conventional-commits-semver.md)

@@ -265,4 +265,4 @@ curl -I https://log.<도메인>                                   # 302 (CF Acce
 | → 다음 | [`journey/cross-repo-cherry-pick.md`](./cross-repo-cherry-pick.md) | 같은 7단계, template 변경을 파생 레포로 가져오기 |
 
 **막혔을 때**: [`journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) (도그푸딩과 같은 함정 적용) / [`infra/runbook.md`](../infra/runbook.md) (평시 운영 절차)
-**왜 이렇게?**: [`infra/decisions-infra.md` I-09](../infra/decisions-infra.md) (Kamal 선택) / [`journey/philosophy.md` 결정 2](./philosophy.md) (template 패턴)
+**왜 이렇게?**: [`infra/decisions-infra.md` I-09](../infra/decisions-infra.md) (Kamal 선택) / [ADR-002 (GitHub Template Repository 패턴)](./philosophy/adr-002-use-this-template.md)
