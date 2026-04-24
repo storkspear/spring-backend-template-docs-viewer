@@ -106,4 +106,4 @@
 ## 관련 문서
 
 - [`Git 워크플로우 (Git Workflow)`](../convention/git-workflow.md) — backlog 운영 규칙 상세
-- [`CHANGELOG.md`](../../CHANGELOG.md) — archive 된 완료 항목의 최종 기록처
+- [`CHANGELOG.md`](https://github.com/storkspear/spring-backend-template/blob/main/CHANGELOG.md) — archive 된 완료 항목의 최종 기록처
