@@ -29,12 +29,16 @@
     {
       "name": "프로젝트 철학",
       "files": [
-        { "path": "journey/philosophy/README.md",                        "title": "책 안내",                    "desc": "프롤로그 + 사용법 + 16 ADR 인덱스" },
-        { "path": "journey/philosophy/adr-001-modular-monolith.md",      "title": "ADR-001: 모듈러 모놀리스",   "desc": "한 JAR 에 여러 앱 공존 + 경계 강제" },
-        { "path": "journey/philosophy/adr-002-use-this-template.md",     "title": "ADR-002: Use this template", "desc": "파생 레포 패턴 + cherry-pick 전파" },
-        { "path": "journey/philosophy/adr-003-api-impl-split.md",        "title": "ADR-003: -api/-impl 분리",   "desc": "미래 추출 보장 위한 포트 인터페이스" },
-        { "path": "journey/philosophy/adr-004-gradle-archunit.md",       "title": "ADR-004: Gradle + ArchUnit", "desc": "2단계 방어로 컨벤션 기계 강제" },
-        { "path": "journey/philosophy/legacy-pending-rewrite.md",        "title": "재작성 예정 (ADR-005~016)",  "desc": "차후 세션에서 ADR 카드로 재작성" }
+        { "path": "journey/philosophy/README.md",                        "title": "책 안내",                        "desc": "프롤로그 + 사용법 + 16 ADR 인덱스" },
+        { "path": "journey/philosophy/adr-001-modular-monolith.md",      "title": "ADR-001: 모듈러 모놀리스",       "desc": "한 JAR 에 여러 앱 공존 + 경계 강제" },
+        { "path": "journey/philosophy/adr-002-use-this-template.md",     "title": "ADR-002: Use this template",     "desc": "파생 레포 패턴 + cherry-pick 전파" },
+        { "path": "journey/philosophy/adr-003-api-impl-split.md",        "title": "ADR-003: -api/-impl 분리",       "desc": "미래 추출 보장 위한 포트 인터페이스" },
+        { "path": "journey/philosophy/adr-004-gradle-archunit.md",       "title": "ADR-004: Gradle + ArchUnit",     "desc": "2단계 방어로 컨벤션 기계 강제" },
+        { "path": "journey/philosophy/adr-011-layered-port-adapter.md",  "title": "ADR-011: 레이어드 + 포트/어댑터","desc": "모듈 안쪽은 Spring 레이어, 바깥은 포트" },
+        { "path": "journey/philosophy/adr-009-base-entity.md",           "title": "ADR-009: BaseEntity",            "desc": "JPA 엔티티 공통 슈퍼클래스 (id/감사/equals)" },
+        { "path": "journey/philosophy/adr-010-search-condition.md",      "title": "ADR-010: SearchCondition",       "desc": "Map 기반 조회 조건 표준화 + QueryDsl 빌더" },
+        { "path": "journey/philosophy/adr-016-dto-mapper-forbidden.md",  "title": "ADR-016: DTO Mapper 금지",       "desc": "Entity 의 to<Dto>() 메서드 패턴 (ArchUnit r22)" },
+        { "path": "journey/philosophy/legacy-pending-rewrite.md",        "title": "재작성 예정 (ADR-5~8, 12~15)",   "desc": "차후 세션에서 ADR 카드로 재작성" }
       ]
     },
     {

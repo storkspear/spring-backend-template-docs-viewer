@@ -86,16 +86,16 @@
 | "JWT 서명은 어떤 알고리즘?" | ADR-006 (작성 예정) |
 | "결정 내릴 때 어떤 기준으로 판단하나?" | ADR-007 (작성 예정) |
 | "API 버전 관리는 언제 도입하지?" | ADR-008 (작성 예정) |
-| "엔티티 공통 필드를 어떻게 처리하지?" | ADR-009 (작성 예정) |
-| "목록 조회 검색 조건을 표준화하려면?" | ADR-010 (작성 예정) |
-| "모듈 내부 구조는 어떻게 잡나?" | ADR-011 (작성 예정) |
+| "엔티티 공통 필드를 어떻게 처리하지?" | [ADR-009: BaseEntity](./adr-009-base-entity.md) |
+| "목록 조회 검색 조건을 표준화하려면?" | [ADR-010: SearchCondition](./adr-010-search-condition.md) |
+| "모듈 내부 구조는 어떻게 잡나?" | [ADR-011: 레이어드 + 포트/어댑터](./adr-011-layered-port-adapter.md) |
 | "통합 계정인가 앱별 계정인가?" | ADR-012 (작성 예정) |
 | "인증 엔드포인트 경로는?" | ADR-013 (작성 예정) |
 | "테스트는 어떻게 쓰나?" | ADR-014 (작성 예정) |
 | "커밋 메시지 규칙은?" | ADR-015 (작성 예정) |
-| "DTO 변환은 어떻게 하나?" | ADR-016 (작성 예정) |
+| "DTO 변환은 어떻게 하나?" | [ADR-016: DTO Mapper 금지](./adr-016-dto-mapper-forbidden.md) |
 
-> **작성 예정** 항목들은 [`legacy-pending-rewrite.md`](./legacy-pending-rewrite.md) 에 **기존 버전의 원본 콘텐츠** 가 보존되어 있습니다. 차후 세션에서 ADR 카드 형식으로 하나씩 재작성됩니다.
+> **작성 예정** 항목들 (ADR-005~008, 012~015) 은 [`legacy-pending-rewrite.md`](./legacy-pending-rewrite.md) 에 **기존 버전의 원본 콘텐츠** 가 보존되어 있습니다. 차후 세션에서 ADR 카드 형식으로 하나씩 재작성됩니다.
 
 ### ADR 카드의 읽는 법
 
@@ -151,14 +151,36 @@ ADR-004 (Gradle + ArchUnit 강제) ───────────────
 
 **테마 1 의 결론**: 하나의 JAR 안에 여러 앱이 공존하되, 모듈 경계는 기계가 강제하고, 도메인은 파생 레포에 두며, 미래의 추출 가능성을 위한 포트 인터페이스를 함께 유지한다.
 
-### 테마 2 — 모듈 내부 설계 (작성 예정)
+### 테마 2 — 모듈 내부 설계 ✅ 완료
 
-**이 테마가 답할 물음**: "모듈 안을 어떻게 짜는가? (한 앱을 구현할 때 어디에 무엇을 두는가)"
+**이 테마가 답하는 물음**: "모듈 안을 어떻게 짜는가? (한 앱을 구현할 때 어디에 무엇을 두는가)"
 
-- ADR-011 · 레이어드 아키텍처 + 포트/어댑터 패턴
-- ADR-009 · BaseEntity 공통 슈퍼클래스
-- ADR-010 · SearchCondition + QueryDsl 공통 조회 인프라
-- ADR-016 · DTO 변환은 Entity 메서드로 (Mapper 금지)
+```
+ADR-011 (레이어드 + 포트/어댑터)
+  "안쪽은 익숙한 Spring 레이어, 바깥은 엄격한 포트"
+   │
+   │ 엔티티 공통 구조는?
+   ▼
+ADR-009 (BaseEntity)
+  "id + 감사 필드 + equals/hashCode 를 한 곳에"
+   │
+   │ 목록 조회의 반복 패턴은?
+   ▼
+ADR-010 (SearchCondition + QueryDsl)
+  "Map 기반 조건 → 자동 WHERE 절 변환"
+   │
+   │ DTO 변환은 어디에 두지?
+   ▼
+ADR-016 (DTO Mapper 금지)
+  "Entity 의 to<Dto>() 메서드로. Mapper 클래스는 ArchUnit r22 가 차단"
+```
+
+- [ADR-011 · 모듈 안 레이어드 + 포트/어댑터](./adr-011-layered-port-adapter.md)
+- [ADR-009 · BaseEntity 공통 슈퍼클래스](./adr-009-base-entity.md)
+- [ADR-010 · SearchCondition + QueryDslPredicateBuilder](./adr-010-search-condition.md)
+- [ADR-016 · DTO Mapper 금지, Entity 메서드 패턴](./adr-016-dto-mapper-forbidden.md)
+
+**테마 2 의 결론**: 전통적 Spring Boot 레이어드를 따르되, `-api` 경계에 Port 를 두어 추출 가능성을 유지한다. 공통 슈퍼클래스와 공통 조회 인프라로 반복 코드를 제거하고, DTO 변환은 Entity 메서드로 담아 Mapper 레이어를 없앤다.
 
 ### 테마 3 — 데이터 & 멀티 테넌시 (작성 예정)
 

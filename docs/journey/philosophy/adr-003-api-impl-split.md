@@ -1,8 +1,3 @@
-> 📚 **Philosophy · 테마 1 — 레포지토리 구조의 기반** (4개 중 3번째)
-> [← ADR-002: Use this template](./adr-002-use-this-template.md) · [Philosophy 목차](./README.md) · [→ ADR-004: Gradle + ArchUnit](./adr-004-gradle-archunit.md)
-
----
-
 # ADR-003 · core 모듈을 `-api` / `-impl` 로 분리
 
 **Status**: Accepted. 2026-04-20 기준 core × 6 도메인 (user, auth, device, push, billing, storage) 전부 -api/-impl 쌍으로 구성. ArchUnit 9개 규칙 (r6, r9~r11, r13~r15, r17, r21) 이 구조 강제.
@@ -321,9 +316,3 @@ references class <com.factory.core.user.impl.entity.User>
 **AutoConfiguration**:
 - [`AuthAutoConfiguration.java`](https://github.com/storkspear/spring-backend-template/blob/main/core/core-auth-impl/src/main/java/com/factory/core/auth/impl/AuthAutoConfiguration.java) — 추출 시 이 파일이 핵심 교체 지점.
 
----
-
-> 📚 **이전 ADR**: [← ADR-002: Use this template](./adr-002-use-this-template.md)  
-> **다음 ADR**: [ADR-004: Gradle + ArchUnit →](./adr-004-gradle-archunit.md)  
-> **테마 1 전체**: [ADR-001](./adr-001-modular-monolith.md) · [ADR-002](./adr-002-use-this-template.md) · [ADR-003](./adr-003-api-impl-split.md) · [ADR-004](./adr-004-gradle-archunit.md)  
-> **상위**: [Philosophy 목차 ↑](./README.md)

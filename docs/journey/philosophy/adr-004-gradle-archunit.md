@@ -1,8 +1,3 @@
-> 📚 **Philosophy · 테마 1 — 레포지토리 구조의 기반** (4개 중 4번째, 마지막)
-> [← ADR-003: -api/-impl 분리](./adr-003-api-impl-split.md) · [Philosophy 목차](./README.md)
-
----
-
 # ADR-004 · Gradle 모듈 경계 + ArchUnit 22규칙으로 의존 강제
 
 
@@ -292,12 +287,3 @@ ArchUnit 규칙은 `r1`, `r2`, ..., `r22` 처럼 **번호로** 참조합니다.
 - [`docs/conventions/module-dependencies.md`](https://github.com/storkspear/spring-backend-template/blob/main/docs/conventions/module-dependencies.md)
 - [`docs/testing/contract-testing.md`](https://github.com/storkspear/spring-backend-template/blob/main/docs/testing/contract-testing.md)
 
----
-
-
----
-
-> 📚 **이전 ADR**: [← ADR-003: -api/-impl 분리](./adr-003-api-impl-split.md)  
-> **테마 1 전체**: [ADR-001](./adr-001-modular-monolith.md) · [ADR-002](./adr-002-use-this-template.md) · [ADR-003](./adr-003-api-impl-split.md) · [ADR-004](./adr-004-gradle-archunit.md)  
-> **상위**: [Philosophy 목차 ↑](./README.md)  
-> **다음 테마**: 테마 2 (모듈 내부 설계) — 작성 예정

@@ -1,8 +1,3 @@
-> 📚 **Philosophy · 테마 1 — 레포지토리 구조의 기반** (4개 중 2번째)
-> [← ADR-001: 모듈러 모놀리스](./adr-001-modular-monolith.md) · [Philosophy 목차](./README.md) · [→ ADR-003: -api/-impl 분리](./adr-003-api-impl-split.md)
-
----
-
 # ADR-002 · GitHub Template Repository 패턴 (Use this template)
 
 **Status**: Accepted. 현재 유효. 2026-04-20 기준 `template-v*` 태그 + 자동 Release 워크플로우 + `cross-repo-cherry-pick.md` 가이드 로 정교화 완료.
@@ -351,9 +346,3 @@ public class SumtallyAuthHook implements AuthHook {
 **ArchUnit 템플릿 순수성 강제**:
 - [`ArchitectureRules.java`](https://github.com/storkspear/spring-backend-template/blob/main/common/common-testing/src/main/java/com/factory/common/testing/architecture/ArchitectureRules.java) 의 r7, r8, r20
 
----
-
-> 📚 **이전 ADR**: [← ADR-001: 모듈러 모놀리스](./adr-001-modular-monolith.md)  
-> **다음 ADR**: [ADR-003: -api/-impl 분리 →](./adr-003-api-impl-split.md)  
-> **테마 1 전체**: [ADR-001](./adr-001-modular-monolith.md) · [ADR-002](./adr-002-use-this-template.md) · [ADR-003](./adr-003-api-impl-split.md) · [ADR-004](./adr-004-gradle-archunit.md)  
-> **상위**: [Philosophy 목차 ↑](./README.md)

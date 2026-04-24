@@ -1,15 +1,18 @@
-# Legacy — 재작성 대기 중인 기존 결정들 (ADR-005 ~ ADR-016)
+# Legacy — 재작성 대기 중인 기존 결정들
 
 > **이 파일의 위상**  
 > 이 문서의 결정들은 **아직 ADR 카드 형식으로 재작성되지 않은 원본 콘텐츠** 입니다. 차후 세션에서 테마별로 하나씩 독립 파일 (예: `adr-005-db-schema-isolation.md`) 로 재작성되며, 여기서는 해당 항목이 제거됩니다.
 >
 > 즉 이 파일은 **점점 줄어드는 임시 공간** 이에요. 모든 재작성이 끝나면 이 파일 자체가 사라집니다.
 >
-> **재작성 순서 계획** (테마 기준, Session 1 에서 확정):
-> - 테마 2 (모듈 내부 설계): ADR-009, 010, 011, 016
-> - 테마 3 (데이터 & 테넌시): ADR-005, 012
-> - 테마 4 (인증 & 보안): ADR-006, 013
-> - 테마 5 (운영 & 개발 방법론): ADR-007, 008, 014, 015
+> **재작성 진행 상황**:
+> - ✅ 테마 1 (레포 구조): ADR-001, 002, 003, 004 — 완료
+> - ✅ 테마 2 (모듈 내부 설계): ADR-009, 010, 011, 016 — 완료
+> - ⏳ 테마 3 (데이터 & 테넌시): ADR-005, 012 — 예정
+> - ⏳ 테마 4 (인증 & 보안): ADR-006, 013 — 예정
+> - ⏳ 테마 5 (운영 & 개발 방법론): ADR-007, 008, 014, 015 — 예정
+>
+> **현재 이 파일에 남아있는 결정**: 5, 6, 7, 8, 12, 13, 14, 15
 
 > **독자 유의사항**  
 > 아래 콘텐츠는 **프롤로그 톤/깊이에 미달** 합니다. Options Considered 대안 검토가 얕고, Lessons Learned 가 누락되었으며, Code References 도 부실해요. ADR 카드로 재작성된 테마 1 의 [ADR-001~004](./README.md) 수준의 품질을 여기서 기대하지 마세요. 재작성이 끝나면 동일 깊이가 될 것입니다.
@@ -157,135 +160,6 @@ API 버전 관리가 필요한 상황은 **"클라이언트를 서버 측에서 
 
 ---
 
-## 결정 9. BaseEntity 공통 슈퍼클래스 도입
-
-### 결정
-
-모든 JPA 엔티티가 공유하는 필드(`id`, `createdAt`, `updatedAt`) 와 감사 로직(`@PrePersist`, `@PreUpdate`, `equals`/`hashCode`) 을 `@MappedSuperclass BaseEntity` 로 집중화합니다.
-
-### 이유
-
-Phase D, E 를 구현하면서 User, RefreshToken, EmailVerificationToken, PasswordResetToken 등 모든 엔티티가 같은 6 개 필드 + 2 개 콜백 + equals/hashCode 를 각자 따로 선언하고 있었습니다. 엔티티 수가 늘어나면 복사 실수가 필연적이고, 감사 로직 변경 시 N 곳을 수정해야 합니다. BaseEntity 로 한 번 잡으면 이후 모든 엔티티가 자동 상속합니다.
-
-### 위치
-
-`common-persistence` 모듈에 위치합니다. JPA 어노테이션에 의존하므로 `common-web` 에는 넣을 수 없습니다.
-
----
-
-## 결정 10. 공통 조회 조건 인프라 (SearchCondition + QueryDslPredicateBuilder)
-
-### 결정
-
-목록 조회 API 에서 프론트엔드가 보내는 검색 조건을 **Map<String, Object> 기반**으로 표준화합니다. 백엔드는 이 Map 을 `QueryDslPredicateBuilder` 로 자동 변환하여 동적 WHERE 절을 생성합니다.
-
-### 이유
-
-모든 목록 조회 API 가 반복하는 패턴 (필드별 if 조건 → 쿼리 추가) 을 한 번에 해결합니다. 프론트엔드는 `{field}_{operator}: value` 형식의 Map 을 보내면 되고, 백엔드는 `QueryDslPredicateBuilder.buildConditions(conditions, QEntity.entity)` 한 줄로 WHERE 절을 완성합니다. 각 앱 모듈이 동일한 패턴으로 조회 API 를 구현하므로 프론트엔드의 payload 일관성이 보장됩니다.
-
-### 구조
-
-순수 Java DTO 와 QueryDsl 변환을 분리합니다:
-- `common-web/search/` — `SearchCondition`, `SortSpec`, `SearchRequest` (QueryDsl 비의존, 순수 Java)
-- `common-persistence/` — `QueryDslPredicateBuilder`, `QueryDslSortBuilder` (QueryDsl 의존)
-
-이렇게 분리하면 web 계층의 DTO 는 QueryDsl 을 몰라도 되고, QueryDsl 변환 로직은 JPA 모듈만 사용합니다.
-
-### Map 기반 조건 규칙
-
-| 키 형식 | 의미 | 예시 |
-|---|---|---|
-| `field_eq` | 일치 | `"categoryId_eq": 5` |
-| `field_gte` / `field_lte` | 이상 / 이하 | `"amount_gte": 10000` |
-| `field_gt` / `field_lt` | 초과 / 미만 | `"age_gt": 18` |
-| `field_like` | 부분 매칭 (대소문자 무시) | `"title_like": "커피"` |
-| `field_isNull` / `field_isNotNull` | null 여부 | `"deletedAt_isNull": true` |
-
-현재 `QueryDslPredicateBuilder` 가 지원하는 연산자는 위 8가지입니다.
-
-### 대안 검토
-
-**타입 세이프 Condition DTO** (`ExpenseSearchCondition(Long categoryId, Integer amountMin, ...)`)
-- 장점: 컴파일 타임 검증
-- 탈락 이유: 조건 추가할 때마다 DTO 수정 필요. 앱마다 조건이 다른 공장 패턴에서 확장성 떨어짐.
-
-**하이브리드** (기본은 Map, 복잡한 쿼리는 커스텀)
-- 실제 운영에서는 이 방식이 될 것이지만, 인프라 수준에서는 Map 기반이 기본이고, 복잡한 쿼리는 각 앱 모듈의 커스텀 Repository 에서 수행합니다.
-
----
-
-## 결정 11. 모듈 안 레이어드 아키텍처 + 포트/어댑터 패턴
-
-> **이 섹션은 기존 '통합 계정' 모델에서 '앱별 독립 유저' 모델로 변경된 내용을 반영합니다.**
-> 런타임에 활성화되는 AuthController 는 각 앱 모듈(`apps/app-<slug>`) 에 위치합니다.
-> `core-auth-impl` 은 서비스 로직 라이브러리 + `new-app.sh` 가 참조할 스캐폴딩 소스만 제공하며,
-> 그 내부의 `AuthController.java` 파일은 **런타임에 Spring bean 으로 등록되지 않습니다**
-> (과거엔 `@Import` 로 등록됐으나 drift 해소를 위해 2026-04-20 제거).
-
-### 구조
-
-각 `core-*-impl` 모듈 내부는 레이어드 아키텍처를 따릅니다:
-
-```
-core-auth-impl/               ← 인증 로직 라이브러리 (런타임 Controller 없음)
-├── service/        ← 비즈니스 계층 (EmailAuthService, AppleSignInService 등)
-├── entity/         ← JPA 엔티티 (RefreshToken 등, 앱 schema 에 매핑)
-├── repository/     ← 데이터 접근 계층
-├── email/          ← 이메일 어댑터
-├── config/         ← Spring 설정 (AuthAutoConfiguration — Controller 등록 안함)
-└── controller/
-    └── AuthController.java   ← ⚠️ 스캐폴딩 소스 only. AuthAutoConfiguration 이 @Import
-                                  하지 않으므로 런타임 빈 아님. `new-app.sh` 가 이 패턴을
-                                  참고해 앱 모듈의 <Slug>AuthController 를 생성.
-
-apps/app-<slug>/              ← 앱별 모듈 (런타임 AuthController 여기)
-├── controller/                ← (health 같은 앱 전용)
-├── auth/
-│   └── <Slug>AuthController.java   ← /api/apps/<slug>/auth/* 실제 엔드포인트
-├── service/        ← 앱별 도메인 서비스
-├── entity/         ← 앱별 도메인 엔티티
-└── ...
-```
-
-모듈 경계가 도메인 경계와 일치하고, 모듈 안에서는 전통적 레이어로 나뉩니다. 이것은 Spring Boot 멀티모듈 프로젝트의 가장 일반적인 Best Practice 입니다.
-
-> **Template 상태 (앱 0개)**: 인증 엔드포인트가 런타임에 노출되지 않습니다 (AuthController 등록 안됨). `new-app.sh <slug>` 실행해 첫 앱 모듈 추가하는 순간부터 해당 slug 의 엔드포인트가 활성화됩니다.
-
-### AuthController 를 앱 모듈에 두는 이유
-
-기존에는 `core-auth-impl` 안에 `AuthController` 가 있었고, `/api/core/auth/*` 경로로 모든 앱이 공유했습니다. 이 방식은 "어느 앱의 인증 요청인지" 를 런타임에 구분해야 하므로 멀티테넌트 DataSource 라우팅(`AbstractRoutingDataSource`, `ThreadLocal` 등)이 필요했습니다.
-
-새 모델에서는 각 앱 모듈이 자신의 `AuthController` 를 가지고 자기 DataSource 를 직접 사용합니다. 라우팅 복잡성이 제거됩니다.
-
-```
-[앱 AuthController]  →  [core-auth-api: AuthPort]  →  [core-auth-impl: EmailAuthService]
-       │                                                          │
-       │ (앱 schema DataSource 직접 사용)                         │
-       └──────────────────────────────────────────────────────────┘
-```
-
-### 포트/어댑터 패턴의 적용
-
-- **Port** = `core-*-api` 의 인터페이스 (`UserPort`, `AuthPort`, `EmailPort` 등)
-- **Primary Adapter** (Inbound) = `*ServiceImpl` — Port 를 구현하고 비즈니스 로직을 담는 구현체. Spring 관용에 따라 `Adapter` 대신 `ServiceImpl` 이라 명명합니다.
-- **Secondary Adapter** (Outbound) = `*Adapter` — 외부 시스템에 연결하는 구현체 (`ResendEmailAdapter`, `FcmPushAdapter` 등). 아직 구현되지 않은 것들은 Phase H, J 에서 추가됩니다.
-
-```
-[앱 AuthController] → [AuthPort 인터페이스] → [AuthServiceImpl]    ← Primary Adapter
-                                                └→ [Repository]      ← Spring Data JPA (앱 DataSource)
-                                                └→ [EmailPort] → [ResendEmailAdapter]  ← Secondary Adapter
-```
-
-### 대안 검토
-
-**레이어별 모듈 분리** (module-controller, module-service, module-repository)
-- 탈락 이유: 기능 하나 수정에 3 개 모듈을 건드려야 함. 도메인 코드가 흩어져서 전체 파악이 어려움.
-
-**DDD Aggregate 패턴** (feature 단위 패키지)
-- Phase 0 에서 YAGNI: 각 모듈이 5~10 클래스 수준이라 feature 분리 이득 없음. 모듈 하나가 20+ 클래스로 커지면 그때 재고.
-
----
-
 ## 결정 12. 앱별 독립 유저 모델 (통합 계정 폐기)
 
 ### 결정
@@ -399,40 +273,3 @@ Port 패턴의 원래 목적인 "계약으로 격리" 와 정렬됩니다.
 
 ---
 
-## 결정 16. DTO 변환은 Mapper 클래스 없이 Entity 메서드로
-
-### 결정
-- DTO ↔ Entity 변환은 **Entity 의 `to<Dto>()` 메서드** 로 제공.
-- 별도 `*Mapper`, `*Factory` 클래스 **금지** (ArchUnit `NO_MAPPER_CLASSES` 로 강제).
-- `api` 모듈에 DTO 정적 팩토리 허용 조건: 정규화/검증이 포함된 경우만 (단순 생성자 대체 금지).
-
-### 이유
-**Mapper 레이어의 비용 > 가치** — 솔로 개발자 스케일에서:
-- 매핑 대부분이 1:1 필드 복사. Mapper 클래스가 제공하는 "격리" 가 실체 없음.
-- 의존 하나 추가, 호출 사이트 가독성 ↓ (`mapper.toSummary(entity)` vs `entity.toSummary()`).
-- Mapper 를 관리할 팀/규모 자체가 없음.
-
-**Entity 메서드가 자연스러운 이유**:
-- Entity 가 자기 표현 방법을 직접 제공 — OOP 원칙에 부합.
-- `impl → api` 방향 참조만 발생 (ArchUnit 규칙 부합).
-- 포트 추출 시 영향도: Port 는 DTO 만 노출하므로 Entity 교체 시 `to<Dto>()` 메서드 재작성으로 대응.
-
-Item 4 에서 `UserMapper` / `UserMapperTest` 전체 삭제 + Entity 메서드 패턴으로 전환 (커밋 `e203872`).
-
-### 트레이드오프
-- Entity 가 DTO 5+ 종류 표현하면 `to<Dto>()` 메서드가 뚱뚱해짐.
-  → 현재 max: `User` → 3개 (Summary, Profile, Account). 감당 가능.
-  → 5+ 초과 시 "Mapper 부활" 아니라 **DTO 구조 재평가** 시그널.
-- 복잡한 매핑 (여러 Entity 조합) 은 Service 에서 조립 (Mapper 없이).
-
-### 관련 문서
-- [`conventions/dto-factory.md`](../conventions/dto-factory.md) — 정적 팩토리 허용 규칙, Entity 메서드 패턴 상세
-- [`architecture/module-dependencies.md`](../architecture/module-dependencies.md) — `NO_MAPPER_CLASSES` ArchUnit 규칙
-
----
-
-
----
-
-> 📚 **상위**: [Philosophy 목차 ↑](./README.md)  
-> **완성된 ADR**: [ADR-001](./adr-001-modular-monolith.md) · [ADR-002](./adr-002-use-this-template.md) · [ADR-003](./adr-003-api-impl-split.md) · [ADR-004](./adr-004-gradle-archunit.md)
