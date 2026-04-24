@@ -1,24 +1,22 @@
 # 인프라 (Infrastructure)
 
-프로젝트의 환경별 인프라 구성, 책임 분담, 프로비저닝 상태를 기록합니다.
+프로젝트의 환경별 인프라 구성, 책임 분담, 프로비저닝 상태를 기록합니다. 코드 아키텍처의 **왜** 는 [`philosophy/` 16 개 ADR](../journey/philosophy/README.md) 에, **무엇/어디** 는 [`architecture.md`](../journey/architecture.md) 에 있으며, 이 문서는 그 위에서 **운영 환경의 실체** 를 다룹니다.
+
+> **독자 대상**: Level 2~3. 본인 (미래의 자신) / 파생 레포를 만든 개발자 / 운영 담당 (Phase 1+).
 
 ## 1. 이 문서의 범위
 
-- **포함**: 물리/운영 인프라 (DB, 오브젝트 스토리지, 운영 호스트, 엣지, 관측성) 구성과 현재 상태.
+- **포함**: 물리/운영 인프라 (DB, 오브젝트 스토리지, 운영 호스트, 엣지, 관측성) 구성과 현재 상태
 - **제외**:
   - 코드 아키텍처 (포트/어댑터, 모듈 구조) → [`architecture.md`](../journey/architecture.md)
-  - 인프라 결정의 근거/대안 → [`infra/decisions-infra.md`](./decisions-infra.md)
-  - 코드 설계 철학 → [`philosophy.md`](../journey/philosophy.md)
-  - 운영 배포 파이프라인/시크릿/백업 → **Item Ops-1** (예정, `backlog.md` 참조)
-
-**대상 독자**:
-- 본인 (미래의 자신)
-- 파생 레포를 만든 개발자 — "이 템플릿의 인프라 어떻게 돌아가지?"
-- 운영 담당 (Phase 1+)
+  - 인프라 결정의 근거/대안 → [`decisions-infra.md`](./decisions-infra.md)
+  - 코드 설계 철학 → [`philosophy/README.md`](../journey/philosophy/README.md)
+  - 배포 파이프라인 상세 → [`ci-cd-flow.md`](./ci-cd-flow.md)
+  - 운영 절차 / 장애 대응 → [`runbook.md`](./runbook.md)
 
 ---
 
-## 2. 현재 프로비저닝 상태 (2026-04-19 기준)
+## 2. 현재 프로비저닝 상태 (2026-04-24 기준)
 
 | 컴포넌트 | Status | 메모 |
 |---|---|---|
@@ -152,7 +150,7 @@ docker compose -f infra/docker-compose.dev.yml up -d postgres minio
 
 ### 4.2 배포 모델 — Modular Monolith + Blue/Green
 
-**하나의 JVM 이 N개 앱 모듈을 서브다.** philosophy 결정 1 — 여러 Spring 프로세스를 띄우지 않는다. 각 앱 모듈은 URL path 또는 내부 routing 으로 구분되며 JVM / DB 커넥션 풀 / 배포 / 모니터링을 공유한다.
+**하나의 JVM 이 N 개 앱 모듈을 서브합니다.** [ADR-001 (모듈러 모놀리스)](../journey/philosophy/adr-001-modular-monolith.md) 와 [ADR-007 (솔로 친화적 운영)](../journey/philosophy/adr-007-solo-friendly-operations.md) 의 직접 적용 — 여러 Spring 프로세스를 띄우지 않습니다. 각 앱 모듈은 URL path 로 구분되며 JVM / DB 커넥션 풀 / 배포 / 모니터링을 공유합니다.
 
 **무중단 배포는 blue/green 컨테이너** — Blue (현재 live) 와 Green (새 버전) 이 서로 다른 호스트 포트에 동시 존재, kamal-proxy 가 health check 통과 후 트래픽을 Green 으로 원자 전환, Blue 는 graceful shutdown.
 
@@ -284,22 +282,22 @@ ingress:
 
 ### 10.1 Schema 구조
 
-단일 DB 안에 앱별 schema:
+단일 DB 안에 앱별 schema ([ADR-005](../journey/philosophy/adr-005-db-schema-isolation.md)):
 ```
 postgres (Supabase or 로컬 docker)
-├── core schema              ← 공통 (users/auth/devices 기본 테이블, bootstrap 담당)
+├── core schema              ← 템플릿 기준선 (users/auth/devices 레거시, core_app role)
 │   ├── users
 │   ├── social_identities
 │   ├── refresh_tokens
 │   ├── email_verification_tokens
 │   ├── password_reset_tokens
 │   └── devices
-└── <slug> schema            ← apps/app-<slug> 이 관리 — 자기 users/auth/devices + 도메인 테이블
-    ├── users / social_identities / refresh_tokens / ...  (philosophy 결정 12: 앱별 독립 유저)
+└── <slug> schema            ← apps/app-<slug> 이 소유 — 자기 users/auth/devices + 도메인 테이블
+    ├── users / social_identities / refresh_tokens / ...  ([ADR-012](../journey/philosophy/adr-012-per-app-user-model.md): 앱별 독립 유저)
     └── (앱 도메인 테이블)
 ```
 
-> **Template 상태**: 현재 레포에는 앱이 없으므로 core schema 만 사용 중. 파생 레포가 `new-app.sh <slug> --provision-db` 실행 시 `<slug>` schema 가 자동 생성되고 Flyway 가 core 테이블 세트를 앱 schema 에 migrate. Multi-DataSource wiring 은 Item 10b 에서 구현 완료 (`CoreDataSourceConfig` + `<Slug>DataSourceConfig`).
+> **Template 상태**: 현재 레포에는 앱이 없으므로 core schema 만 존재. 파생 레포가 `new-app.sh <slug> --provision-db` 실행 시 `<slug>` schema 가 자동 생성되고 Flyway 가 users/auth/device 기본 테이블 세트를 앱 schema 에 migrate. Multi-DataSource wiring 은 구현 완료 (`CoreDataSourceConfig` + `<Slug>DataSourceConfig`, `common-persistence/AbstractAppDataSourceConfig` 기반).
 
 ### 10.2 초기 Schema 스크립트
 
@@ -328,9 +326,7 @@ V009__add_devices_updated_at.sql
 
 ### 10.4 서비스별 DataSource
 
-앱별 schema 에 붙는 DataSource 는 `apps/app-<slug>/src/main/resources/application-*.yml` 에 정의. Bootstrap 은 core schema 만, 각 앱은 자기 schema 에.
-
-자세한 것: [`philosophy.md 결정 5`](../journey/philosophy.md) + `architecture.md` DB 섹션.
+앱별 schema 에 붙는 DataSource 는 각 앱 모듈의 `<Slug>DataSourceConfig` 에서 `@Value` 로 환경변수 주입. Bootstrap 은 core schema 만, 각 앱은 자기 schema 에. 5중 방어선 (DB role · DataSource · Flyway · 포트 · ArchUnit) 의 구조적 근거: [ADR-005 (단일 Postgres + 앱당 schema)](../journey/philosophy/adr-005-db-schema-isolation.md). 구조 상세: [`architecture.md`](../journey/architecture.md) 데이터베이스 구조 섹션.
 
 ### 10.5 `keep-alive.sh` — Supabase Free 7일 비활성 방지
 
@@ -348,13 +344,26 @@ V009__add_devices_updated_at.sql
 
 ## 11. 관련 문서
 
+### 코드 아키텍처 / 설계 결정
 - [`architecture.md`](../journey/architecture.md) — 코드 아키텍처 (포트/어댑터, 모듈 의존성)
-- [`philosophy.md`](../journey/philosophy.md) — 코드 설계 결정 (모듈러 모놀리스, Mapper 금지 등)
-- [`infra/decisions-infra.md`](./decisions-infra.md) — 인프라 결정 카드 I-01~I-07
-- [`features/storage.md`](../features/storage.md) — MinIO 2-tier bucket 정책
-- [`features/observability.md`](../features/observability.md) — 관측성 규약
-- [`guides/onboarding.md`](../journey/onboarding.md) — 템플릿 첫 사용 가이드
-- [`guides/storage-setup.md`](./storage-setup.md) — MinIO 로컬/NAS 셋업
-- [`guides/monitoring-setup.md`](./monitoring-setup.md) — 관측성 스택 기동
-- [`edge-cases.md`](./edge-cases.md) — 리스크 분석
-- [`backlog.md`](../reference/backlog.md) — 미완료 항목 (Item Ops-1 묶음 포함)
+- [`philosophy/README.md`](../journey/philosophy/README.md) — 16 개 ADR 인덱스 (설계 결정의 근거)
+- 특히: [ADR-001 (모듈러 모놀리스)](../journey/philosophy/adr-001-modular-monolith.md), [ADR-005 (Postgres schema 격리)](../journey/philosophy/adr-005-db-schema-isolation.md), [ADR-007 (솔로 친화적 운영)](../journey/philosophy/adr-007-solo-friendly-operations.md)
+
+### 인프라 결정 / 운영
+- [`decisions-infra.md`](./decisions-infra.md) — 인프라 결정 카드 I-01~I-07
+- [`ci-cd-flow.md`](./ci-cd-flow.md) — commit → 운영 반영까지 전체 배포 흐름
+- [`runbook.md`](./runbook.md) — 운영 절차 + 장애 대응
+- [`edge-cases.md`](./edge-cases.md) — 엣지 케이스 / 예외 처리 목록
+- [`key-rotation.md`](./key-rotation.md) — 보안 키 로테이션 절차
+- [`mac-mini-setup.md`](./mac-mini-setup.md) — 맥미니 홈서버 셋업
+
+### 기능 별 상세
+- [`../features/storage.md`](../features/storage.md) — MinIO 2-tier bucket 정책
+- [`../features/observability.md`](../features/observability.md) — 관측성 규약
+- [`storage-setup.md`](./storage-setup.md) — MinIO 로컬/NAS 셋업
+- [`monitoring-setup.md`](./monitoring-setup.md) — 관측성 스택 기동
+
+### 여정 / 진입점
+- [`../journey/onboarding.md`](../journey/onboarding.md) — 템플릿 첫 사용 가이드
+- [`../journey/deployment.md`](../journey/deployment.md) — 파생 레포 첫 운영 배포
+- [`../reference/backlog.md`](../reference/backlog.md) — 미완료 항목 (Item Ops-1 묶음 포함)
