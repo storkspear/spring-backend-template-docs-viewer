@@ -10,7 +10,7 @@ Mac mini 운영 호스트에서 관측성 스택(Loki + Grafana + Prometheus + A
 > 관측성 규약 (로그 레벨, MDC, 메트릭 네이밍): [`features/observability.md`](../features/observability.md)
 > 선택 근거 (왜 Loki/Graf/Prom 셀프 호스트?): [`infra/decisions-infra.md`](./decisions-infra.md) I-06
 
-## 범위
+## 개요
 
 **이 가이드는 운영(Mac mini)에서만 필요하다.** 로컬 개발 환경에서는 관측성 스택을 띄우지 않는다 — 메모리·docker 리소스 부담 대비 활용 빈도가 낮다. 대시보드·쿼리 동작 검증이 필요하면 운영 Mac mini 의 Grafana (예: `log.<domain>`) 에서 확인한다.
 
@@ -127,6 +127,14 @@ docker compose -f infra/docker-compose.observability.yml ps
 - Prometheus retention 단축 (`--storage.tsdb.retention.time=3d` 등)
 - Loki log retention 감소
 - 그래도 빠듯하면 I-06 재검토 트리거 도달 → NAS 로 관측성 분리 고려
+
+## 다음 단계
+
+- 평시/장애 대응: [`./runbook.md`](./runbook.md)
+- 관측성 규약 (로깅/메트릭/알림): [`../features/observability.md`](../features/observability.md)
+- 인프라 구성: [`./infrastructure.md`](./infrastructure.md)
+
+---
 
 ## 관련 문서
 

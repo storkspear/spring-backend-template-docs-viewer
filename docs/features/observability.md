@@ -11,6 +11,12 @@
 > 선택 근거 (셀프 호스트 vs 관리형): [`decisions-infra.md`](../infra/decisions-infra.md) I-06
 > 알림 종류/임계치 확정: Item Ops-1 (`../reference/backlog.md`)
 
+## 한 문장 요약
+
+이 문서는 `spring-backend-template` 의 **메트릭 · 로그 · 알림 3 대 축** 규약을 정의합니다. `appSlug` 태깅 의무 + 로그 레벨 가이드 + 알림 임계치.
+
+---
+
 ## 3대 축
 
 | 축 | 도구 | 목적 |

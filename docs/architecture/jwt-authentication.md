@@ -10,6 +10,12 @@
 
 ---
 
+## 한 문장 요약
+
+이 문서는 **JWT 기반 stateless 인증** 체계의 구조와 사용법을 설명합니다. SecurityConfig · JwtService · JwtAuthFilter · @CurrentUser · appSlug 검증 · Refresh Token 회전까지.
+
+---
+
 ## 1. 아키텍처
 
 ### SecurityConfig (Stateless)
@@ -474,6 +480,15 @@ app:
 ```
 
 Prod 는 default 값 없이 `${VAR}` strict 방식을 사용해 환경변수 주입이 빠지면 즉시 실패하도록 만듭니다 — 운영 안전망입니다.
+
+---
+
+## 관련 문서
+
+- [`../journey/philosophy/adr-006-hs256-jwt.md`](../journey/philosophy/adr-006-hs256-jwt.md) — HS256 채택 결정
+- [`../journey/philosophy/adr-012-per-app-user-model.md`](../journey/philosophy/adr-012-per-app-user-model.md) — 앱별 독립 유저 모델 + `appSlug` claim
+- [`./multitenant-architecture.md`](./multitenant-architecture.md) — 앱별 DataSource 분리 구현
+- [`../api-contract/flutter-backend-integration.md`](../api-contract/flutter-backend-integration.md) — 클라이언트 401 처리 규약
 
 ---
 

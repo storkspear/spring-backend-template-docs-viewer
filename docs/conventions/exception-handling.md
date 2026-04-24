@@ -6,6 +6,12 @@
 
 ---
 
+## 개요
+
+이 문서는 예외 처리의 **단일 정본**입니다. 에러 코드 체계 · HTTP 매핑 · 새 예외 추가 절차 · 테스트 검증 규칙 포함.
+
+---
+
 ## 1. 아키텍처
 
 ```
@@ -204,3 +210,10 @@ assertThatCode(() -> service.requestReset("nobody@example.com"))
 | `core-user-api/.../exception/UserException.java` | 유저 예외 |
 | `core-billing-api/.../exception/BillingError.java` | 결제 에러 enum (향후) |
 | `core-billing-api/.../exception/BillingException.java` | 결제 예외 |
+
+---
+
+## 관련 문서
+
+- [`../api-contract/api-response.md`](../api-contract/api-response.md) — 예외가 변환되는 응답 포맷
+- [`../api-contract/flutter-backend-integration.md`](../api-contract/flutter-backend-integration.md) — 클라이언트 측 401/403 처리 규약

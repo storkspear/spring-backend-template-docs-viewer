@@ -10,6 +10,12 @@
 
 ---
 
+## 개요
+
+**이메일 발송 아키텍처** (Resend + EmailPort) 와 **이메일 인증 / 비밀번호 재설정 플로우** 구현 가이드. 토큰 생성 · TTL · Reference 컨트롤러 매핑.
+
+---
+
 ## 이메일 발송 아키텍처
 
 ```
@@ -433,3 +439,34 @@ EMAIL_DELIVERY_FAILED(503, "ATH_006", "이메일 발송에 실패했습니다");
 - 비밀번호 재설정 성공 시 해당 유저의 모든 refresh token 이 무효화됩니다.
 - 존재하지 않는 이메일로 재설정 요청이 와도 동일한 응답을 반환합니다 (enumeration 방지).
 - 가입 시 이메일 발송이 실패해도 가입 자체는 성공합니다.
+
+---
+
+## 트러블슈팅
+
+### Resend API 응답 500 또는 타임아웃
+
+- **원인**: Resend API 장애 또는 `RESEND_API_KEY` 만료
+- **확인**: `curl -i https://api.resend.com/emails -H "Authorization: Bearer $RESEND_API_KEY"` 로 키 유효성 테스트
+- **조치**: 키 회전 ([`../infra/key-rotation.md`](../infra/key-rotation.md))
+
+### 인증 이메일이 스팸함으로 감
+
+- **원인**: Resend 전송 도메인의 SPF/DKIM 미설정
+- **조치**: Resend 대시보드 → Domains → DNS 레코드 추가
+
+### 토큰 만료 후 재발송 요청
+
+- **엔드포인트**: `POST /api/apps/{slug}/auth/resend-verification` (인증 필요)
+- **제약**: Rate limit 적용 (strict)
+
+### 비밀번호 재설정 토큰 이미 사용됨
+
+- **원인**: 재설정 토큰은 1 회용. 클릭 후 재시도 불가.
+- **조치**: `POST /api/apps/{slug}/auth/password-reset/request` 재요청
+
+## 다음 단계
+
+- 푸시 알림 통합: [`./push-notifications.md`](./push-notifications.md)
+- JWT 인증 흐름: [`../architecture/jwt-authentication.md`](../architecture/jwt-authentication.md)
+- Rate limit 설정: [`./rate-limiting.md`](./rate-limiting.md)

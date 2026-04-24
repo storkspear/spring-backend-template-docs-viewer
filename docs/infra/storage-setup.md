@@ -11,6 +11,12 @@
 > bucket 네이밍 / key 패턴 규약: [`features/storage.md`](../features/storage.md)
 > 선택 근거 (왜 NAS MinIO?): [`infra/decisions-infra.md`](./decisions-infra.md) I-03
 
+## 개요
+
+MinIO 스토리지의 **로컬 개발** (Docker Compose) + **운영 NAS** (시놀로지) 셋업 절차. 연결 확인 · 용량 모니터링 · 백업 · 장애 대응 포함.
+
+---
+
 ## 로컬 개발
 
 `docker-compose.dev.yml` 에 MinIO 가 이미 포함됨:
@@ -113,6 +119,14 @@ NAS 자체 RAID/Snapshot 활용 권장. docker volume 은 NAS 볼륨 안이라 N
 **"lifecycle 안 먹힘"** — `mc ilm rule ls nas/<bucket>` 으로 규칙 확인.
 
 **"업로드 느림"** — 홈 네트워크 대역폭 확인. 원격 접속 중이면 VPN 병목 가능성.
+
+## 다음 단계
+
+- 스토리지 사용 규약: [`../features/storage.md`](../features/storage.md)
+- 키 로테이션 (MinIO access key 포함): [`./key-rotation.md`](./key-rotation.md)
+- 인프라 구성: [`./infrastructure.md`](./infrastructure.md)
+
+---
 
 ## 관련 문서
 

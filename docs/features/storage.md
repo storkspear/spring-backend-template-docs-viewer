@@ -10,6 +10,12 @@
 > 셋업 가이드 (로컬 docker / NAS): [`infra/storage-setup.md`](../infra/storage-setup.md)
 > 선택 근거 (2-tier bucket): [`decisions-infra.md`](../infra/decisions-infra.md) I-07
 
+## 개요
+
+`core-storage-api` / `core-storage-impl` 의 **`StoragePort` 사용 규약**. Signed URL · 2-tier bucket 네이밍 · retention · 용량 계산.
+
+---
+
 ## Signed URL 패턴 (권장)
 
 **업로드**:
@@ -136,3 +142,11 @@ class VoiceMessage {
 - 통합: `MinIOStorageAdapterContractTest` (Testcontainer)
 - 로컬 수동: Synology NAS 의 MinIO 컨테이너 (`http://<NAS-IP>:9001`) 또는
   `docker compose up minio` + Web UI (http://localhost:9001)
+
+---
+
+## 관련 문서
+
+- [`../infra/storage-setup.md`](../infra/storage-setup.md) — MinIO 로컬 / NAS 셋업 가이드
+- [`../journey/philosophy/adr-003-api-impl-split.md`](../journey/philosophy/adr-003-api-impl-split.md) — StoragePort 가 `-api` 모듈에 있는 근거
+- [`../journey/philosophy/adr-007-solo-friendly-operations.md`](../journey/philosophy/adr-007-solo-friendly-operations.md) — 관리형 스토리지 선호 근거

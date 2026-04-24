@@ -8,6 +8,12 @@
 
 ---
 
+## 개요
+
+모든 REST API 의 **요청/응답 포맷 표준**. 응답 래퍼 구조 · HTTP 상태 코드 매핑 · 에러 코드 체계 · 필드 명명 규약.
+
+---
+
 ## 응답 래퍼
 
 모든 응답은 다음 구조로 감쌉니다.
@@ -489,3 +495,12 @@ public ApiResponse<AuthResponse> signUp(@RequestBody @Valid SignUpRequest reques
 - **성공은 HTTP 2xx + data**, **실패는 HTTP 4xx/5xx + error**
 - **예외로 에러를 표현** — 컨트롤러는 `ApiResponse.error()` 를 직접 반환하지 않습니다 (상세: [exception-handling.md](../conventions/exception-handling.md))
 - **날짜는 ISO 8601 UTC**, **필드명은 camelCase**, **null 은 생략** (빈 배열은 생략 안 함)
+
+---
+
+## 관련 문서
+
+- [`../conventions/exception-handling.md`](../conventions/exception-handling.md) — 에러 코드 체계 + 도메인별 예외
+- [`./json-contract.md`](./json-contract.md) — JSON 직렬화 정책 + 테스트 4 종
+- [`./flutter-backend-integration.md`](./flutter-backend-integration.md) — 클라이언트 연동 규약
+- [`./versioning.md`](./versioning.md) — API 버전 관리 전략

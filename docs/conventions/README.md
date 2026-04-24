@@ -8,6 +8,12 @@
 
 ---
 
+## 개요
+
+이 디렉토리는 `spring-backend-template` 및 파생 레포의 **코드 작성 규약** 을 모읍니다. 네이밍 · 예외 처리 · DTO 패턴 · git workflow 등 실무 코드에 직접 적용되는 규칙들.
+
+---
+
 ## 이 폴더의 문서 (순수 코드 작성 규약)
 
 - [`design-principles.md`](./design-principles.md) — SOLID · DRY · YAGNI · 포트/어댑터 · 의존 방향
@@ -71,3 +77,12 @@
 ## 기여
 
 규약은 고정되어 있지 않습니다. 개선 의견이 있으면 해당 문서에 직접 수정을 제안하거나, 기존 규약이 실제 코드 작성에서 걸림돌이 되면 즉시 재평가합니다. 다만 **"이 결정의 이유가 여전히 유효한가"** 를 먼저 확인한 후 바꿉니다.
+
+---
+
+## 관련 문서
+
+- [`../STYLE_GUIDE.md`](../STYLE_GUIDE.md) — 문서 작성 규칙 (코드 규약의 문서 버전)
+- [`../journey/philosophy/adr-016-dto-mapper-forbidden.md`](../journey/philosophy/adr-016-dto-mapper-forbidden.md) — Mapper 금지 설계 근거
+- [`../journey/philosophy/adr-015-conventional-commits-semver.md`](../journey/philosophy/adr-015-conventional-commits-semver.md) — 커밋 규약 설계 근거
+- [`../architecture/architecture-rules.md`](../architecture/architecture-rules.md) — ArchUnit 이 기계 강제하는 규약 목록

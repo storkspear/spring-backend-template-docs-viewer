@@ -8,6 +8,12 @@
 
 ---
 
+## 개요
+
+DTO JSON **직렬화/역직렬화 정책** + 필수 테스트 4 종 (샘플/보안/중첩/타입) 목록. 필드 추가/변경 시 절차 포함.
+
+---
+
 ## 전역 Jackson 정책
 
 모든 DTO 는 다음 정책을 따릅니다. 정책은 `AbstractJsonContractTest` 내부의 `contractObjectMapper()` 에 내장되어 있으며, 프로덕션 Spring Boot 기본 Jackson 설정과 일치해야 합니다.

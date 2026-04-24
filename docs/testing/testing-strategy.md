@@ -10,6 +10,12 @@
 
 ---
 
+## 한 문장 요약
+
+이 문서는 **4 층 테스트 전략** (Unit · Contract JSON · Contract Port · Integration) 의 전체 그림과 각 층의 역할/예시/체크리스트를 설명합니다.
+
+---
+
 ## 왜 4층 구조인가
 
 테스트는 "실행 속도" 와 "검증 강도" 사이에 항상 trade-off 가 있습니다. 단위 테스트만 있으면 빠르지만 모듈 간 실제 연결은 검증되지 않고, 통합 테스트만 있으면 느려서 개발자가 더 이상 실행하지 않게 됩니다.
@@ -399,3 +405,12 @@ END $$;
 - **통합 테스트** — `AbstractIntegrationTest` + Testcontainers. 트랜잭션 자동 롤백.
 - **ArchUnit** — 모듈/패키지/네이밍 구조 자동 강제. 전체 규칙은 [`module-dependencies.md`](../architecture/module-dependencies.md).
 - **4중 안전장치** — Contract/Integration 테스트가 운영 DB 를 건드리지 못하도록 강제.
+
+---
+
+## 관련 문서
+
+- [`./contract-testing.md`](./contract-testing.md) — Port 계약 테스트 상세 규약
+- [`../journey/philosophy/adr-014-no-delegation-mock.md`](../journey/philosophy/adr-014-no-delegation-mock.md) — Delegation mock 금지 설계 근거
+- [`../journey/philosophy/adr-011-layered-port-adapter.md`](../journey/philosophy/adr-011-layered-port-adapter.md) — Port 경계 설계
+- [`../architecture/architecture-rules.md`](../architecture/architecture-rules.md) — ArchUnit 22 규칙 (Layer 5 대상)

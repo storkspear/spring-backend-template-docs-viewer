@@ -10,6 +10,12 @@
 
 ---
 
+## 한 문장 요약
+
+이 문서는 **`main` 브랜치 push 부터 운영 배포까지** 의 전체 CI/CD 흐름을 다이어그램과 Phase 별로 추적합니다. 함정 11 개 + 시간 분석 포함.
+
+---
+
 ## 1. 개요
 
 **`git commit` → 사용자에게 노출까지 ~15~20분, billed 8분.**
@@ -379,7 +385,7 @@ cloudflared tunnel 이 외부 도메인을 Mac mini :80 으로 outbound 연결. 
 
 ---
 
-## 7. 관련 문서
+## 관련 문서
 
 - [`journey/dogfood-setup.md`](../journey/dogfood-setup.md) — 셋업 가이드 (정상 흐름)
 - [`journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md) — 함정 모음 (사고 실록)

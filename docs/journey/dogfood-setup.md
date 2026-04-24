@@ -291,6 +291,16 @@ cleanup.sh 가 마지막에 안내 출력. 실제 폐기는 사람이:
 
 ---
 
+## 다음 단계
+
+도그푸딩 검증이 끝났다면:
+
+- **실제 파생 레포 배포**: [`./deployment.md`](./deployment.md) — "Use this template" 로 만든 본인 레포를 운영 배포
+- **운영 시 장애 대응**: [`../infra/runbook.md`](../infra/runbook.md) — 평시/장애 운영 절차
+- **템플릿 개선을 파생 레포로 전파**: [`./cross-repo-cherry-pick.md`](./cross-repo-cherry-pick.md)
+
+---
+
 ## 관련 문서
 
 - [`infra/ci-cd-flow.md`](../infra/ci-cd-flow.md) — commit→배포 전체 다이어그램

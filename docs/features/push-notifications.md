@@ -10,6 +10,12 @@
 
 ---
 
+## 한 문장 요약
+
+이 문서는 **FCM 기반 푸시 알림** 아키텍처와 디바이스 토큰 관리 방식을 설명합니다. `PushPort` 추상 + `FcmPushAdapter` 구현 + 디바이스 등록 플로우.
+
+---
+
 ## 아키텍처 개요
 
 ```
@@ -406,3 +412,12 @@ public class PushAutoConfiguration {
 - `PushService` 가 유저 ID → 토큰 조회 → 전송 → 무효 토큰 정리를 오케스트레이션합니다.
 - 운영은 `FcmPushAdapter` + Firebase Admin SDK, 개발은 `NoOpPushAdapter` fallback 으로 자동 전환됩니다.
 - FCM 에러 중 `UNREGISTERED` / `INVALID_ARGUMENT` 만 토큰 무효로 판정합니다.
+
+---
+
+## 관련 문서
+
+- [`./email-verification.md`](./email-verification.md) — 이메일 알림 (푸시와 대조)
+- [`../journey/philosophy/adr-003-api-impl-split.md`](../journey/philosophy/adr-003-api-impl-split.md) — PushPort 가 `-api` 모듈에 있는 근거
+- [`../journey/philosophy/adr-011-layered-port-adapter.md`](../journey/philosophy/adr-011-layered-port-adapter.md) — 레이어드 + 포트/어댑터 패턴
+- [`../architecture/jwt-authentication.md`](../architecture/jwt-authentication.md) — 디바이스 등록 시 인증 흐름

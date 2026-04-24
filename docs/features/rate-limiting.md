@@ -4,6 +4,12 @@
 
 `common/common-web/ratelimit/` 의 Bucket4j 기반 rate limit 정책.
 
+## 개요
+
+`common/common-web/ratelimit/` 의 **Bucket4j 기반 rate limit 정책** 명세. 키 설계 · 기본값 · 민감 엔드포인트 · 429 응답 포맷.
+
+---
+
 ## 키 설계
 
 ```

@@ -8,6 +8,12 @@
 
 ---
 
+## 개요
+
+`spring-backend-template` 및 파생 레포의 **초기/테스트 데이터 관리 전략**. Flyway 반복 마이그레이션 / ApplicationRunner / Testcontainers fixture 3 종 비교.
+
+---
+
 ## 스키마와 데이터의 구분
 
 | 영역 | 도구 | 관리 위치 | 실행 시점 |
@@ -275,3 +281,11 @@ seed 파일은 레포에 커밋되어 공개 상태가 되므로, **더미 값**
 - **테스트 전용 데이터** 는 `Jpa<X>Fixtures` 패턴으로 이미 구현되어 있으므로 재사용합니다.
 - 운영 DB 에 seed 를 넣는 것은 **금지**. 민감 정보/실제 비밀번호 커밋도 금지.
 - SQL 파일 위치는 `db/migration/<schema>/` 를 원칙으로 하며, 그 외 위치는 테스트 cleanup 또는 인프라 스크립트만 해당합니다.
+
+---
+
+## 관련 문서
+
+- [`./migration.md`](./migration.md) — Flyway 마이그레이션 (스키마 관리)
+- [`../testing/contract-testing.md`](../testing/contract-testing.md) — 테스트 fixture 전략
+- [`../testing/testing-strategy.md`](../testing/testing-strategy.md) — 4 층 테스트 구조 (Integration 층에서 seed 사용)

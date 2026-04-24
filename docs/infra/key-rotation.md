@@ -142,6 +142,26 @@
 
 ---
 
+## 트러블슈팅
+
+### 키 교체 후 앱이 기동 안 됨
+
+- **원인**: 새 키가 모든 곳에 반영 안 됨 (GitHub Secrets / `.env.prod` / Supabase 대시보드 등 중 누락)
+- **확인**: `docker logs <container>` 에서 authentication/JWT 관련 예외 검색
+- **조치**: 누락된 위치에 새 키 주입 + 재배포
+
+### 파생 레포 간 키 동기화
+
+파생 레포마다 각자의 시크릿 관리. 템플릿 키 교체해도 파생 레포는 자기 키를 따로 교체해야 함.
+
+## 다음 단계
+
+- 인시던트 회고: [`./runbook.md`](./runbook.md) 의 "인시던트 회고 템플릿"
+- 장애 대응 절차: [`./runbook.md`](./runbook.md)
+- 관측성 알림 설정: [`./monitoring-setup.md`](./monitoring-setup.md)
+
+---
+
 ## 관련 문서
 
 - [`journey/dogfood-setup.md`](../journey/dogfood-setup.md) — 외부 리소스 발급 절차

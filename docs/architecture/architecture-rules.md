@@ -8,6 +8,12 @@
 
 ---
 
+## 개요
+
+ArchUnit 으로 강제되는 **22 개 모듈 경계 및 코드 구조 규칙** (r1~r22) 의 전체 목록. 규칙 정의 위치 · 추가 절차 · 테스트 실행 방법 포함.
+
+---
+
 ## 1. 왜 ArchUnit 인가
 
 모듈 의존 규칙, DTO 구조, Entity 위치 같은 "구조적 결정" 을 문서로만 관리하면 2~3주 안에 어긋납니다. 리뷰에서 매번 잡아내는 것은 비효율적이고, 사람이 개입하는 규칙은 결국 깨집니다.
@@ -305,6 +311,14 @@ Architecture Violation [r1: apps/* must not depend on core-*-impl (ports only)]
 ```
 
 파일명, 줄 번호까지 제공되므로 바로 수정 지점을 찾을 수 있습니다.
+
+---
+
+## 관련 문서
+
+- [`../journey/philosophy/adr-004-gradle-archunit.md`](../journey/philosophy/adr-004-gradle-archunit.md) — ArchUnit 도입 결정 + Gradle convention plugin 관계
+- [`./module-dependencies.md`](./module-dependencies.md) — 모듈 의존 방향 규칙 (r1~r5 상세)
+- [`../testing/contract-testing.md`](../testing/contract-testing.md) — 테스트 계약 규약 (r20 연관)
 
 ---
 

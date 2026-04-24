@@ -10,6 +10,12 @@
 
 ---
 
+## 개요
+
+Flutter 앱이 `spring-backend-template` 기반 백엔드와 통신할 때 알아야 할 **백엔드 관점의 계약**. URL 규칙 · 인증 엔드포인트 · Bearer 토큰 · 401 처리 · appSlug 검증.
+
+---
+
 ## 기본 URL 규칙
 
 ### 앱별 스코프 (대부분의 엔드포인트)
@@ -396,6 +402,32 @@ Content-Type: application/json
 **같은 유저 + 같은 appSlug + 같은 platform 조합은 유니크 제약(`uk_devices_user_app_platform`)** 으로 관리되어, 동일 조합으로 다시 등록하면 pushToken 을 업데이트합니다 (실제 upsert 는 `DevicePort.register` 가 처리).
 
 로그아웃/탈퇴 시 해당 디바이스를 `DELETE` 로 삭제하는 것이 권장됩니다. 그렇지 않으면 이 디바이스로 계속 푸시가 전달됩니다.
+
+---
+
+## 트러블슈팅
+
+### 401 Unauthorized 계속 반환
+
+- **원인 1**: Access Token 만료 → Refresh Token 으로 갱신 필요 ([ADR-006](../journey/philosophy/adr-006-hs256-jwt.md))
+- **원인 2**: JWT 의 `appSlug` 와 URL path 의 `{appSlug}` 불일치 → `AppSlugVerificationFilter` 가 403 반환 ([ADR-012](../journey/philosophy/adr-012-per-app-user-model.md))
+- **확인**: 토큰 payload 의 `appSlug` claim 과 호출한 URL path 비교
+
+### 이메일 가입이 200 인데 로그인 안 됨
+
+- **원인**: `email_verified: false` 상태. 이메일 인증 링크 클릭 필요.
+- **확인**: DB 의 `users.email_verified` 값 또는 signup 응답의 `user.emailVerified`
+
+### 소셜 로그인 identity token 거부됨
+
+- **원인**: Apple/Google Console 의 Client ID 와 서버 `APP_CREDENTIALS_<SLUG>_*` 불일치
+- **조치**: [`../journey/social-auth-setup.md`](../journey/social-auth-setup.md) §4 에서 credential 재발급
+
+## 다음 단계
+
+- 앱별 credential 발급: [`../journey/social-auth-setup.md`](../journey/social-auth-setup.md)
+- 인증 내부 구조 상세: [`../architecture/jwt-authentication.md`](../architecture/jwt-authentication.md)
+- API 응답 포맷 표준: [`./api-response.md`](./api-response.md)
 
 ---
 

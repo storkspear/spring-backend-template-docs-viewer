@@ -130,6 +130,12 @@ curl -H "Host: server.<도메인>" http://100.X.X.X/actuator/health/liveness
 
 ---
 
+## 개요
+
+도그푸딩 환경 셋업 시 자주 묻는 질문 11 개 모음. 본 가이드 ([`./dogfood-setup.md`](./dogfood-setup.md)) 를 따라가다 막히는 지점별 해결 포인터.
+
+---
+
 ## 더 궁금한 게 있다면
 
 - [`journey/dogfood-setup.md`](./dogfood-setup.md) — 정상 흐름
@@ -137,3 +143,10 @@ curl -H "Host: server.<도메인>" http://100.X.X.X/actuator/health/liveness
 - [`infra/ci-cd-flow.md`](../infra/ci-cd-flow.md) — 다이어그램
 - [`infra/key-rotation.md`](../infra/key-rotation.md) — 키 교체
 - [`infra/decisions-infra.md`](../infra/decisions-infra.md) — 결정 근거 (I-09 ~ I-14)
+
+---
+
+## 다음 단계
+
+- 함정 사례 검색: [`./dogfood-pitfalls.md`](./dogfood-pitfalls.md) — 실제 겪은 11 개 사고 기록
+- 본 가이드 전체: [`./dogfood-setup.md`](./dogfood-setup.md)

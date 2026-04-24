@@ -10,6 +10,12 @@
 
 ---
 
+## 한 문장 요약
+
+이 문서는 코드 작성 시 판단 기준이 되는 **설계 원칙 7 가지** (SOLID · DRY · YAGNI · 포트/어댑터 · 의존 방향 · TDD · Fail Fast) 를 설명합니다. 절대 규칙이 아니라 **상황별 판단 기준**.
+
+---
+
 ## SOLID
 
 ### S — Single Responsibility Principle
@@ -480,3 +486,13 @@ public UserProfile findProfileById(Long id) {
 ---
 
 이 원칙들은 **서로 돕기도 하고 충돌하기도** 합니다. 충돌할 때는 **"유지보수하기 쉬운가"** 를 최종 기준으로 삼습니다.
+
+---
+
+## 관련 문서
+
+- [`./naming.md`](./naming.md) — 네이밍 규칙 (Design Principles 의 "일관된 표현" 구현)
+- [`./records-and-classes.md`](./records-and-classes.md) — record vs class 선택 기준
+- [`../journey/philosophy/adr-011-layered-port-adapter.md`](../journey/philosophy/adr-011-layered-port-adapter.md) — 포트/어댑터 패턴 채택 근거
+- [`../journey/philosophy/adr-016-dto-mapper-forbidden.md`](../journey/philosophy/adr-016-dto-mapper-forbidden.md) — Mapper 금지 결정
+- [`../testing/testing-strategy.md`](../testing/testing-strategy.md) — TDD 실천 규약

@@ -4,7 +4,7 @@
 
 **설계 근거**: [ADR-002 (Use this template)](../journey/philosophy/adr-002-use-this-template.md) · [ADR-005 (Postgres schema 격리)](../journey/philosophy/adr-005-db-schema-isolation.md) · [ADR-013 (앱별 인증 엔드포인트)](../journey/philosophy/adr-013-per-app-auth-endpoints.md)
 
-## 배경 — 이 스크립트가 왜 필요한가
+## 개요
 
 이 문서는 새로운 앱 도메인 모듈을 생성하는 `tools/new-app/new-app.sh` 스크립트를 정리합니다.
 
@@ -580,3 +580,14 @@ slug 자체는 하이픈을 허용하지만 Postgres schema/role 이름에는 `S
 | **운영 DB** | `export DATABASE_URL='postgresql://...'` 로 일시 덮어쓰기 |
 | **멱등성** | 디렉토리만 없음. `.env` / settings.gradle / DB schema/role 모두 있음 |
 | **남은 수동 작업** | `.env` host/credentials 실제 값 · V007 도메인 테이블 · 커밋 |
+
+---
+
+## 다음 단계
+
+새 앱 모듈이 준비되었다면:
+
+- **도메인 코드 작성**: `apps/app-<slug>/` 에 Controller · Service · Entity · Repository 추가
+- **소셜 로그인 설정**: [`../journey/social-auth-setup.md`](../journey/social-auth-setup.md) — Google/Apple credential 발급
+- **Flutter 연동**: [`../api-contract/flutter-backend-integration.md`](../api-contract/flutter-backend-integration.md)
+- **배포**: [`../journey/deployment.md`](../journey/deployment.md)

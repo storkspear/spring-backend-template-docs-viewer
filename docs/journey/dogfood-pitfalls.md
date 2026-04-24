@@ -8,7 +8,7 @@
 
 ---
 
-## 이 문서의 역할
+## 개요
 
 template 첫 도그푸딩 배포에서 **11번 시도** 후에야 성공. 매 시도마다 새 에러 한 개씩. 이 문서는 그 실록 — **에러 메시지로 검색해서 원인 + 해결 빠르게 찾기 위한 reference**. 정상 흐름 설명은 가이드에서.
 
@@ -246,6 +246,14 @@ DB_PASSWORD=<password>
 3. **commit 메시지** 에 `pitfalls: add #N` 접두사
 4. 가능하면 `setup.sh` 의 검증 step 에 가드 추가 (예: #11 의 DB_URL 형식 체크처럼)
 5. ADR 변경이 필요한 결정이면 [`infra/decisions-infra.md`](../infra/decisions-infra.md) 에 새 카드 추가
+
+## 다음 단계
+
+- 새 함정 만났을 때: 이 문서 상단 "새 함정 발견 시 추가하는 방법" 참고
+- 본 가이드 전체: [`./dogfood-setup.md`](./dogfood-setup.md)
+- 자주 묻는 질문: [`./dogfood-faq.md`](./dogfood-faq.md)
+
+---
 
 ## 관련 문서
 
