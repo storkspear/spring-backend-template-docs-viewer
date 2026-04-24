@@ -1,8 +1,10 @@
 # 운영 런북 (Runbook)
 
-평시 배포·롤백·장애 대응 절차. 파생레포 최초 onboarding 은 [`guides/deployment.md`](../journey/deployment.md).
+평시 배포·롤백·장애 대응 절차. 파생 레포 최초 onboarding 은 [`deployment.md`](../journey/deployment.md).
 
-> 결정 근거: [`infra/decisions-infra.md` I-09](./decisions-infra.md)
+> **설계 배경**: [ADR-007 (솔로 친화적 운영)](../journey/philosophy/adr-007-solo-friendly-operations.md) — 운영 단위 1, 관리형 서비스 선호, 회색 지대 없는 CI. 운영 구성 상세: [`infrastructure.md`](./infrastructure.md). 배포 결정 근거: [`decisions-infra.md I-09`](./decisions-infra.md).
+>
+> **독자 대상**: Level 2~3. 장애 상황에서 빠르게 찾을 수 있도록 최단 경로 · 명령어 중심으로 기술.
 
 ---
 
@@ -174,14 +176,27 @@ kamal app boot                # 마지막 배포 버전으로 다시 기동
 5. 재발 방지 체크 / 테스트 / 모니터링 개선
 6. 이 런북에 추가할 내용
 
-`docs/infra/edge-cases.md` 와 `docs/backlog.md` 에 해당 항목 반영 또는 추가.
+`docs/infra/edge-cases.md` 와 `docs/reference/backlog.md` 에 해당 항목 반영 또는 추가.
 
 ---
 
 ## 관련 문서
 
-- [`guides/deployment.md`](../journey/deployment.md) — 파생레포 onboarding (최초 1회)
-- [`guides/monitoring-setup.md`](./monitoring-setup.md) — 관측성 스택
+### 배포 / 운영
+- [`../journey/deployment.md`](../journey/deployment.md) — 파생 레포 onboarding (최초 1회)
+- [`ci-cd-flow.md`](./ci-cd-flow.md) — commit → 운영 반영 전체 흐름
 - [`infrastructure.md`](./infrastructure.md) — 전체 구성도
-- [`edge-cases.md`](./edge-cases.md) — 리스크 시나리오
-- [`infra/decisions-infra.md`](./decisions-infra.md) — 결정 카드
+- [`decisions-infra.md`](./decisions-infra.md) — 인프라 결정 카드 (I-01~I-09)
+
+### 관측성 / 보안
+- [`monitoring-setup.md`](./monitoring-setup.md) — 관측성 스택 기동
+- [`../features/observability.md`](../features/observability.md) — 관측성 규약
+- [`key-rotation.md`](./key-rotation.md) — 보안 키 로테이션 절차
+
+### 장애 / 회고
+- [`edge-cases.md`](./edge-cases.md) — 리스크 시나리오 · 엣지 케이스 목록
+- [`../reference/backlog.md`](../reference/backlog.md) — 미완료 항목 (인시던트 회고 추가 대상)
+
+### 설계 배경
+- [`../journey/philosophy/adr-007-solo-friendly-operations.md`](../journey/philosophy/adr-007-solo-friendly-operations.md) — 솔로 운영 원칙
+- [`../journey/philosophy/adr-001-modular-monolith.md`](../journey/philosophy/adr-001-modular-monolith.md) — 단일 JVM 운영 단위
