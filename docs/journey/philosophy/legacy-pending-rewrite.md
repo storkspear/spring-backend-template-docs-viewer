@@ -9,38 +9,13 @@
 > - ✅ 테마 1 (레포 구조): ADR-001, 002, 003, 004 — 완료
 > - ✅ 테마 2 (모듈 내부 설계): ADR-009, 010, 011, 016 — 완료
 > - ✅ 테마 3 (데이터 & 테넌시): ADR-005, 012 — 완료
-> - ⏳ 테마 4 (인증 & 보안): ADR-006, 013 — 예정
+> - ✅ 테마 4 (인증 & 보안): ADR-006, 013 — 완료
 > - ⏳ 테마 5 (운영 & 개발 방법론): ADR-007, 008, 014, 015 — 예정
 >
-> **현재 이 파일에 남아있는 결정**: 6, 7, 8, 13, 14, 15
+> **현재 이 파일에 남아있는 결정**: 7, 8, 14, 15
 
 > **독자 유의사항**  
 > 아래 콘텐츠는 **프롤로그 톤/깊이에 미달** 합니다. Options Considered 대안 검토가 얕고, Lessons Learned 가 누락되었으며, Code References 도 부실해요. ADR 카드로 재작성된 테마 1 의 [ADR-001~004](./README.md) 수준의 품질을 여기서 기대하지 마세요. 재작성이 끝나면 동일 깊이가 될 것입니다.
-
----
-
-## 결정 6. HS256 JWT (대칭키)
-
-### 결정
-
-JWT 서명 알고리즘으로 HS256 (대칭키) 를 사용합니다.
-
-### 이유
-
-우리는 단일 모놀리스 JVM 안에서 토큰 발급과 검증이 모두 일어납니다. 발급자와 검증자가 같은 프로세스이므로 같은 비밀 키를 공유하는 것이 자연스럽습니다.
-
-### 대안 검토
-
-**RS256 (비대칭키)**
-- 장점: 개인키로 서명, 공개키로 검증. 공개키를 여러 서비스에 배포해서 독립 검증 가능.
-- 사용 맥락: 마이크로서비스에서 여러 서비스가 JWT 를 독립 검증해야 할 때.
-- 우리에겐 과잉: 우리는 단일 JVM 이므로 공개키 배포의 이점이 없습니다.
-
-HS256 이 더 단순하고 빠릅니다. 운영할 것은 비밀 키 하나뿐입니다.
-
-### 트레이드오프
-
-HS256 의 단점은 비밀 키가 유출되면 누구든 토큰을 위조할 수 있다는 것입니다. 이것은 시크릿 관리로 대응합니다 (`~/.factory/secrets.env`, GitHub Actions Secrets, 평문 커밋 금지).
 
 ---
 
@@ -92,38 +67,6 @@ API 버전 관리가 필요한 상황은 **"클라이언트를 서버 측에서 
 버전 관리가 필요해지는 시점이 오면 (외부 소비자 등장, 멀티 버전 앱 공존 등):
 - Cloudflare 리버스 프록시에서 경로 재작성 (`/api/v1/*` → `/api/*`)
 - 또는 `@RequestMapping` prefix 를 `api/v1` 로 변경 (한 줄)
-
----
-
-## 결정 13. 앱별 인증 엔드포인트 (core-auth 는 라이브러리 역할)
-
-### 결정
-
-인증 엔드포인트는 `/api/apps/<slug>/auth/*` 패턴을 사용합니다. 각 앱 모듈이 자신의 `AuthController` 를 가지며, 실제 인증 로직은 `core-auth-impl` 서비스에 위임합니다.
-
-### 기존 방식과의 비교
-
-| 항목 | 기존 방식 | 새 방식 |
-|---|---|---|
-| 엔드포인트 | `/api/core/auth/email/signup` | `/api/apps/<slug>/auth/email/signup` |
-| 런타임 Controller 위치 | `core-auth-impl/controller/AuthController` (활성) | `apps/app-<slug>/auth/<Slug>AuthController` (활성) — core-auth-impl 의 동일 파일은 스캐폴딩 소스로만 잔존 (런타임 bean 아님) |
-| DataSource 결정 | ThreadLocal 라우팅 (AbstractRoutingDataSource) | 앱 모듈 자체 DataSource 직접 주입 |
-| 앱 식별 | 요청 파라미터 또는 헤더 | URL path (`<slug>`) |
-
-### 멀티테넌트 라우팅 제거
-
-기존 통합 계정 모델에서는 `POST /api/core/auth/email/signup` 으로 들어오는 요청이 "어느 앱의 가입인지" 를 런타임에 구분해야 했습니다. 이를 위해 `AbstractRoutingDataSource` + `ThreadLocal` 조합을 사용하거나, 요청 body/header 에 `appSlug` 를 별도 포함시켜야 했습니다.
-
-이 방식의 문제:
-- `ThreadLocal` 은 비동기 처리(`@Async`, `CompletableFuture`, Virtual Thread) 에서 컨텍스트가 누출되거나 소실됩니다.
-- Spring Security 필터 체인 + `ThreadLocal` 상태 관리가 복잡해집니다.
-- 코드에 "어느 DataSource 를 써야 하나" 를 주입해야 하는 복잡성이 모든 Repository 에 전파됩니다.
-
-새 모델에서는 URL path 의 `{slug}` 가 곧 "어느 앱의 요청인지" 를 결정하며, 해당 앱 모듈의 Controller 가 자기 DataSource 를 직접 사용합니다. Spring 의 DI 만으로 해결되며 `ThreadLocal` 이 필요 없습니다.
-
-### `new-app.sh` 자동 생성
-
-`./tools/new-app/new-app.sh <slug>` 실행 시 해당 앱의 `<Slug>AuthController` 가 `apps/app-<slug>/auth/` 에 자동으로 스캐폴드됩니다. 인증 엔드포인트를 손으로 작성할 필요가 없습니다. 생성 시의 "템플릿 소스" 는 `core-auth-impl/controller/AuthController.java` 의 구조를 참조하지만, 그 파일 자체는 **런타임 bean 으로 등록되지 않습니다** (`AuthAutoConfiguration` 이 더 이상 `@Import` 하지 않음). 따라서 template 상태 (앱 0개) 에선 인증 엔드포인트가 노출되지 않고, 앱이 추가될 때마다 해당 slug 의 엔드포인트만 활성화됩니다.
 
 ---
 

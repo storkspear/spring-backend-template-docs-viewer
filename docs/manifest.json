@@ -40,7 +40,9 @@
         { "path": "journey/philosophy/adr-016-dto-mapper-forbidden.md",  "title": "ADR-016: DTO Mapper 금지",       "desc": "Entity 의 to<Dto>() 메서드 패턴 (ArchUnit r22)" },
         { "path": "journey/philosophy/adr-005-db-schema-isolation.md",   "title": "ADR-005: Postgres schema 격리", "desc": "단일 database + 앱당 schema + 5중 방어선" },
         { "path": "journey/philosophy/adr-012-per-app-user-model.md",    "title": "ADR-012: 앱별 독립 유저 모델",   "desc": "통합 계정 폐기, appSlug claim + 검증 필터" },
-        { "path": "journey/philosophy/legacy-pending-rewrite.md",        "title": "재작성 예정 (ADR-6~8, 13~15)",   "desc": "차후 세션에서 ADR 카드로 재작성" }
+        { "path": "journey/philosophy/adr-006-hs256-jwt.md",             "title": "ADR-006: HS256 JWT (대칭키)",   "desc": "단일 JVM 전제 · 비밀키 1개 · 15분/30일 TTL" },
+        { "path": "journey/philosophy/adr-013-per-app-auth-endpoints.md","title": "ADR-013: 앱별 인증 엔드포인트", "desc": "/api/apps/{slug}/auth/* · core-auth 라이브러리 역할" },
+        { "path": "journey/philosophy/legacy-pending-rewrite.md",        "title": "재작성 예정 (ADR-7, 8, 14, 15)", "desc": "차후 세션에서 ADR 카드로 재작성" }
       ]
     },
     {

@@ -83,19 +83,19 @@
 | "나중에 특정 앱을 별도 서비스로 빼려면?" | [ADR-003: -api / -impl 분리](./adr-003-api-impl-split.md) |
 | "경계를 어떻게 기계적으로 강제하지?" | [ADR-004: Gradle + ArchUnit](./adr-004-gradle-archunit.md) |
 | "앱마다 DB 를 따로 쓰나, 하나를 공유하나?" | [ADR-005: 단일 Postgres + 앱당 schema](./adr-005-db-schema-isolation.md) |
-| "JWT 서명은 어떤 알고리즘?" | ADR-006 (작성 예정) |
+| "JWT 서명은 어떤 알고리즘?" | [ADR-006: HS256 JWT](./adr-006-hs256-jwt.md) |
 | "결정 내릴 때 어떤 기준으로 판단하나?" | ADR-007 (작성 예정) |
 | "API 버전 관리는 언제 도입하지?" | ADR-008 (작성 예정) |
 | "엔티티 공통 필드를 어떻게 처리하지?" | [ADR-009: BaseEntity](./adr-009-base-entity.md) |
 | "목록 조회 검색 조건을 표준화하려면?" | [ADR-010: SearchCondition](./adr-010-search-condition.md) |
 | "모듈 내부 구조는 어떻게 잡나?" | [ADR-011: 레이어드 + 포트/어댑터](./adr-011-layered-port-adapter.md) |
 | "통합 계정인가 앱별 계정인가?" | [ADR-012: 앱별 독립 유저 모델](./adr-012-per-app-user-model.md) |
-| "인증 엔드포인트 경로는?" | ADR-013 (작성 예정) |
+| "인증 엔드포인트 경로는?" | [ADR-013: 앱별 인증 엔드포인트](./adr-013-per-app-auth-endpoints.md) |
 | "테스트는 어떻게 쓰나?" | ADR-014 (작성 예정) |
 | "커밋 메시지 규칙은?" | ADR-015 (작성 예정) |
 | "DTO 변환은 어떻게 하나?" | [ADR-016: DTO Mapper 금지](./adr-016-dto-mapper-forbidden.md) |
 
-> **작성 예정** 항목들 (ADR-006~008, 013~015) 은 [`legacy-pending-rewrite.md`](./legacy-pending-rewrite.md) 에 **기존 버전의 원본 콘텐츠** 가 보존되어 있습니다. 차후 세션에서 ADR 카드 형식으로 하나씩 재작성됩니다.
+> **작성 예정** 항목들 (ADR-007, 008, 014, 015) 은 [`legacy-pending-rewrite.md`](./legacy-pending-rewrite.md) 에 **기존 버전의 원본 콘텐츠** 가 보존되어 있습니다. 차후 세션에서 ADR 카드 형식으로 하나씩 재작성됩니다.
 
 ### ADR 카드의 읽는 법
 
@@ -201,12 +201,24 @@ ADR-012 (앱별 독립 유저 모델)
 
 **테마 3 의 결론**: 한 Postgres 인스턴스 · 한 database 안에서 앱마다 schema 를 분리하고, 유저 테이블도 그 schema 에 독립 소유. DB role · DataSource · Flyway · 포트 · ArchUnit 의 5중 방어선으로 경계를 강제. JWT 의 단일 `appSlug` claim 과 `AppSlugVerificationFilter` 로 런타임 오용을 차단. ThreadLocal 기반 동적 라우팅은 전면 폐기.
 
-### 테마 4 — 인증 & 보안 (작성 예정)
+### 테마 4 — 인증 & 보안 ✅ 완료
 
-**이 테마가 답할 물음**: "어떤 인증 토큰, 어떤 엔드포인트 구조인가?"
+**이 테마가 답하는 물음**: "단일 JVM 모놀리스에서 JWT 알고리즘과 엔드포인트 구조를 어떻게 설계하는가?"
 
-- ADR-006 · HS256 JWT (대칭키)
-- ADR-013 · 앱별 인증 엔드포인트
+```
+ADR-006 (HS256 JWT 대칭키)
+  "발급자=검증자 단일 프로세스. 비밀키 1개로 끝"
+   │
+   │ 이 JWT 를 사용하는 엔드포인트는 어떻게 생겼는가?
+   ▼
+ADR-013 (앱별 인증 엔드포인트)
+  "/api/apps/{slug}/auth/*. core-auth-impl 은 라이브러리"
+```
+
+- [ADR-006 · HS256 JWT (대칭키)](./adr-006-hs256-jwt.md)
+- [ADR-013 · 앱별 인증 엔드포인트 (core-auth 는 라이브러리 역할)](./adr-013-per-app-auth-endpoints.md)
+
+**테마 4 의 결론**: 단일 JVM 모놀리스 전제에서 JWT 는 HS256 대칭키로 단순화 — 관리 대상은 `JWT_SECRET` 환경변수 하나. 엔드포인트는 `/api/apps/{slug}/auth/*` 경로로 appSlug 를 URL 에 명시하고, Controller 는 각 앱 모듈이 소유. 실제 인증 로직은 `core-auth-impl/AuthServiceImpl` 한 곳에 집중되며, core-auth-impl 은 앱이 가져다 쓰는 **라이브러리** 로 작동. `AppSlugVerificationFilter` ([ADR-012](./adr-012-per-app-user-model.md)) 가 JWT-URL 경계를 런타임에 강제.
 
 ### 테마 5 — 운영 & 개발 방법론 (작성 예정)
 
