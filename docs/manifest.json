@@ -13,7 +13,6 @@
     {
       "name": "통합 가이드",
       "files": [
-        { "path": "journey/philosophy.md",                    "title": "Philosophy",           "desc": "설계 결정의 이유 — 모듈러 모놀리스, 포트/어댑터 (1단계 ①)" },
         { "path": "journey/architecture.md",                  "title": "Architecture",         "desc": "모듈 구조 · 파일 트리 · 기술 스택 (1단계 ②)" },
         { "path": "journey/onboarding.md",                    "title": "Onboarding",           "desc": "로컬 개발 환경 + 첫 앱 모듈 추가 (2~3단계)" },
         { "path": "journey/social-auth-setup.md",             "title": "Social Auth Setup",    "desc": "소셜 로그인 자격 증명 발급 (4단계)" },
@@ -25,6 +24,17 @@
         },
         { "path": "journey/deployment.md",                    "title": "Deployment",           "desc": "파생 레포 첫 운영 배포 (7단계)" },
         { "path": "journey/cross-repo-cherry-pick.md",        "title": "Cross-repo Cherry-pick","desc": "template → 파생 레포 변경 동기화" }
+      ]
+    },
+    {
+      "name": "프로젝트 철학",
+      "files": [
+        { "path": "journey/philosophy/README.md",                        "title": "책 안내",                    "desc": "프롤로그 + 사용법 + 16 ADR 인덱스" },
+        { "path": "journey/philosophy/adr-001-modular-monolith.md",      "title": "ADR-001: 모듈러 모놀리스",   "desc": "한 JAR 에 여러 앱 공존 + 경계 강제" },
+        { "path": "journey/philosophy/adr-002-use-this-template.md",     "title": "ADR-002: Use this template", "desc": "파생 레포 패턴 + cherry-pick 전파" },
+        { "path": "journey/philosophy/adr-003-api-impl-split.md",        "title": "ADR-003: -api/-impl 분리",   "desc": "미래 추출 보장 위한 포트 인터페이스" },
+        { "path": "journey/philosophy/adr-004-gradle-archunit.md",       "title": "ADR-004: Gradle + ArchUnit", "desc": "2단계 방어로 컨벤션 기계 강제" },
+        { "path": "journey/philosophy/legacy-pending-rewrite.md",        "title": "재작성 예정 (ADR-005~016)",  "desc": "차후 세션에서 ADR 카드로 재작성" }
       ]
     },
     {
