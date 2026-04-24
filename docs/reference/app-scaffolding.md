@@ -1,14 +1,14 @@
 # App Scaffolding (`new-app.sh`)
 
-> **한 줄 요약** — 모듈러 모놀리스에 새 앱 도메인을 추가하는 스크립트. Gradle 모듈 · Java 컨트롤러 · Flyway 마이그레이션 · `.env` 변수 · Postgres schema/role 을 **한 번에, 멱등하게** 생성합니다.
->
-> **최소 명령**: `./tools/new-app/new-app.sh <slug> --provision-db` — `--provision-db` 를 붙이면 DB schema/role 까지 자동 생성되므로 **기본으로 붙이길 권장**합니다.
-
 ## 배경 — 이 스크립트가 왜 필요한가
 
 이 문서는 새로운 앱 도메인 모듈을 생성하는 `tools/new-app/new-app.sh` 스크립트를 정리합니다.
 
 템플릿은 하나의 바이너리로 여러 앱을 호스팅하는 **모듈러 모놀리스** 구조입니다. 앱을 추가할 때 Gradle 모듈, AutoConfiguration, 컨트롤러 스켈레톤, Flyway 마이그레이션, DataSource 설정, `.env` 변수, Postgres schema/role 까지 **여러 곳을 동시에** 건드려야 하는데, 이를 수작업으로 반복하면 실수가 쌓입니다. `new-app.sh` 는 이 과정을 **한 번에, 멱등하게** 수행합니다.
+
+> **한 줄 요약** — 모듈러 모놀리스에 새 앱 도메인을 추가하는 스크립트. Gradle 모듈 · Java 컨트롤러 · Flyway 마이그레이션 · `.env` 변수 · Postgres schema/role 을 **한 번에, 멱등하게** 생성합니다.
+>
+> **최소 명령**: `./tools/new-app/new-app.sh <slug> --provision-db` — `--provision-db` 를 붙이면 DB schema/role 까지 자동 생성되므로 **기본으로 붙이길 권장**합니다.
 
 ---
 
