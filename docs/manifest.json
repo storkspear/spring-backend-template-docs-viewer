@@ -102,7 +102,7 @@
         { "title": "Functional", "children": [
             { "path": "features/push-notifications.md",           "title": "Push Notifications",   "desc": "FCM · 디바이스 등록 · PushPort · 토큰 무효화" },
             { "path": "features/email-verification.md",           "title": "Email Verification",   "desc": "Resend · 이메일 인증 · 비밀번호 재설정" },
-            { "path": "features/storage.md",                      "title": "Storage",              "desc": "파일 스토리지 컨벤션" },
+            { "path": "features/storage.md",                      "title": "Storage",              "desc": "StoragePort · signed URL · bucket 네이밍 · retention" },
             { "path": "features/migration.md",                    "title": "Migration",            "desc": "DB 마이그레이션 (Flyway) 가이드" },
             { "path": "features/seed-data-management.md",         "title": "Seed Data Management", "desc": "개발/테스트 seed 데이터 전략" },
             { "path": "features/rate-limiting.md",                "title": "Rate Limiting",        "desc": "요청 제한 전략" },
