@@ -248,13 +248,21 @@ function buildSidebar(manifest) {
     sidebar.appendChild(groupEl);
 
     group.files.forEach(file => {
-      META[file.path] = { title: file.title, desc: file.desc };
-      const a = document.createElement('a');
-      a.className = 'nav-item';
-      a.dataset.doc = file.path;
-      const descHtml = file.desc ? `<span class="nav-item-desc">${file.desc}</span>` : '';
-      a.innerHTML = `<span class="dot"></span><span class="nav-item-inner"><span class="nav-item-title">${file.title}</span>${descHtml}</span>`;
-      sidebar.appendChild(a);
+      if (file.path) {
+        META[file.path] = { title: file.title, desc: file.desc };
+        const a = document.createElement('a');
+        a.className = 'nav-item';
+        a.dataset.doc = file.path;
+        const descHtml = file.desc ? `<span class="nav-item-desc">${file.desc}</span>` : '';
+        a.innerHTML = `<span class="dot"></span><span class="nav-item-inner"><span class="nav-item-title">${file.title}</span>${descHtml}</span>`;
+        sidebar.appendChild(a);
+      } else {
+        // 경로 없는 서브카테고리 헤더 (비클릭)
+        const sub = document.createElement('div');
+        sub.className = 'nav-subcategory';
+        sub.textContent = file.title;
+        sidebar.appendChild(sub);
+      }
 
       if (file.children) {
         file.children.forEach(child => {
