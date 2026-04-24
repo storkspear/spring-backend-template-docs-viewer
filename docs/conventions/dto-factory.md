@@ -210,4 +210,6 @@ public DetailedProfile getDetailedProfile(long userId) {
 - [`conventions/naming.md`](./naming.md) — DTO 네이밍 규칙
 - [`conventions/records-and-classes.md`](./records-and-classes.md) — record vs class 선택 기준
 - [`api-contract/json-contract.md`](../api-contract/json-contract.md) — JSON 직렬화 정책
-- [`journey/philosophy.md`](../journey/philosophy.md) — 결정 3 (api/impl 분리), 결정 11 (포트/어댑터)
+- [ADR-003 · -api / -impl 분리](../journey/philosophy/adr-003-api-impl-split.md)
+- [ADR-011 · 레이어드 + 포트/어댑터](../journey/philosophy/adr-011-layered-port-adapter.md)
+- [ADR-016 · DTO Mapper 금지](../journey/philosophy/adr-016-dto-mapper-forbidden.md)

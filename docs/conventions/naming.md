@@ -358,15 +358,11 @@ apps/app-sumtally/src/main/resources/db/migration/sumtally/
 
 `conditions` 의 키 형식: `{fieldName}_{operator}`. 지원 연산자: `eq`(기본), `not`, `gte`, `lte`, `gt`, `lt`, `like`, `in`, `notIn`, `isNull`, `isNotNull`.
 
-상세 규칙은 [`philosophy.md`](../journey/philosophy.md) 의 "결정 10" 참조.
+상세 규칙은 [ADR-010 (SearchCondition)](../journey/philosophy/adr-010-search-condition.md) 참조.
 
 ---
 
 ## REST 엔드포인트 URL
-
-> **이 섹션은 기존 '통합 계정' 모델에서 '앱별 독립 유저' 모델로 변경된 내용을 반영합니다.**
-> 인증 엔드포인트가 `/api/core/auth/*` 에서 `/api/apps/{slug}/auth/*` 로 변경되었습니다.
-> 모든 유저/인증 엔드포인트는 이제 앱별로 분리되어 있습니다.
 
 ### 패턴
 

@@ -246,5 +246,7 @@ git push origin template-v1.3.0
 
 - [`conventions/git-workflow.md`](../conventions/git-workflow.md) — 브랜치 · 커밋 규약 · Merge 정책
 - [`journey/cross-repo-cherry-pick.md`](../journey/cross-repo-cherry-pick.md) — 파생 레포 동기화
-- [`journey/philosophy.md`](../journey/philosophy.md) — 결정 2 (템플릿 전파)
+- [ADR-002 · GitHub Template Repository 패턴](../journey/philosophy/adr-002-use-this-template.md) — 템플릿 전파
+- [ADR-008 · API 버전 관리 미도입](../journey/philosophy/adr-008-no-api-versioning.md) — URL 버저닝 거절 근거
+- [ADR-015 · Conventional Commits + SemVer](../journey/philosophy/adr-015-conventional-commits-semver.md) — 커밋/태그 체계
 - [`features/migration.md`](../features/migration.md) — 버전별 migration guide
