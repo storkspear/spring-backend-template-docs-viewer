@@ -7,6 +7,12 @@
     {
       "name": "시작하기",
       "files": [
+        { "path": "journey/level0/README.md",                 "title": "Level 0 — 감 잡기",    "desc": "쓸지 말지 3~10분 안에 결정 · 코드 돌리기 전 읽기",
+          "children": [
+            { "path": "journey/level0/what-is-this.md",       "title": "이게 뭐야? (3분)",     "desc": "한 문장 소개 · 맞는 경우/안 맞는 경우" },
+            { "path": "journey/level0/five-minute-tour.md",   "title": "5 분 투어",            "desc": "모듈 4 종류 · 앱 추가 의미 · DB 분리 · 배포 그림" }
+          ]
+        },
         { "path": "journey/README.md",                        "title": "Overview",             "desc": "전체 읽기 순서 안내 (Developer Journey)" },
         { "path": "STYLE_GUIDE.md",                           "title": "Documentation Style Guide", "desc": "문서 작성 규칙 · ADR 템플릿 · 용어집 · 검증 체크리스트" }
       ]
