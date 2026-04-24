@@ -93,17 +93,21 @@
     {
       "name": "API & Functional",
       "files": [
-        { "path": "api-contract/api-response.md",             "title": "API Response",         "desc": "API 응답 형식 표준" },
-        { "path": "api-contract/json-contract.md",            "title": "JSON Contract",        "desc": "JSON 계약 규칙" },
-        { "path": "api-contract/versioning.md",               "title": "Versioning",           "desc": "API 버저닝 전략" },
-        { "path": "api-contract/flutter-backend-integration.md","title": "Flutter Integration","desc": "Flutter 앱 연동 — 엔드포인트 · 401 · appSlug" },
-        { "path": "features/push-notifications.md",           "title": "Push Notifications",   "desc": "FCM · 디바이스 등록 · PushPort · 토큰 무효화" },
-        { "path": "features/email-verification.md",           "title": "Email Verification",   "desc": "Resend · 이메일 인증 · 비밀번호 재설정" },
-        { "path": "features/storage.md",                      "title": "Storage",              "desc": "파일 스토리지 컨벤션" },
-        { "path": "features/migration.md",                    "title": "Migration",            "desc": "DB 마이그레이션 (Flyway) 가이드" },
-        { "path": "features/seed-data-management.md",         "title": "Seed Data Management", "desc": "개발/테스트 seed 데이터 전략" },
-        { "path": "features/rate-limiting.md",                "title": "Rate Limiting",        "desc": "요청 제한 전략" },
-        { "path": "features/observability.md",                "title": "Observability",        "desc": "로깅, 메트릭, 트레이싱" }
+        { "title": "API", "children": [
+            { "path": "api-contract/api-response.md",             "title": "API Response",         "desc": "API 응답 형식 표준" },
+            { "path": "api-contract/json-contract.md",            "title": "JSON Contract",        "desc": "JSON 계약 규칙" },
+            { "path": "api-contract/versioning.md",               "title": "Versioning",           "desc": "API 버저닝 전략" },
+            { "path": "api-contract/flutter-backend-integration.md","title": "Flutter Integration","desc": "Flutter 앱 연동 — 엔드포인트 · 401 · appSlug" }
+        ]},
+        { "title": "Functional", "children": [
+            { "path": "features/push-notifications.md",           "title": "Push Notifications",   "desc": "FCM · 디바이스 등록 · PushPort · 토큰 무효화" },
+            { "path": "features/email-verification.md",           "title": "Email Verification",   "desc": "Resend · 이메일 인증 · 비밀번호 재설정" },
+            { "path": "features/storage.md",                      "title": "Storage",              "desc": "파일 스토리지 컨벤션" },
+            { "path": "features/migration.md",                    "title": "Migration",            "desc": "DB 마이그레이션 (Flyway) 가이드" },
+            { "path": "features/seed-data-management.md",         "title": "Seed Data Management", "desc": "개발/테스트 seed 데이터 전략" },
+            { "path": "features/rate-limiting.md",                "title": "Rate Limiting",        "desc": "요청 제한 전략" },
+            { "path": "features/observability.md",                "title": "Observability",        "desc": "로깅, 메트릭, 트레이싱" }
+        ]}
       ]
     },
     {
@@ -121,14 +125,11 @@
             { "path": "infra/mac-mini-setup.md",              "title": "Mac Mini Setup",       "desc": "홈서버 맥미니 셋업" },
             { "path": "infra/monitoring-setup.md",            "title": "Monitoring Setup",     "desc": "관측성 스택 설정" },
             { "path": "infra/storage-setup.md",               "title": "Storage Setup",        "desc": "MinIO / NAS 스토리지 설정" }
+        ]},
+        { "title": "Test", "children": [
+            { "path": "testing/testing-strategy.md",          "title": "Testing Strategy",     "desc": "4층 전략 (Unit · Contract · Integration · ArchUnit)" },
+            { "path": "testing/contract-testing.md",          "title": "Contract Testing",     "desc": "계약 기반 테스트 전략" }
         ]}
-      ]
-    },
-    {
-      "name": "Test",
-      "files": [
-        { "path": "testing/testing-strategy.md",              "title": "Testing Strategy",     "desc": "4층 전략 (Unit · Contract · Integration · ArchUnit)" },
-        { "path": "testing/contract-testing.md",              "title": "Contract Testing",     "desc": "계약 기반 테스트 전략" }
       ]
     },
     {
