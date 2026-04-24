@@ -140,7 +140,7 @@
       ]
     },
     {
-      "name": "Upcoming Functional",
+      "name": "Planned",
       "files": [
         { "path": "reference/backlog.md",                     "title": "Backlog",              "desc": "개발 예정 항목" }
       ]
