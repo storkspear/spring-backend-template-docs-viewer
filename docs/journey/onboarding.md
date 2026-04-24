@@ -448,13 +448,15 @@ openssl rand -hex 32   # 64자 출력
 
 | 목적 | 문서 |
 |---|---|
-| 코드 아키텍처 (포트/어댑터, 모듈 의존) | [`journey/architecture.md`](./architecture.md) |
-| 인프라 구성 (DB/스토리지/관측성 전체 상태) | [`infra/infrastructure.md`](../infra/infrastructure.md) |
-| 설계 철학 (결정 1~16) | [`journey/philosophy.md`](./philosophy.md) |
-| 인프라 결정 근거 (Supabase/NAS/맥미니 등) | [`infra/decisions-infra.md`](../infra/decisions-infra.md) |
-| 코딩 규약 (naming, DTO, exception, 등) | [`conventions/`](../conventions) |
-| 미완료 / 향후 작업 목록 | [`reference/backlog.md`](../reference/backlog.md) |
-| 장애 시나리오 분석 | [`infra/edge-cases.md`](../infra/edge-cases.md) |
+| 코드 아키텍처 (포트/어댑터, 모듈 의존) | [`./architecture.md`](./architecture.md) |
+| 인프라 구성 (DB/스토리지/관측성 전체 상태) | [`../infra/infrastructure.md`](../infra/infrastructure.md) |
+| 설계 철학 (16 개 ADR) | [`./philosophy/README.md`](./philosophy/README.md) |
+| 문서 작성 규칙 | [`../STYLE_GUIDE.md`](../STYLE_GUIDE.md) |
+| 인프라 결정 근거 (Supabase/NAS/맥미니 등) | [`../infra/decisions-infra.md`](../infra/decisions-infra.md) |
+| 코딩 규약 (naming, DTO, exception 등) | [`../conventions/`](../conventions/) |
+| 테스트 전략 (4층 구조) | [`../testing/testing-strategy.md`](../testing/testing-strategy.md) |
+| 미완료 / 향후 작업 목록 | [`../reference/backlog.md`](../reference/backlog.md) |
+| 장애 시나리오 분석 | [`../infra/edge-cases.md`](../infra/edge-cases.md) |
 
 ---
 
@@ -478,8 +480,8 @@ openssl rand -hex 32   # 64자 출력
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
-| ← 이전 | [`journey/architecture.md`](./architecture.md) | 1단계 — 모듈 구조 한 눈 |
-| → 다음 | [`journey/social-auth-setup.md`](./social-auth-setup.md) | 4단계 — 외부 자격 증명 발급 (Google/Apple) |
+| ← 이전 | [`./architecture.md`](./architecture.md) | 1단계 — 모듈 구조 한 눈 |
+| → 다음 | [`./social-auth-setup.md`](./social-auth-setup.md) | 4단계 — 외부 자격 증명 발급 (Google/Apple) |
 
-**막혔을 때**: §6 흔한 에러 5개 / [도그푸딩 함정](../journey/dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
-**왜 이렇게?**: [`journey/philosophy.md`](./philosophy.md) (설계 결정 22개) / [`infra/decisions-infra.md`](../infra/decisions-infra.md) (I-01~I-14)
+**막혔을 때**: §6 흔한 에러 / [도그푸딩 함정](./dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
+**왜 이렇게?**: [`./philosophy/README.md`](./philosophy/README.md) (16 개 ADR · 테마 1~5) / [`../infra/decisions-infra.md`](../infra/decisions-infra.md) (I-01~I-13)
