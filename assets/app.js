@@ -248,6 +248,7 @@ function buildSidebar(manifest) {
     sidebar.appendChild(groupEl);
 
     group.files.forEach(file => {
+      const isSubcategory = !file.path;
       if (file.path) {
         META[file.path] = { title: file.title, desc: file.desc };
         const a = document.createElement('a');
@@ -257,7 +258,7 @@ function buildSidebar(manifest) {
         a.innerHTML = `<span class="dot"></span><span class="nav-item-inner"><span class="nav-item-title">${file.title}</span>${descHtml}</span>`;
         sidebar.appendChild(a);
       } else {
-        // 경로 없는 서브카테고리 헤더 (비클릭)
+        // 경로 없는 서브카테고리 헤더 (비클릭, 순수 레이블)
         const sub = document.createElement('div');
         sub.className = 'nav-subcategory';
         sub.textContent = file.title;
@@ -268,7 +269,8 @@ function buildSidebar(manifest) {
         file.children.forEach(child => {
           META[child.path] = { title: child.title, desc: child.desc };
           const ca = document.createElement('a');
-          ca.className = 'nav-item nav-item-child';
+          // 서브카테고리의 children 은 1-depth (최상위 동급), 파일의 children 은 2-depth (들여쓰기)
+          ca.className = isSubcategory ? 'nav-item' : 'nav-item nav-item-child';
           ca.dataset.doc = child.path;
           const childDescHtml = child.desc ? `<span class="nav-item-desc">${child.desc}</span>` : '';
           ca.innerHTML = `<span class="dot"></span><span class="nav-item-inner"><span class="nav-item-title">${child.title}</span>${childDescHtml}</span>`;
