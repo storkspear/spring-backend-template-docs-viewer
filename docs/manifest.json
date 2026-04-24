@@ -80,7 +80,7 @@
       ]
     },
     {
-      "name": "코딩 규약 (Level 2)",
+      "name": "코딩 규약",
       "files": [
         { "path": "conventions/README.md",                    "title": "Overview",             "desc": "컨벤션 전체 개요" },
         { "path": "conventions/design-principles.md",         "title": "Design Principles",    "desc": "코드 작성 원칙 (SOLID 등)" },
@@ -92,7 +92,7 @@
       ]
     },
     {
-      "name": "API 및 기능 (Level 2)",
+      "name": "API 및 기능",
       "files": [
         { "path": "api-contract/api-response.md",             "title": "API Response",         "desc": "API 응답 형식 표준" },
         { "path": "api-contract/json-contract.md",            "title": "JSON Contract",        "desc": "JSON 계약 규칙" },
@@ -108,14 +108,14 @@
       ]
     },
     {
-      "name": "테스팅 (Level 2)",
+      "name": "테스팅",
       "files": [
         { "path": "testing/testing-strategy.md",              "title": "Testing Strategy",     "desc": "4층 전략 (Unit · Contract · Integration · ArchUnit)" },
         { "path": "testing/contract-testing.md",              "title": "Contract Testing",     "desc": "계약 기반 테스트 전략" }
       ]
     },
     {
-      "name": "운영 (Level 2.5)",
+      "name": "운영",
       "files": [
         { "path": "infra/infrastructure.md",                  "title": "Infrastructure",       "desc": "맥미니 · Supabase · Cloudflare · 블루그린",
           "children": [
