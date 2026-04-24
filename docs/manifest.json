@@ -108,13 +108,6 @@
       ]
     },
     {
-      "name": "테스팅",
-      "files": [
-        { "path": "testing/testing-strategy.md",              "title": "Testing Strategy",     "desc": "4층 전략 (Unit · Contract · Integration · ArchUnit)" },
-        { "path": "testing/contract-testing.md",              "title": "Contract Testing",     "desc": "계약 기반 테스트 전략" }
-      ]
-    },
-    {
       "name": "운영",
       "files": [
         { "path": "infra/infrastructure.md",                  "title": "Infrastructure",       "desc": "맥미니 · Supabase · Cloudflare · 블루그린",
@@ -130,6 +123,13 @@
         { "path": "infra/mac-mini-setup.md",                  "title": "Mac Mini Setup",       "desc": "홈서버 맥미니 셋업" },
         { "path": "infra/monitoring-setup.md",                "title": "Monitoring Setup",     "desc": "관측성 스택 설정" },
         { "path": "infra/storage-setup.md",                   "title": "Storage Setup",        "desc": "MinIO / NAS 스토리지 설정" }
+      ]
+    },
+    {
+      "name": "테스팅",
+      "files": [
+        { "path": "testing/testing-strategy.md",              "title": "Testing Strategy",     "desc": "4층 전략 (Unit · Contract · Integration · ArchUnit)" },
+        { "path": "testing/contract-testing.md",              "title": "Contract Testing",     "desc": "계약 기반 테스트 전략" }
       ]
     },
     {
