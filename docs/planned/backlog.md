@@ -48,7 +48,6 @@
 
 ### 보안 / 자격증명
 
-- [ ] [Security] JWT_SECRET prod 전용 생성 + 로테이션 주기 규약 — 비밀키 유출 대비 (2026-04-18)
 - [ ] [Security] TLS/HTTPS 내부 구간 검토 — CF 가 edge 처리 OK, 맥미니 ↔ NAS 내부 통신은? (2026-04-18)
 - [ ] [Security] 공유 시크릿 노출 시 incident response 프로토콜 문서 — 재발급/통보 순서 (2026-04-18)
 
@@ -63,7 +62,6 @@
 
 ### 관측성 / 운영
 
-- [ ] [Obs] Loki retention 정책 확정 (보관 기간 + 디스크 예산) — 현재 기본값 중 (2026-04-18)
 - [ ] [Obs] 맥미니 vs NAS 관측성 분리 여부 결정 — 맥미니 RAM 여유에 따라 (decisions-infra I-06 재검토 트리거) (2026-04-18)
 - [ ] [Obs] 알림 임계치 정의 (CPU / 메모리 / 디스크 / 에러율 / DB 커넥션 실패 / 5xx / p95 지연) — Alertmanager 에 rules 정의 (2026-04-18)
 - [ ] [Obs] Performance baseline (JMeter / Gatling) — 릴리스 전 기준 RPS / p95 (2026-04-18)
@@ -74,7 +72,6 @@
 - [ ] [Feature] Billing 실제 구현 (Apple StoreKit + Google Play Billing) — 현재 Stub (2026-04-18)
 - [ ] [Feature] Push 실제 구현 (FCM 서비스 계정 + APNs) — 현재 NoOp (2026-04-18)
 - [ ] [Feature] 이미지 검열용 Admin 페이지 (유저 업로드 모더레이션) — Cyberduck/콘솔 대체 (2026-04-18)
-- [ ] [Feature] API 버저닝 실제 롤아웃 — [`ADR-008 (API 버전 관리 미도입)`](../philosophy/adr-008-no-api-versioning.md) 로 확정, 도입 시점 재검토 (2026-04-18)
 - [ ] [Feature] i18n / 다국어 지원 전략 — 모바일 클라이언트와 계약 (2026-04-18)
 - [ ] [Feature] OpenAPI → Flutter 클라이언트 계약 자동 export — 백엔드/앱 싱크 (2026-04-18)
 
@@ -106,6 +103,9 @@
 - [x] [Obs] 로컬 관측성 범위 재조정 → 운영 전용으로 한정 (infra/docker-compose.observability.yml 분리). 완료일: 2026-04-19, `895ef84` + `47eeced`
 - [x] [Obs] Prometheus retention 정책 → 운영 compose 에서 7일 확정. 완료일: 2026-04-19, `47eeced`
 - [x] [DX] `bootstrap/build.gradle` bootRun 기본 프로파일 dev 주입 → convention plugin 에서 처리. 완료일: 2026-04-19, `d781b34`
+- [x] [Security] JWT_SECRET prod 전용 생성 + 로테이션 주기 규약 → [`key-rotation.md §5 JWT_SECRET`](../production/setup/key-rotation.md) 에 6개월 주기 + 즉시 폐기 절차 문서화. JwtProperties 가 32자 미만 거부. 완료일: 2026-04-24
+- [x] [Obs] Loki retention 정책 확정 → `infra/loki/loki-config.yml` 에 `retention_period: 336h` (14일) 확정. 완료일: 2026-04-24
+- [x] [Feature] API 버저닝 롤아웃 결정 → [`ADR-008 (API 버전 관리 미도입)`](../philosophy/adr-008-no-api-versioning.md) 으로 의도적 미도입 확정. 도입 경로 (Cloudflare rewrite / ApiEndpoints prefix) 사전 기록. 완료일: 2026-04-24
 
 > 2개월 경과 후 CHANGELOG 로 이관.
 
