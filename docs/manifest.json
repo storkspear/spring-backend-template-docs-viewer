@@ -42,7 +42,10 @@
         { "path": "journey/philosophy/adr-012-per-app-user-model.md",    "title": "ADR-012: 앱별 독립 유저 모델",   "desc": "통합 계정 폐기, appSlug claim + 검증 필터" },
         { "path": "journey/philosophy/adr-006-hs256-jwt.md",             "title": "ADR-006: HS256 JWT (대칭키)",   "desc": "단일 JVM 전제 · 비밀키 1개 · 15분/30일 TTL" },
         { "path": "journey/philosophy/adr-013-per-app-auth-endpoints.md","title": "ADR-013: 앱별 인증 엔드포인트", "desc": "/api/apps/{slug}/auth/* · core-auth 라이브러리 역할" },
-        { "path": "journey/philosophy/legacy-pending-rewrite.md",        "title": "재작성 예정 (ADR-7, 8, 14, 15)", "desc": "차후 세션에서 ADR 카드로 재작성" }
+        { "path": "journey/philosophy/adr-007-solo-friendly-operations.md","title": "ADR-007: 솔로 친화적 운영",   "desc": "모든 운영 결정의 상위 기준 + 비목표 선언" },
+        { "path": "journey/philosophy/adr-008-no-api-versioning.md",     "title": "ADR-008: API 버전 관리 미도입", "desc": "YAGNI · 도입 시점에 한 줄 리팩토링" },
+        { "path": "journey/philosophy/adr-014-no-delegation-mock.md",    "title": "ADR-014: Delegation mock 금지", "desc": "4층 테스트 전략 · Port 계약 위주" },
+        { "path": "journey/philosophy/adr-015-conventional-commits-semver.md","title": "ADR-015: Conventional Commits + SemVer","desc": "cherry-pick 전파 · template-v* 태그 · Deprecation 3단계" }
       ]
     },
     {

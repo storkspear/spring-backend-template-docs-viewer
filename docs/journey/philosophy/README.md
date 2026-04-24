@@ -84,18 +84,18 @@
 | "경계를 어떻게 기계적으로 강제하지?" | [ADR-004: Gradle + ArchUnit](./adr-004-gradle-archunit.md) |
 | "앱마다 DB 를 따로 쓰나, 하나를 공유하나?" | [ADR-005: 단일 Postgres + 앱당 schema](./adr-005-db-schema-isolation.md) |
 | "JWT 서명은 어떤 알고리즘?" | [ADR-006: HS256 JWT](./adr-006-hs256-jwt.md) |
-| "결정 내릴 때 어떤 기준으로 판단하나?" | ADR-007 (작성 예정) |
-| "API 버전 관리는 언제 도입하지?" | ADR-008 (작성 예정) |
+| "결정 내릴 때 어떤 기준으로 판단하나?" | [ADR-007: 솔로 친화적 운영](./adr-007-solo-friendly-operations.md) |
+| "API 버전 관리는 언제 도입하지?" | [ADR-008: API 버전 관리 미도입](./adr-008-no-api-versioning.md) |
 | "엔티티 공통 필드를 어떻게 처리하지?" | [ADR-009: BaseEntity](./adr-009-base-entity.md) |
 | "목록 조회 검색 조건을 표준화하려면?" | [ADR-010: SearchCondition](./adr-010-search-condition.md) |
 | "모듈 내부 구조는 어떻게 잡나?" | [ADR-011: 레이어드 + 포트/어댑터](./adr-011-layered-port-adapter.md) |
 | "통합 계정인가 앱별 계정인가?" | [ADR-012: 앱별 독립 유저 모델](./adr-012-per-app-user-model.md) |
 | "인증 엔드포인트 경로는?" | [ADR-013: 앱별 인증 엔드포인트](./adr-013-per-app-auth-endpoints.md) |
-| "테스트는 어떻게 쓰나?" | ADR-014 (작성 예정) |
-| "커밋 메시지 규칙은?" | ADR-015 (작성 예정) |
+| "테스트는 어떻게 쓰나?" | [ADR-014: Delegation mock 금지](./adr-014-no-delegation-mock.md) |
+| "커밋 메시지 규칙은?" | [ADR-015: Conventional Commits + SemVer](./adr-015-conventional-commits-semver.md) |
 | "DTO 변환은 어떻게 하나?" | [ADR-016: DTO Mapper 금지](./adr-016-dto-mapper-forbidden.md) |
 
-> **작성 예정** 항목들 (ADR-007, 008, 014, 015) 은 [`legacy-pending-rewrite.md`](./legacy-pending-rewrite.md) 에 **기존 버전의 원본 콘텐츠** 가 보존되어 있습니다. 차후 세션에서 ADR 카드 형식으로 하나씩 재작성됩니다.
+> **16 개 ADR 모두 작성 완료**. 테마별로 그룹화되어 있으며, 각 카드는 독립적으로 읽을 수 있어요.
 
 ### ADR 카드의 읽는 법
 
@@ -220,14 +220,30 @@ ADR-013 (앱별 인증 엔드포인트)
 
 **테마 4 의 결론**: 단일 JVM 모놀리스 전제에서 JWT 는 HS256 대칭키로 단순화 — 관리 대상은 `JWT_SECRET` 환경변수 하나. 엔드포인트는 `/api/apps/{slug}/auth/*` 경로로 appSlug 를 URL 에 명시하고, Controller 는 각 앱 모듈이 소유. 실제 인증 로직은 `core-auth-impl/AuthServiceImpl` 한 곳에 집중되며, core-auth-impl 은 앱이 가져다 쓰는 **라이브러리** 로 작동. `AppSlugVerificationFilter` ([ADR-012](./adr-012-per-app-user-model.md)) 가 JWT-URL 경계를 런타임에 강제.
 
-### 테마 5 — 운영 & 개발 방법론 (작성 예정)
+### 테마 5 — 운영 & 개발 방법론 ✅ 완료
 
-**이 테마가 답할 물음**: "개발/운영의 일상 작업을 어떤 원칙으로 굴리는가?"
+**이 테마가 답하는 물음**: "개발/운영의 일상 작업을 어떤 원칙으로 굴리는가?"
 
-- ADR-007 · 솔로 친화적 운영
-- ADR-008 · API 버전 관리 미도입
-- ADR-014 · Delegation mock 테스트 금지
-- ADR-015 · Conventional Commits + 템플릿 semver
+```
+ADR-007 (솔로 친화적 운영)
+  "모든 운영 결정의 상위 기준. 비목표도 명시"
+   │
+   ├──> ADR-008 (API 버전 관리 미도입)
+   │     "'지금 필요 없다' 의 구체 적용. YAGNI 준수"
+   │
+   ├──> ADR-014 (Delegation mock 금지)
+   │     "리팩토링 안전망 유지. Port 계약만 검증"
+   │
+   └──> ADR-015 (Conventional Commits + SemVer)
+         "cherry-pick 모델의 운영 인프라. 초기 투자 vs 미래 부담"
+```
+
+- [ADR-007 · 솔로 친화적 운영](./adr-007-solo-friendly-operations.md)
+- [ADR-008 · API 버전 관리 미도입](./adr-008-no-api-versioning.md)
+- [ADR-014 · Delegation mock 테스트 금지](./adr-014-no-delegation-mock.md)
+- [ADR-015 · Conventional Commits + 템플릿 전체 semver](./adr-015-conventional-commits-semver.md)
+
+**테마 5 의 결론**: "솔로 한 사람이 감당 가능한가?" 를 모든 운영 결정의 상위 기준으로 두고, 비목표 (HA 99.99%, 멀티 리전, 무중단 배포, 분산 추적) 를 명시 선언. 이 원칙 아래 API 버전 관리는 YAGNI 로 미도입, 테스트는 delegation mock 금지로 리팩토링 안전망 유지, 커밋/버전 관리는 파생 레포 cherry-pick 을 위한 기계 쿼리 가능 형태 (Conventional Commits + template-v* 태그) 로 강제. 초기 셋업 비용은 1회성, 장기 운영 부담 감소의 복리 효과.
 
 ---
 
