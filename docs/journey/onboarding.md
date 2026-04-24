@@ -47,24 +47,19 @@ git clone git@github.com:<your-org>/myapp-backend.git
 cd myapp-backend
 ```
 
-### 2.3 `npm install` — **왜 필요한가**
+### 2.3 `npm install` — **bootstrap 이 자동 실행**
 
 이 프로젝트는 Java Gradle 기반이지만 **커밋 메시지 규약 도구 (husky / commitlint / commitizen)** 를 npm 으로 관리합니다.
 
-```bash
-npm install
-```
+`./tools/bootstrap.sh` 실행 시 내부적으로 `npm install` 을 자동 수행하므로 **별도로 수동 실행할 필요가 없습니다**. 대신 **Node 18+ 가 필수** — bootstrap 이 Node 를 찾지 못하면 즉시 fail 합니다.
 
-무엇이 일어나는가:
-- `node_modules/` 디렉토리가 생성됩니다 (약 50 MB).
-- `.gitignore` 에 포함되어 있어 commit 안 됩니다.
-- `.husky/` 의 git hook 이 활성화됩니다 (`prepare` 스크립트).
+자동 수행되는 것:
+- `node_modules/` 디렉토리 생성 (약 50 MB, `.gitignore` 포함)
+- `.husky/` 의 git hook 활성화 (`prepare` 스크립트)
+- `git commit` 마다 `.husky/commit-msg` 가 **Conventional Commits 형식 + Claude 트레일러 차단** 검증
+- `npx cz` 로 대화형 커밋 메시지 작성 가능
 
-결과:
-- `git commit` 할 때마다 `.husky/commit-msg` 가 **Conventional Commits 형식 검증**.
-- `npx cz` 로 대화형 커밋 메시지 작성 가능.
-
-**Node 를 설치하기 싫다?** 커밋 검증이 없어지고 CI (`commit-lint.yml`) 에서만 체크됩니다. 로컬에서 잘못된 메시지 작성하면 PR 에서 실패. Node 설치 권장.
+**재실행 시에도 안전**: bootstrap 은 `node_modules` + `.husky/_` 가 이미 있으면 skip 하므로 여러 번 돌려도 비용 거의 0.
 
 ---
 
@@ -214,11 +209,11 @@ Started FactoryApplication in 4.xxx seconds
 | **Fly.io Postgres** | 앱 근접 배포, 글로벌 edge | `jdbc:postgresql://<app>.flycast:5432/<db>?currentSchema=core` |
 | **자체 호스트 Postgres** | 완전 통제, 비용 0 | `jdbc:postgresql://<host>:5432/<db>?currentSchema=core` |
 
-준비 체크리스트 (공통):
+준비 체크리스트 (운영 provider 사용 시):
 - [ ] 인스턴스/프로젝트 생성
-- [ ] admin credential 확보 (`DATABASE_URL` 에 사용 — schema/role 생성 시에만 shell export. `.env` 에 저장 금지)
+- [ ] admin credential 확보 (운영용 `DATABASE_URL` — `.env` 에 저장 금지, shell export 로만 사용)
 - [ ] 앱용 `DB_URL` / `DB_USER` / `DB_PASSWORD` 확보 — `.env` 에 저장
-- [ ] `new-app.sh --provision-db` 실행 시 `DATABASE_URL` env 를 shell 에서 export
+- [ ] `new-app.sh --provision-db` 실행 **직전에** shell 에서 `export DATABASE_URL='postgresql://postgres:<pw>@<host>:5432/postgres'` (운영 DB 에 provision 할 때만. 로컬 docker 는 `.env.example` 의 기본값으로 자동 처리)
 
 **Supabase 사용 시 주의**: Supavisor pooler (`:6543`) 쓰면 Spring Boot blue/green 배포 오버랩 구간의 connection 폭증 안전. Free tier 의 direct (`:5432`) connection 한도가 낮아서 production 부하엔 pooler 필수.
 
@@ -257,10 +252,18 @@ Opt-in 자동 수행 (`--provision-db` 플래그):
 > **`DATABASE_URL` 이 뭔가?** schema 와 role 을 **생성할 관리자 권한** connection string.
 > 앱 전용 `GYMLOG_DB_URL` (앱 role `gymlog_app` 로 접속) 과는 다른 개념 — 수퍼유저/관리자 credential 이 필요하다.
 >
-> - **로컬 dev** (docker-compose postgres): `export DATABASE_URL='postgresql://postgres:dev@localhost:5433/postgres'`
-> - **운영** (Supabase 등): 관리자 role 의 pooler connection string
+> - **로컬 dev** (docker-compose postgres): **별도 설정 불필요** — `.env.example` 에 `DATABASE_URL=postgresql://postgres:dev@localhost:5433/postgres` 기본값이 있고, `new-app.sh` 가 `.env` 에서 자동 로드한다. 로컬 docker 환경은 결정적이라 사용자 조작 0.
+> - **운영** (Supabase 등): 관리자 credential 을 **shell 에서 export** 해야 함 (`.env` 에 저장 금지). `new-app.sh` 는 shell 환경변수를 `.env` 값보다 우선 사용하므로 일시 덮어씀.
 >
-> `.env` 에는 저장하지 않는다 (관리자 credential 상주 금지). `--provision-db` 실행 시점에만 shell export.
+> ```bash
+> # 로컬 docker — export 불필요
+> ./tools/new-app/new-app.sh gymlog --provision-db
+>
+> # 운영 (Supabase 등) — shell export 필수
+> export DATABASE_URL='postgresql://postgres:<pw>@<host>:5432/postgres'
+> ./tools/new-app/new-app.sh gymlog --provision-db
+> ```
+>
 > `--provision-db` 없이 수동 실행도 가능: `psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f infra/scripts/init-app-schema.sql`
 
 여전히 수동:

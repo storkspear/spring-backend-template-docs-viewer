@@ -283,9 +283,19 @@ echo "${key}=${value}" >> .env
 
 ### 사용 전 필요 조건
 
+**로컬 docker** — `.env` 기본값이 자동 사용되므로 export 불필요:
+
 ```bash
-export DATABASE_URL='postgresql://postgres:dev@localhost:5433/postgres'
 ./tools/new-app/new-app.sh gymlog --provision-db
+# .env 의 DATABASE_URL=postgresql://postgres:dev@localhost:5433/postgres 자동 로드
+```
+
+**운영 DB** (Supabase 등) — admin credential 은 `.env` 에 저장 금지, shell export 로만:
+
+```bash
+export DATABASE_URL='postgresql://postgres.<ref>:<pw>@<supabase-host>:5432/postgres'
+./tools/new-app/new-app.sh gymlog --provision-db
+# shell 환경변수가 .env 값보다 우선 — 운영 DB 에 provision
 ```
 
 - `DATABASE_URL` 은 schema/role 을 생성할 권한이 있는 **관리자 credential** 이어야 합니다 (앱 role 아님).
@@ -447,11 +457,10 @@ slug 자체는 하이픈을 허용하지만 Postgres schema/role 이름에는 `S
 사용 순서는 이렇습니다.
 
 ```bash
-# 1. 환경 부팅 (처음 한 번)
+# 1. 환경 부팅 (처음 한 번) — .env 자동 생성, DATABASE_URL 기본값 포함
 ./tools/bootstrap.sh
 
-# 2. 앱 모듈 생성 (앱마다 한 번)
-export DATABASE_URL='postgresql://postgres:dev@localhost:5433/postgres'
+# 2. 앱 모듈 생성 (앱마다 한 번) — 로컬 docker 는 export 불필요
 ./tools/new-app/new-app.sh gymlog --provision-db
 
 # 3. Spring Boot 기동

@@ -115,9 +115,11 @@ feat(auth):add field   → 콜론 뒤 공백 없음
 
 **설정 (최초 1회)**:
 ```bash
-npm install              # husky 자동 활성화 (prepare script)
+./tools/bootstrap.sh     # 내부적으로 npm install 실행 → husky 자동 활성화
 git config --local commit.template .gitmessage
 ```
+
+> bootstrap 이 이미 `npm install` 을 자동 수행하므로 대부분 별도 작업 불필요. Node 18+ 가 없으면 bootstrap 이 fail 하므로 먼저 설치 필요.
 
 ### 2차: CI commitlint
 
