@@ -1,5 +1,7 @@
 # Rate Limit 규약
 
+> **유형**: Reference · **독자**: Level 2 · **읽는 시간**: ~2분
+
 `common/common-web/ratelimit/` 의 Bucket4j 기반 rate limit 정책.
 
 ## 키 설계
@@ -58,3 +60,8 @@ Content-Type: application/json
 
 - 단위 테스트: `RateLimitFilterTest` (7개)
 - 통합: signup 엔드포인트 11회 호출 → 마지막 429
+
+## 관련 문서
+
+- [`observability.md`](./observability.md) — `appSlug` 태깅 (버킷 키와 동일 원칙)
+- [`../api-contract/api-response.md`](../api-contract/api-response.md) — 429 응답 포맷 표준

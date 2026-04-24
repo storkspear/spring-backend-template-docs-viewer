@@ -1,5 +1,9 @@
 # JWT Authentication
 
+> **유형**: Explanation · **독자**: Level 2 · **읽는 시간**: ~15분
+
+**설계 근거**: [ADR-006 (HS256 JWT)](../journey/philosophy/adr-006-hs256-jwt.md) · [ADR-012 (앱별 독립 유저 모델)](../journey/philosophy/adr-012-per-app-user-model.md)
+
 이 문서는 JWT 기반 인증 체계의 구조와 사용법을 설명합니다.
 
 템플릿은 **Stateless JWT 인증** 을 기본으로 채택합니다. 서버에 세션을 저장하지 않으므로 수평 확장이 자유롭고, 모바일 앱이 메인 클라이언트인 환경에서 CORS 협상 같은 브라우저 특화 이슈를 피할 수 있습니다.

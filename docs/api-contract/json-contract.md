@@ -1,5 +1,9 @@
 # JSON 계약 규약 (JSON Contract)
 
+> **유형**: Reference · **독자**: Level 2 · **읽는 시간**: ~5분
+
+**설계 근거**: [ADR-016 (DTO Mapper 금지)](../journey/philosophy/adr-016-dto-mapper-forbidden.md)
+
 이 문서는 DTO JSON 직렬화/역직렬화의 전역 정책과 테스트 규약을 정의합니다.
 
 ---

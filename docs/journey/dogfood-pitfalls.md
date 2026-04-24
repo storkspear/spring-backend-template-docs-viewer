@@ -1,5 +1,7 @@
 # 도그푸딩 함정 모음 (사고 실록)
 
+> **유형**: How-to · **독자**: Level 1 · **읽는 시간**: ~10분
+
 > 결정 근거: [`infra/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md)
 > 정상 흐름: [`journey/dogfood-setup.md`](../journey/dogfood-setup.md)
 > 전체 플로우: [`infra/ci-cd-flow.md`](../infra/ci-cd-flow.md)

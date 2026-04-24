@@ -1,5 +1,9 @@
 # Testing Strategy
 
+> **유형**: Explanation · **독자**: Level 2 · **읽는 시간**: ~12분
+
+**설계 근거**: [ADR-014 (Delegation mock 금지)](../journey/philosophy/adr-014-no-delegation-mock.md)
+
 이 문서는 `spring-backend-template` 의 **전체 테스트 전략** 을 설명합니다. 어떤 종류의 테스트를 어디에 두고, 무엇을 검증하며, 언제 실행하는지를 다룹니다.
 
 계약 테스트(Contract Testing)의 상세한 작성 규약은 [`contract-testing.md`](./contract-testing.md) 에서 별도로 관리하고, ArchUnit 규칙의 전체 목록은 [`module-dependencies.md`](../architecture/module-dependencies.md) 에서 다룹니다. 여기서는 **큰 그림과 공통 전략** 에 집중합니다.

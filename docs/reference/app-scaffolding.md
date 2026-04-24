@@ -1,5 +1,9 @@
 # App Scaffolding (`new-app.sh`)
 
+> **유형**: How-to · **독자**: Level 1~2 · **읽는 시간**: ~20분
+
+**설계 근거**: [ADR-002 (Use this template)](../journey/philosophy/adr-002-use-this-template.md) · [ADR-005 (Postgres schema 격리)](../journey/philosophy/adr-005-db-schema-isolation.md) · [ADR-013 (앱별 인증 엔드포인트)](../journey/philosophy/adr-013-per-app-auth-endpoints.md)
+
 ## 배경 — 이 스크립트가 왜 필요한가
 
 이 문서는 새로운 앱 도메인 모듈을 생성하는 `tools/new-app/new-app.sh` 스크립트를 정리합니다.

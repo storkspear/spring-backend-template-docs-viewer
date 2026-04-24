@@ -1,5 +1,9 @@
 # record vs class 선택 기준
 
+> **유형**: Reference · **독자**: Level 2 · **읽는 시간**: ~3분
+
+**설계 근거**: [ADR-016 (DTO Mapper 금지)](../journey/philosophy/adr-016-dto-mapper-forbidden.md)
+
 이 문서는 새 Java 타입을 정의할 때 `record` 와 `class` 중 무엇을 선택할지 결정 기준을 제공합니다.
 
 ---

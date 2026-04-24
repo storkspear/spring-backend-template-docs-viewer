@@ -1,5 +1,9 @@
 # Design Principles
 
+> **유형**: Explanation · **독자**: Level 2 · **읽는 시간**: ~15분
+
+**설계 근거**: [ADR-011 (레이어드 + 포트/어댑터)](../journey/philosophy/adr-011-layered-port-adapter.md) · [ADR-016 (DTO Mapper 금지)](../journey/philosophy/adr-016-dto-mapper-forbidden.md)
+
 이 문서는 코드 작성 시 참조하는 **설계 원칙** 을 정리합니다.
 
 원칙은 절대 규칙이 아닙니다. 상황에 맞게 적용하고, 지키기 위해 지키는 게 아니라 **코드를 더 이해하기 쉽고 유지하기 쉽게 만들기 위해** 적용합니다.

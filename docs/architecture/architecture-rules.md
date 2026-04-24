@@ -1,5 +1,9 @@
 # Architecture Rules (ArchUnit)
 
+> **유형**: Reference · **독자**: Level 2 · **읽는 시간**: ~10분
+
+**설계 근거**: [ADR-004 (Gradle + ArchUnit)](../journey/philosophy/adr-004-gradle-archunit.md)
+
 이 문서는 ArchUnit 으로 강제되는 모듈 경계 및 코드 구조 규칙을 설명합니다.
 
 ---

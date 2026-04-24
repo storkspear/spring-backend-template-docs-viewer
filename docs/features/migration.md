@@ -1,5 +1,9 @@
 # Migration Guides
 
+> **유형**: Reference · **독자**: Level 2 · **읽는 시간**: ~2분
+
+**설계 근거**: [ADR-015 (Conventional Commits + SemVer)](../journey/philosophy/adr-015-conventional-commits-semver.md)
+
 이 디렉토리는 **breaking change 가 있는 템플릿 버전마다** 해당 버전으로 이행하는 단계별 가이드를 담습니다.
 
 ---

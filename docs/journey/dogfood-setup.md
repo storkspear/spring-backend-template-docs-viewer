@@ -1,5 +1,9 @@
 # 도그푸딩 환경 셋업 가이드
 
+> **유형**: How-to · **독자**: Level 1 · **읽는 시간**: ~12분
+
+**설계 근거**: [ADR-002 (Use this template)](philosophy/adr-002-use-this-template.md)
+
 template (또는 파생 레포) 가 자기 자신을 Mac mini 에 배포해서 한 사이클 검증하기 위한 가이드. **정상 흐름만** 다룸. 에러 만나면 → [`journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md).
 
 > 결정 근거: [`infra/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md)

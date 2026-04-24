@@ -1,5 +1,9 @@
 # 오브젝트 스토리지 규약
 
+> **유형**: Reference · **독자**: Level 2 · **읽는 시간**: ~5분
+
+**설계 근거**: [ADR-003 (-api / -impl 분리)](../journey/philosophy/adr-003-api-impl-split.md) · [ADR-007 (솔로 친화적 운영)](../journey/philosophy/adr-007-solo-friendly-operations.md)
+
 `core-storage-api` / `core-storage-impl` 의 `StoragePort` 사용 가이드.
 
 > 인프라 전체 구성 / 프로비저닝 상태: [`infra/infrastructure.md §4`](../infra/infrastructure.md)

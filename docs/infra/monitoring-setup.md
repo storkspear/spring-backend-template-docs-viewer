@@ -1,5 +1,9 @@
 # 운영 모니터링 셋업 가이드
 
+> **유형**: How-to · **독자**: Level 2.5 · **읽는 시간**: ~5분
+
+**설계 근거**: [ADR-007 (솔로 친화적 운영)](../journey/philosophy/adr-007-solo-friendly-operations.md)
+
 Mac mini 운영 호스트에서 관측성 스택(Loki + Grafana + Prometheus + Alertmanager)을 기동·운영하는 방법.
 
 > 인프라 전체 구성 / 책임 분담: [`infra/infrastructure.md`](./infrastructure.md)

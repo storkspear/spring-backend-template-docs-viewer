@@ -1,5 +1,9 @@
 # 스토리지 셋업 가이드 (MinIO / 시놀로지 NAS)
 
+> **유형**: How-to · **독자**: Level 2.5 · **읽는 시간**: ~3분
+
+**설계 근거**: [ADR-007 (솔로 친화적 운영)](../journey/philosophy/adr-007-solo-friendly-operations.md)
+
 > **대상**: 이 문서는 **template 레포 자체** 의 MinIO 셋업 (docker-compose 기반, 기본 bucket=`template-default`) 을 설명합니다.
 > **파생 레포 개발자** 는 [`onboarding.md`](../journey/onboarding.md) §3.3 를 참조하세요 (`dev-shared` 또는 본인 환경 이름).
 >

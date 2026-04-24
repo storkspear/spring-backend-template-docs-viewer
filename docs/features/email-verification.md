@@ -1,5 +1,9 @@
 # Email Verification & Delivery
 
+> **유형**: How-to · **독자**: Level 2 · **읽는 시간**: ~12분
+
+**설계 근거**: [ADR-006 (HS256 JWT)](../journey/philosophy/adr-006-hs256-jwt.md) · [ADR-013 (앱별 인증 엔드포인트)](../journey/philosophy/adr-013-per-app-auth-endpoints.md)
+
 이 문서는 이메일 발송 아키텍처와 이메일 인증/비밀번호 재설정 플로우를 정리합니다.
 
 템플릿은 트랜잭셔널 이메일을 **Port/Adapter 패턴**으로 추상화합니다. 도메인 서비스(`EmailVerificationService`, `PasswordResetService`) 는 `EmailPort` 인터페이스만 의존하고, 실제 발송은 `ResendEmailAdapter` 가 [Resend](https://resend.com) HTTP API 로 수행합니다.

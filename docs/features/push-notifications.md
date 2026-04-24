@@ -1,5 +1,9 @@
 # Push Notifications
 
+> **유형**: Explanation · **독자**: Level 2 · **읽는 시간**: ~10분
+
+**설계 근거**: [ADR-003 (-api / -impl 분리)](../journey/philosophy/adr-003-api-impl-split.md) · [ADR-011 (레이어드 + 포트/어댑터)](../journey/philosophy/adr-011-layered-port-adapter.md)
+
 이 문서는 푸시 알림 아키텍처와 디바이스 토큰 관리 방식을 정리합니다.
 
 템플릿은 FCM(Firebase Cloud Messaging) 기반 푸시 알림을 **Port/Adapter 패턴**으로 추상화합니다. 앱 도메인 코드는 FCM SDK 를 직접 알지 못하고 `PushPort` 인터페이스만 의존합니다. 덕분에 테스트에서는 mock 으로, 로컬에서는 no-op 으로, 운영에서는 Firebase Admin SDK 로 바꿔 끼울 수 있습니다.

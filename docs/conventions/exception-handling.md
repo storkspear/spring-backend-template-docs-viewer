@@ -1,5 +1,7 @@
 # Exception Handling Convention
 
+> **유형**: Reference · **독자**: Level 2 · **읽는 시간**: ~5분
+
 이 문서는 예외 처리의 **단일 정본(Single Source of Truth)** 입니다.
 
 ---

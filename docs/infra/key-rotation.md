@@ -1,5 +1,9 @@
 # 키 교체 절차 (Key Rotation)
 
+> **유형**: How-to · **독자**: Level 2.5 · **읽는 시간**: ~5분
+
+**설계 근거**: [ADR-006 (HS256 JWT)](../journey/philosophy/adr-006-hs256-jwt.md) · [ADR-007 (솔로 친화적 운영)](../journey/philosophy/adr-007-solo-friendly-operations.md)
+
 > 결정 근거: [`infra/decisions-infra.md` I-10, I-14](../infra/decisions-infra.md)
 > 셋업 가이드: [`journey/dogfood-setup.md`](../journey/dogfood-setup.md)
 

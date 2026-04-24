@@ -1,5 +1,9 @@
 # Multi-tenant Architecture
 
+> **유형**: Explanation · **독자**: Level 2 · **읽는 시간**: ~12분
+
+**설계 근거**: [ADR-005 (Postgres schema 격리)](../journey/philosophy/adr-005-db-schema-isolation.md) · [ADR-012 (앱별 독립 유저 모델)](../journey/philosophy/adr-012-per-app-user-model.md)
+
 이 문서는 "앱별 독립 유저" 멀티테넌시를 PostgreSQL schema 격리로 구현하는 방식을 설명합니다.
 
 한 레포에서 여러 모바일 앱(`sumtally`, `gymlog`, `rny` 등) 을 운영하되, **각 앱은 서로 유저 데이터를 공유하지 않습니다.** 같은 이메일로 sumtally 와 gymlog 에 각각 가입해도 둘은 완전히 별개의 계정입니다.

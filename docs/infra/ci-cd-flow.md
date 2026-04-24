@@ -1,5 +1,9 @@
 # CI / CD 전체 플로우 — commit 부터 운영 반영까지
 
+> **유형**: Explanation · **독자**: Level 2.5 · **읽는 시간**: ~15분
+
+**설계 근거**: [ADR-007 (솔로 친화적 운영)](../journey/philosophy/adr-007-solo-friendly-operations.md) · [ADR-015 (Conventional Commits + SemVer)](../journey/philosophy/adr-015-conventional-commits-semver.md)
+
 > 결정 근거: [`infra/decisions-infra.md` I-09 ~ I-14](../infra/decisions-infra.md)
 > 셋업 가이드: [`journey/dogfood-setup.md`](../journey/dogfood-setup.md)
 > 함정 모음: [`journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md)

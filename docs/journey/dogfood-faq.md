@@ -1,5 +1,7 @@
 # 도그푸딩 FAQ
 
+> **유형**: How-to · **독자**: Level 1 · **읽는 시간**: ~5분
+
 > 셋업 가이드: [`journey/dogfood-setup.md`](./dogfood-setup.md)
 > 함정 모음: [`journey/dogfood-pitfalls.md`](../journey/dogfood-pitfalls.md)
 > 다이어그램: [`infra/ci-cd-flow.md`](../infra/ci-cd-flow.md)

@@ -1,5 +1,9 @@
 # Observability 규약
 
+> **유형**: Explanation · **독자**: Level 2 · **읽는 시간**: ~3분
+
+**설계 근거**: [ADR-007 (솔로 친화적 운영)](../journey/philosophy/adr-007-solo-friendly-operations.md)
+
 이 문서는 `spring-backend-template` 의 **메트릭·로그·알림** 규약을 정의합니다.
 
 > 인프라 스택 구성 / 프로비저닝 상태: [`infra/infrastructure.md §5`](../infra/infrastructure.md)
@@ -14,6 +18,21 @@
 | 메트릭 | Prometheus + Micrometer | 요청량·에러율·레이턴시·JVM |
 | 로그 | Loki + logback (loki4j) | 구조화 로그, 앱별 필터링 |
 | 알림 | Alertmanager + Discord webhook | 임계치 초과 시 푸시 |
+
+### 데이터 흐름
+
+```
+ Spring Boot (bootstrap)
+ │
+ ├── Micrometer ──► Prometheus (scrape) ──► Grafana (dashboard)
+ │                                          │
+ │                                          ▼
+ │                                   Alertmanager ──► Discord webhook
+ │
+ └── logback-loki ──► Loki (push) ──► Grafana (explore)
+```
+
+각 축이 독립적으로 작동하므로 한 축이 다운돼도 다른 축은 영향 없음 (예: Loki 다운 시 메트릭/알림은 유지).
 
 ## 필수 태깅 — `appSlug` 의무
 
@@ -38,6 +57,22 @@
 | `DEBUG` | 개발·디버깅. prod 기본 비활성 |
 
 민감 정보(password, token, JWT secret) 는 **절대** 로그에 남기지 않습니다. `toString()` 오버라이드 시 `@ToString.Exclude` 등으로 명시 제외.
+
+### 로그 작성 Good / Bad 예시
+
+```java
+// ✅ Good — 구조화 필드 + 민감정보 제외 + 레벨 적합
+log.info("user signed up: userId={}, appSlug={}", user.id(), appSlug);
+log.warn("rate limit exceeded: bucket={}, principal={}", bucketKey, principalMask);
+
+// ❌ Bad — 민감정보 노출
+log.info("user signed up: {}", user);  // user.passwordHash, user.refreshToken 등 유출 위험
+log.debug("JWT payload: {}", jwtToken); // 토큰 전체 로깅 금지
+
+// ❌ Bad — 레벨 오용
+log.error("user typed wrong password");  // 비즈니스 예외는 WARN, 시스템 장애만 ERROR
+log.info("method foo() called with x=5"); // 디버깅 흔적은 DEBUG
+```
 
 ## 메트릭 naming
 
