@@ -5,23 +5,23 @@
   },
   "groups": [
     {
-      "name": "입문 (Level 0)",
+      "name": "Level 0 - Onboarding",
       "files": [
-        { "path": "journey/level0/README.md",                 "title": "Level 0 — 감 잡기",    "desc": "쓸지 말지 3~10분 안에 결정 · 코드 돌리기 전 읽기",
+        { "path": "journey/README.md",                        "title": "Overview - 전체 읽기 순서", "desc": "Developer Journey 개요 · 그룹별 안내" },
+        { "path": "journey/level0/README.md",                 "title": "감 잡기",              "desc": "쓸지 말지 3~10분 안에 결정 · 코드 돌리기 전 읽기",
           "children": [
-            { "path": "journey/level0/what-is-this.md",       "title": "이게 뭐야? (3분)",     "desc": "한 문장 소개 · 맞는 경우/안 맞는 경우" },
+            { "path": "journey/level0/what-is-this.md",       "title": "이게 뭐야?",           "desc": "한 문장 소개 · 맞는 경우/안 맞는 경우" },
             { "path": "journey/level0/five-minute-tour.md",   "title": "5 분 투어",            "desc": "모듈 4 종류 · 앱 추가 의미 · DB 분리 · 배포 그림" },
             { "path": "journey/level0/glossary.md",           "title": "용어 사전",            "desc": "Spring · JPA · Docker · JWT 등 Level 0 용어 풀이" },
             { "path": "journey/level0/first-run.md",          "title": "첫 실행 결과 해석",    "desc": "bootRun 로그 라인별 의미 + 체크리스트" },
             { "path": "journey/level0/first-change.md",       "title": "첫 수정 튜토리얼",     "desc": "nickname 컬럼 추가 — 한 필드가 건드리는 6 곳" },
             { "path": "journey/level0/first-deploy.md",       "title": "배포 맛보기",          "desc": "Docker 이미지 빌드 + Blue/Green 개념 + Flyway" }
           ]
-        },
-        { "path": "journey/README.md",                        "title": "Overview — 전체 읽기 순서", "desc": "Developer Journey 개요 · 그룹별 안내" }
+        }
       ]
     },
     {
-      "name": "시작하기 (Level 1)",
+      "name": "Level 1 - Start",
       "files": [
         { "path": "journey/onboarding.md",                    "title": "Onboarding",           "desc": "로컬 개발 환경 + 첫 앱 모듈 추가" },
         { "path": "journey/social-auth-setup.md",             "title": "Social Auth Setup",    "desc": "Google/Apple 소셜 로그인 자격 증명 발급" },
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "name": "구조 이해하기 (Level 2)",
+      "name": "Level 2 - Structure",
       "files": [
         { "path": "journey/architecture.md",                  "title": "Architecture",         "desc": "모듈 구조 · 파일 트리 · 기술 스택" },
         { "path": "architecture/module-dependencies.md",      "title": "Module Dependencies",  "desc": "모듈 의존 방향 규칙" },
@@ -46,7 +46,7 @@
       ]
     },
     {
-      "name": "프로젝트 철학 (Level 3)",
+      "name": "Level 3 - Philosophy",
       "files": [
         { "path": "journey/philosophy/README.md",             "title": "개요",                 "desc": "프롤로그 (3 제약) + 사용법 + 16 ADR 인덱스" },
         { "title": "모듈 설계", "children": [
@@ -80,7 +80,7 @@
       ]
     },
     {
-      "name": "코딩 규약",
+      "name": "Convention",
       "files": [
         { "path": "conventions/README.md",                    "title": "Overview",             "desc": "컨벤션 전체 개요" },
         { "path": "conventions/design-principles.md",         "title": "Design Principles",    "desc": "코드 작성 원칙 (SOLID 등)" },
@@ -92,7 +92,7 @@
       ]
     },
     {
-      "name": "API 및 기능",
+      "name": "API & Functional",
       "files": [
         { "path": "api-contract/api-response.md",             "title": "API Response",         "desc": "API 응답 형식 표준" },
         { "path": "api-contract/json-contract.md",            "title": "JSON Contract",        "desc": "JSON 계약 규칙" },
@@ -108,7 +108,7 @@
       ]
     },
     {
-      "name": "운영",
+      "name": "Production",
       "files": [
         { "path": "infra/infrastructure.md",                  "title": "Infrastructure",       "desc": "맥미니 · Supabase · Cloudflare · 블루그린",
           "children": [
@@ -126,14 +126,14 @@
       ]
     },
     {
-      "name": "테스팅",
+      "name": "Test",
       "files": [
         { "path": "testing/testing-strategy.md",              "title": "Testing Strategy",     "desc": "4층 전략 (Unit · Contract · Integration · ArchUnit)" },
         { "path": "testing/contract-testing.md",              "title": "Contract Testing",     "desc": "계약 기반 테스트 전략" }
       ]
     },
     {
-      "name": "참고",
+      "name": "Reference",
       "files": [
         { "path": "reference/backlog.md",                     "title": "Backlog",              "desc": "개발 예정 항목" },
         { "path": "STYLE_GUIDE.md",                           "title": "Documentation Style Guide", "desc": "저자용 · 5 유형 템플릿 · ADR 규격 · 검증 체크리스트" }
