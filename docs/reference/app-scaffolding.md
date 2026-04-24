@@ -389,12 +389,55 @@ fi
 
 ## 실행 후 남는 수동 작업
 
-스크립트가 끝나면 아래 안내가 출력됩니다.
+스크립트가 끝나면 무엇이 **자동으로 처리됐고** 무엇이 **남아있는지** 를 안내합니다. 이때 출력되는 내용은 `--provision-db` 플래그를 **붙였느냐에 따라 달라집니다**. DB schema 를 자동 생성했느냐 여부가 "남은 작업" 개수에 영향을 주기 때문입니다.
+
+### 케이스 A — `--provision-db` 를 붙인 경우 (권장)
+
+```bash
+./tools/new-app/new-app.sh gymlog --provision-db
+```
+
+스크립트가 DB schema 와 role 까지 만들어 줘서 **남는 작업이 한 가지 줄어듭니다**. 출력은 다음과 같이 나옵니다.
 
 ```
+자동 수행됨:
+  ✅ Java 모듈 scaffolding
+  ✅ .env 에 DB / bucket / credentials placeholder 추가
+  ✅ Postgres schema + role 생성       ← 자동 완료
+
 남은 수동 작업:
 
-1. Postgres schema 수동 생성 (--provision-db 재실행으로도 가능):
+1. .env 의 placeholder 값 실제 값으로 교체:
+   - <SLUG_UPPER>_DB_URL 의 <host> (Supabase pooler 호스트 등)
+   - APP_CREDENTIALS_<SLUG_UPPER>_GOOGLE_CLIENT_IDS_0/1, _APPLE_BUNDLE_ID
+   → 발급 방법: docs/social-auth-setup.md
+
+2. 도메인 테이블 작성:
+   apps/app-<slug>/src/main/resources/db/migration/<slug>/V007__init_domain.sql
+
+3. 커밋:
+   feat(apps): scaffold app-<slug>
+```
+
+이 케이스에서는 **DB schema 수동 생성 단계가 출력에 아예 등장하지 않습니다.** 이미 DB 에 반영되었기 때문입니다. 로컬 `docker compose` 환경이든 운영 Postgres 든 동일하게 적용되며, `new-app.sh` 가 실행 시점에 `.env` 의 `DATABASE_URL` (또는 shell export) 을 보고 해당 DB 에 적용합니다.
+
+### 케이스 B — `--provision-db` 를 붙이지 않은 경우
+
+```bash
+./tools/new-app/new-app.sh gymlog
+```
+
+스크립트는 코드 파일과 `.env` 항목만 준비하고, **DB 는 건드리지 않습니다.** 이 경우 출력에는 DB schema 생성이 "남은 작업" 1번으로 추가됩니다.
+
+```
+자동 수행됨:
+  ✅ Java 모듈 scaffolding
+  ✅ .env 에 DB / bucket / credentials placeholder 추가
+  ⏭  Postgres schema 생성 skip         ← 수동 처리 필요
+
+남은 수동 작업:
+
+1. Postgres schema 수동 생성 (또는 --provision-db 로 재실행):
    export APP_SLUG=<slug> APP_ROLE=<slug>_app APP_PASSWORD='강력한비번'
    psql "$DATABASE_URL" -f infra/scripts/init-app-schema.sql
 
@@ -410,12 +453,17 @@ fi
    feat(apps): scaffold app-<slug>
 ```
 
-요약하면 사람이 직접 해야 하는 것은 네 가지입니다.
+이때 schema 를 직접 만들고 싶지 않다면 `./tools/new-app/new-app.sh gymlog --provision-db` 로 **한 번 더 실행** 하면 됩니다. 스크립트는 멱등하게 설계되어 있어서 이미 만들어진 코드 파일은 건드리지 않고, DB schema / role 만 추가로 생성합니다.
 
-1. `--provision-db` 를 쓰지 않았다면 Postgres schema 를 수동 생성
-2. `.env` 의 `<host>` 와 소셜 로그인 credential placeholder 를 실제 값으로 교체
-3. 도메인 테이블용 `V007__init_domain.sql` 작성
-4. 커밋
+### 요약 — 사람이 직접 할 일
+
+두 케이스 모두 **공통으로 남는 3가지** 작업이 있습니다:
+
+1. `.env` 의 `<host>` 자리와 소셜 로그인 credential placeholder 를 실제 값으로 교체
+2. 도메인 테이블용 `V007__init_domain.sql` 작성 (이 앱의 비즈니스 로직)
+3. 커밋
+
+여기에 **케이스 B** 에서는 **"DB schema 수동 생성"** 이 하나 더 추가됩니다. DB 를 처음부터 자동으로 만들게 하려면 **케이스 A (`--provision-db` 를 붙이는 쪽)** 를 기본으로 쓰는 것을 권장합니다.
 
 ---
 
