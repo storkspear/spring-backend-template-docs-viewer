@@ -82,32 +82,32 @@
 | "파생 레포끼리 공통 코드를 어떻게 동기화하지?" | [ADR-002: Use this template](./adr-002-use-this-template.md) |
 | "나중에 특정 앱을 별도 서비스로 빼려면?" | [ADR-003: -api / -impl 분리](./adr-003-api-impl-split.md) |
 | "경계를 어떻게 기계적으로 강제하지?" | [ADR-004: Gradle + ArchUnit](./adr-004-gradle-archunit.md) |
-| "앱마다 DB 를 따로 쓰나, 하나를 공유하나?" | ADR-005 (작성 예정) |
+| "앱마다 DB 를 따로 쓰나, 하나를 공유하나?" | [ADR-005: 단일 Postgres + 앱당 schema](./adr-005-db-schema-isolation.md) |
 | "JWT 서명은 어떤 알고리즘?" | ADR-006 (작성 예정) |
 | "결정 내릴 때 어떤 기준으로 판단하나?" | ADR-007 (작성 예정) |
 | "API 버전 관리는 언제 도입하지?" | ADR-008 (작성 예정) |
 | "엔티티 공통 필드를 어떻게 처리하지?" | [ADR-009: BaseEntity](./adr-009-base-entity.md) |
 | "목록 조회 검색 조건을 표준화하려면?" | [ADR-010: SearchCondition](./adr-010-search-condition.md) |
 | "모듈 내부 구조는 어떻게 잡나?" | [ADR-011: 레이어드 + 포트/어댑터](./adr-011-layered-port-adapter.md) |
-| "통합 계정인가 앱별 계정인가?" | ADR-012 (작성 예정) |
+| "통합 계정인가 앱별 계정인가?" | [ADR-012: 앱별 독립 유저 모델](./adr-012-per-app-user-model.md) |
 | "인증 엔드포인트 경로는?" | ADR-013 (작성 예정) |
 | "테스트는 어떻게 쓰나?" | ADR-014 (작성 예정) |
 | "커밋 메시지 규칙은?" | ADR-015 (작성 예정) |
 | "DTO 변환은 어떻게 하나?" | [ADR-016: DTO Mapper 금지](./adr-016-dto-mapper-forbidden.md) |
 
-> **작성 예정** 항목들 (ADR-005~008, 012~015) 은 [`legacy-pending-rewrite.md`](./legacy-pending-rewrite.md) 에 **기존 버전의 원본 콘텐츠** 가 보존되어 있습니다. 차후 세션에서 ADR 카드 형식으로 하나씩 재작성됩니다.
+> **작성 예정** 항목들 (ADR-006~008, 013~015) 은 [`legacy-pending-rewrite.md`](./legacy-pending-rewrite.md) 에 **기존 버전의 원본 콘텐츠** 가 보존되어 있습니다. 차후 세션에서 ADR 카드 형식으로 하나씩 재작성됩니다.
 
 ### ADR 카드의 읽는 법
 
 각 카드는 다음 섹션으로 구성돼 있어요:
 
 - **Status** — 현재 유효한지, 언제 정해졌는지
-- **한 문장 직관** — 30초 안에 핵심 잡기
-- **Context** — 이 결정이 답해야 했던 물음
-- **Options Considered** — 검토된 대안과 탈락 이유
-- **Decision** — 실제 채택된 안과 구현
-- **Consequences** — 긍정/부정 결과 모두 정직하게
-- **Lessons Learned** — 사후에 드러난 교훈 (있을 때만)
+- **결론부터** — 30초 안에 핵심 잡기
+- **왜 이런 고민이 시작됐나?** — 이 결정이 답해야 했던 물음
+- **고민했던 대안들** — 검토된 대안과 탈락 이유
+- **결정** — 실제 채택된 안과 구현
+- **이 선택이 가져온 것** — 긍정/부정 결과 모두 정직하게
+- **교훈** — 사후에 드러난 교훈 (있을 때만)
 - **관련 사례 (Prior Art)** — 업계의 유사 접근
 - **Code References** — 실제 구현 파일 링크
 
@@ -182,12 +182,24 @@ ADR-016 (DTO Mapper 금지)
 
 **테마 2 의 결론**: 전통적 Spring Boot 레이어드를 따르되, `-api` 경계에 Port 를 두어 추출 가능성을 유지한다. 공통 슈퍼클래스와 공통 조회 인프라로 반복 코드를 제거하고, DTO 변환은 Entity 메서드로 담아 Mapper 레이어를 없앤다.
 
-### 테마 3 — 데이터 & 멀티 테넌시 (작성 예정)
+### 테마 3 — 데이터 & 멀티 테넌시 ✅ 완료
 
-**이 테마가 답할 물음**: "여러 앱이 한 DB 를 어떻게 안전하게 공유하는가?"
+**이 테마가 답하는 물음**: "여러 앱이 한 Postgres 인스턴스를 공유하면서 서로의 데이터를 건드리지 못하게 하려면 어떻게 해야 하는가?"
 
-- ADR-005 · 단일 Postgres database + 앱당 schema
-- ADR-012 · 앱별 독립 유저 모델
+```
+ADR-005 (단일 Postgres + 앱당 schema)
+  "한 database, schema 분리, 5중 방어선"
+   │
+   │ 유저 테이블은 어디에? 통합인가 앱별인가?
+   ▼
+ADR-012 (앱별 독립 유저 모델)
+  "같은 이메일도 앱마다 별개 레코드. ThreadLocal 라우팅 폐기"
+```
+
+- [ADR-005 · 단일 Postgres + 앱당 schema](./adr-005-db-schema-isolation.md)
+- [ADR-012 · 앱별 독립 유저 모델 (통합 계정 폐기)](./adr-012-per-app-user-model.md)
+
+**테마 3 의 결론**: 한 Postgres 인스턴스 · 한 database 안에서 앱마다 schema 를 분리하고, 유저 테이블도 그 schema 에 독립 소유. DB role · DataSource · Flyway · 포트 · ArchUnit 의 5중 방어선으로 경계를 강제. JWT 의 단일 `appSlug` claim 과 `AppSlugVerificationFilter` 로 런타임 오용을 차단. ThreadLocal 기반 동적 라우팅은 전면 폐기.
 
 ### 테마 4 — 인증 & 보안 (작성 예정)
 

@@ -8,79 +8,14 @@
 > **재작성 진행 상황**:
 > - ✅ 테마 1 (레포 구조): ADR-001, 002, 003, 004 — 완료
 > - ✅ 테마 2 (모듈 내부 설계): ADR-009, 010, 011, 016 — 완료
-> - ⏳ 테마 3 (데이터 & 테넌시): ADR-005, 012 — 예정
+> - ✅ 테마 3 (데이터 & 테넌시): ADR-005, 012 — 완료
 > - ⏳ 테마 4 (인증 & 보안): ADR-006, 013 — 예정
 > - ⏳ 테마 5 (운영 & 개발 방법론): ADR-007, 008, 014, 015 — 예정
 >
-> **현재 이 파일에 남아있는 결정**: 5, 6, 7, 8, 12, 13, 14, 15
+> **현재 이 파일에 남아있는 결정**: 6, 7, 8, 13, 14, 15
 
 > **독자 유의사항**  
 > 아래 콘텐츠는 **프롤로그 톤/깊이에 미달** 합니다. Options Considered 대안 검토가 얕고, Lessons Learned 가 누락되었으며, Code References 도 부실해요. ADR 카드로 재작성된 테마 1 의 [ADR-001~004](./README.md) 수준의 품질을 여기서 기대하지 마세요. 재작성이 끝나면 동일 깊이가 될 것입니다.
-
----
-
-## 결정 5. 단일 Postgres database + 앱당 schema
-
-> **이 섹션은 기존 '통합 계정' 모델에서 '앱별 독립 유저' 모델로 변경된 내용을 반영합니다.**
-> users 테이블은 이제 `core` schema 가 아니라 각 앱 schema (`sumtally`, `rny` 등) 에 있습니다.
-
-### 결정
-
-모든 앱이 **하나의 Postgres database (`postgres`)** 를 공유하며, 각 앱은 자기 schema (`sumtally`, `rny`, `gymlog` 등) 를 가집니다.
-
-각 앱 schema 는 **유저/인증 테이블과 도메인 테이블을 모두 포함**합니다. `core` schema 는 최소화되거나 비워질 수 있습니다.
-
-```
-postgres (database)
-├── sumtally schema
-│   ├── users                        ← sumtally 유저 (독립)
-│   ├── social_identities
-│   ├── refresh_tokens
-│   ├── email_verification_tokens
-│   ├── password_reset_tokens
-│   ├── devices
-│   ├── budget_groups                ← sumtally 도메인
-│   ├── expenses
-│   └── ...
-├── rny schema
-│   ├── users                        ← rny 유저 (독립, sumtally 와 별개)
-│   ├── social_identities
-│   ├── refresh_tokens
-│   ├── ...
-│   ├── asset_groups                 ← rny 도메인
-│   └── ...
-└── public schema                    ← 건드리지 않음 (Supabase 기본)
-```
-
-### 이유
-
-**Supabase 의 구조적 제약입니다.** Supabase 는 `postgres` database 중심으로 설계되어 있으며, 부가 기능들(Auth, Storage, Realtime) 이 모두 이 database 의 schema 로 구현되어 있습니다. 추가 database 를 만드는 것은 제한되거나 대시보드가 제대로 인식하지 못합니다.
-
-**schema 분리만으로도 충분한 격리가 가능합니다.** 다음 5중 방어선을 적용합니다.
-
-1. **DB role 분리** — 각 앱 모듈은 자기 schema 에만 접근 권한을 가진 전용 role 로 접속 (`sumtally_app`, `gymlog_app` 등). 크로스 schema 접근은 DB 수준에서 permission denied.
-2. **Spring DataSource 분리** — 앱별로 별도 HikariCP 커넥션 풀. 한 앱의 커넥션 고갈이 다른 앱에 영향 없음.
-3. **Flyway 마이그레이션 분리** — 앱별 마이그레이션 히스토리 테이블 독립.
-4. **포트 인터페이스 의존** — 앱 모듈은 자기 schema 의 엔티티만 소유.
-5. **ArchUnit 규칙** — 크로스 모듈 엔티티 참조 금지.
-
-### `new-app.sh` 가 자동 생성하는 마이그레이션
-
-새 앱 추가 시 `./tools/new-app.sh <slug>` 를 실행하면 해당 앱 schema 아래에 V001~V006 마이그레이션이 자동 생성됩니다.
-
-```
-apps/app-<slug>/src/main/resources/db/migration/<slug>/
-    V001__init_users.sql
-    V002__init_social_identities.sql
-    V003__init_refresh_tokens.sql
-    V004__init_email_verification_tokens.sql
-    V005__init_password_reset_tokens.sql
-    V006__init_devices.sql
-```
-
-### 트레이드오프
-
-단일 database 는 "한 Postgres 인스턴스의 장애가 모든 앱을 다운시킴" 을 의미합니다. 그러나 우리는 Supabase (관리형) 를 사용하므로 인스턴스 운영 자체가 Supabase 책임이며, 실제 장애율은 낮습니다. 필요한 시점(특정 앱이 진짜 독립 운영이 필요할 때) 에는 pg_dump 로 해당 schema 만 떼어 내 별도 Postgres 인스턴스로 이전할 수 있습니다.
 
 ---
 
@@ -157,48 +92,6 @@ API 버전 관리가 필요한 상황은 **"클라이언트를 서버 측에서 
 버전 관리가 필요해지는 시점이 오면 (외부 소비자 등장, 멀티 버전 앱 공존 등):
 - Cloudflare 리버스 프록시에서 경로 재작성 (`/api/v1/*` → `/api/*`)
 - 또는 `@RequestMapping` prefix 를 `api/v1` 로 변경 (한 줄)
-
----
-
-## 결정 12. 앱별 독립 유저 모델 (통합 계정 폐기)
-
-### 결정
-
-각 앱은 **자기 schema 에 독립된 users 테이블을 가집니다.** 같은 이메일이 `sumtally.users` 와 `rny.users` 에 별개의 레코드로 존재할 수 있습니다. 통합 계정(`core.users` + `core.user_app_access`) 은 폐기합니다.
-
-### 이유
-
-**UX 관점** — 유저는 각 앱을 독립된 서비스로 인식합니다. 가계부 앱에 가입했다고 해서 자동으로 다른 앱에도 계정이 생기는 것은 어색합니다. "sumtally 에서 쓰던 계정으로 rny 에 로그인" 이라는 플로우는 설명이 필요하고, 설명이 필요한 UX 는 나쁜 UX 입니다.
-
-**프라이버시 관점** — 통합 계정은 앱 간 데이터가 같은 user_id 로 연결됨을 의미합니다. GDPR/개인정보 관점에서 "이 앱에서 탈퇴하면 모든 앱에서 사라지는가" 같은 복잡한 질문이 생깁니다. 독립 유저 모델에서는 각 앱 탈퇴가 그 앱 데이터만 삭제합니다.
-
-**운영 단순성** — `user_app_access` 테이블 관리, JWT `apps` claim 생성/검증, 멀티테넌트 DataSource 라우팅 등 통합 계정이 만들어내는 복잡성이 제거됩니다.
-
-**GDPR 단순성** — 앱별 독립 데이터이므로 "데이터 삭제 요청" 이 앱 단위로 처리됩니다. 교차 앱 데이터 연결을 추적할 필요가 없습니다.
-
-### 폐기된 개념들
-
-| 폐기 | 대체 |
-|---|---|
-| `core.users` (공유 유저 테이블) | `<slug>.users` (앱별 독립 테이블) |
-| `core.user_app_access` | 없음 (앱에 유저가 있으면 접근 권한 있음) |
-| JWT `apps` claim (배열) | JWT `appSlug` claim (단일 문자열) |
-| `/api/core/auth/*` 전역 엔드포인트 | `/api/apps/<slug>/auth/*` 앱별 엔드포인트 |
-| 멀티테넌트 DataSource 라우팅 | 앱 모듈이 자기 DataSource 직접 사용 |
-
-### 크로스 앱 통합의 미래 대응
-
-"미래에 Marvel universe 처럼 앱들이 연동되면?" 이라는 질문이 있을 수 있습니다. 그 시점이 오면:
-
-1. 각 앱에 `linked_account_id` 컬럼 추가 (optional)
-2. 별도 `core.linked_accounts` 테이블로 크로스 앱 매핑 관리
-3. 유저가 **명시적으로** 계정 연동을 선택
-
-지금 당장 이 복잡성을 도입할 이유가 없습니다. YAGNI.
-
-### `AppSlugVerificationFilter`
-
-JWT 의 `appSlug` claim 과 URL path 의 `{slug}` 가 다를 경우 즉시 403 을 반환하는 필터입니다. 예를 들어 sumtally 에서 발급된 JWT 로 `/api/apps/rny/...` 를 호출하면 차단됩니다. 이것은 앱 간 JWT 오용을 방지하는 마지막 방어선입니다.
 
 ---
 
