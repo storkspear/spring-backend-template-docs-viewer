@@ -12,7 +12,6 @@
           "children": [
             { "path": "journey/level0/what-is-this.md",       "title": "이게 뭐야?",           "desc": "한 문장 소개 · 맞는 경우/안 맞는 경우" },
             { "path": "journey/level0/five-minute-tour.md",   "title": "5 분 투어",            "desc": "모듈 4 종류 · 앱 추가 의미 · DB 분리 · 배포 그림" },
-            { "path": "journey/level0/glossary.md",           "title": "용어 사전",            "desc": "Spring · JPA · Docker · JWT 등 Level 0 용어 풀이" },
             { "path": "journey/level0/first-run.md",          "title": "첫 실행 결과 해석",    "desc": "bootRun 로그 라인별 의미 + 체크리스트" },
             { "path": "journey/level0/first-change.md",       "title": "첫 수정 튜토리얼",     "desc": "nickname 컬럼 추가 — 한 필드가 건드리는 6 곳" },
             { "path": "journey/level0/first-deploy.md",       "title": "배포 맛보기",          "desc": "Docker 이미지 빌드 + Blue/Green 개념 + Flyway" }
@@ -135,6 +134,7 @@
     {
       "name": "Reference",
       "files": [
+        { "path": "journey/level0/glossary.md",               "title": "용어 사전",            "desc": "Spring · JPA · Docker · JWT · Kamal 등 전반 용어 풀이" },
         { "path": "reference/backlog.md",                     "title": "Backlog",              "desc": "개발 예정 항목" },
         { "path": "STYLE_GUIDE.md",                           "title": "Documentation Style Guide", "desc": "저자용 · 5 유형 템플릿 · ADR 규격 · 검증 체크리스트" }
       ]
