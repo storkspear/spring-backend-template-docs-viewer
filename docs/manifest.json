@@ -7,7 +7,8 @@
     {
       "name": "시작하기",
       "files": [
-        { "path": "journey/README.md",                        "title": "Overview",             "desc": "전체 읽기 순서 안내 (Developer Journey)" }
+        { "path": "journey/README.md",                        "title": "Overview",             "desc": "전체 읽기 순서 안내 (Developer Journey)" },
+        { "path": "STYLE_GUIDE.md",                           "title": "Documentation Style Guide", "desc": "문서 작성 규칙 · ADR 템플릿 · 용어집 · 검증 체크리스트" }
       ]
     },
     {
