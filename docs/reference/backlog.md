@@ -74,7 +74,7 @@
 - [ ] [Feature] Billing 실제 구현 (Apple StoreKit + Google Play Billing) — 현재 Stub (2026-04-18)
 - [ ] [Feature] Push 실제 구현 (FCM 서비스 계정 + APNs) — 현재 NoOp (2026-04-18)
 - [ ] [Feature] 이미지 검열용 Admin 페이지 (유저 업로드 모더레이션) — Cyberduck/콘솔 대체 (2026-04-18)
-- [ ] [Feature] API 버저닝 실제 롤아웃 — philosophy 결정 8: "Phase 0 미도입" 으로 결정, 도입 시점 재검토 (2026-04-18)
+- [ ] [Feature] API 버저닝 실제 롤아웃 — [ADR-008 (API 버전 관리 미도입)](../journey/philosophy/adr-008-no-api-versioning.md) 로 확정, 도입 시점 재검토 (2026-04-18)
 - [ ] [Feature] i18n / 다국어 지원 전략 — 모바일 클라이언트와 계약 (2026-04-18)
 - [ ] [Feature] OpenAPI → Flutter 클라이언트 계약 자동 export — 백엔드/앱 싱크 (2026-04-18)
 
@@ -114,4 +114,4 @@
 ## 관련 문서
 
 - [`conventions/git-workflow.md`](../conventions/git-workflow.md) — backlog 운영 규칙 상세
-- [`CHANGELOG.md`](../CHANGELOG.md) — archive 된 완료 항목의 최종 기록처
+- [`CHANGELOG.md`](../../CHANGELOG.md) — archive 된 완료 항목의 최종 기록처

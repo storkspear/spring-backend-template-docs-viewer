@@ -426,7 +426,7 @@
 
 ## 관련 문서
 
-- [`philosophy.md`](../journey/philosophy.md) — 각 설계 결정의 이유
+- [`philosophy/README.md`](../journey/philosophy/README.md) — 16 개 ADR 인덱스 (설계 결정의 이유)
 - [`architecture.md`](../journey/architecture.md) — 시스템 구조
 - [`api-contract/api-response.md`](../api-contract/api-response.md) — API 응답 포맷
 - [`conventions/design-principles.md`](../conventions/design-principles.md) — 설계 원칙
