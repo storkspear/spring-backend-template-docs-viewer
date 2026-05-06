@@ -47,6 +47,18 @@
 ### 보안 / 자격증명
 
 - [ ] [Security] TLS/HTTPS 내부 구간 검토 — CF 가 edge 처리 OK, 맥미니 ↔ NAS 내부 통신은? (2026-04-18)
+- [ ] [Security] **Swagger UI prod 노출 차단** — `application-prod.yml` 에 `springdoc.swagger-ui.enabled: false` 또는 SecurityConfig 에서 prod 시 인증 요구. 현재 누구나 `/swagger-ui.html` 접근 가능. **즉시 fix 권장** (owasp-top10-mapping.md A05.1) (생성일: 2026-05-06)
+- [ ] [Security] Resend HTTP timeout 명시 — `ResendEmailAdapter` 가 `HttpClient.newHttpClient()` 기본 timeout 사용. 다른 client (Apple/Google/Kakao/Naver JWKS) 와 동일 connect=5s/request=10s 적용. **즉시 fix 권장** (owasp A10.2) (생성일: 2026-05-06)
+- [ ] [Security] CVE 스캔 도구 CI 통합 (OWASP Dependency Check 또는 Snyk) — Dependabot 은 update PR 만 제공, CVE 심각도 기반 자동 차단 부재. critical/high 임계값 정책 포함 (owasp A06.1) (생성일: 2026-05-06)
+- [ ] [Security] 로그인 실패 계정 잠금 정책 — N회 실패 후 계정 lockout. 현재 rate limit (요청 횟수) 만 있고 brute-force 방어로 부족. ADR-029 line 187 에 등재된 항목 (owasp A07.1) (생성일: 2026-05-06)
+- [ ] [Security] 보안 이벤트 명시 로그 정책 — 로그인 실패/권한 거부/TOTP 실패/webhook 서명 실패/암호 변경 같은 보안 이벤트의 로그 레벨 + 형식 명시 (`observability.md` 보강 또는 별도 security-logging.md). Grafana alert rule cycle 과 묶어 진행 가능 (owasp A09.1) (생성일: 2026-05-06)
+- [ ] [Security] Docker image signing (cosign / Sigstore) CI 통합 — GHCR push 한 image 가 진짜 우리 CI 에서 온 건지 검증 부재. Kamal 배포 시 서명 검증 추가 (owasp A08.1) (생성일: 2026-05-06)
+- [ ] [Security] Gradle dependency verification 활성화 — `org.gradle.dependency-verification` 으로 jar checksum lock. Maven central 에서 받은 의존성 무결성 검증 (owasp A06.3 + A08.2) (생성일: 2026-05-06)
+- [ ] [Security] Audit log 조회 endpoint — `GET /api/admin/audit-logs?action=...&since=...` 운영자 UI. ADR-028 line 222 에 다음 사이클로 등재 (owasp A09.3) (생성일: 2026-05-06)
+- [ ] [Security] Log retention 정책 1년으로 연장 — 현재 `loki-config.yml` 의 14일은 PCI-DSS / 일반 compliance 권장 1년 미달. 비용/스토리지 trade-off 검토 후 결정 (owasp A09.5) (생성일: 2026-05-06)
+- [ ] [Template] 보안 정책 ADR/문서 보강 묶음 — TLS 내부 통신 (`sslmode=require` 명시) / SSRF URL whitelist + private IP 차단 / 404 vs 500 service 레이어 convention / CORS 가이드 (브라우저 client 추가 시) / `server.error.include-stacktrace=never` 명시. 작은 정책 5건 묶음 (owasp A02.1, A04.1, A05.2~3, A10.1) (생성일: 2026-05-06)
+- [ ] [Security] 이메일 OTP brute-force 방어 명시 — `EmailVerificationService` 의 attempt counter / exponential backoff 정책 코드 + 문서 검증. 6자리 OTP 는 1M 조합이라 TTL 5분만으론 부족 가능 (owasp A07.2) (생성일: 2026-05-06)
+- [ ] [Security] 2FA backup codes 자동 복구 endpoint — 8개 다 소진 시 admin intervention 대신 recovery code 발급. ADR-030 보강 (owasp A07.4) (생성일: 2026-05-06)
 
 ### 데이터 / DB
 
