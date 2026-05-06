@@ -83,7 +83,6 @@
 
 - [ ] [DX] Inventory 기계 추출 파일 `docs/.inventory.yml` — Item 9 plan 의 embed 인벤토리 drift 방지 (2026-04-18)
 - [ ] [DX] Multi-app 로컬 병렬 개발 가이드 (포트 충돌, IntelliJ run config 공유) — 여러 앱 동시 기동 (2026-04-18)
-- [ ] [DX] Pre-push hook (build 자동 실행) — CI 실패 전 로컬 차단 (2026-04-18)
 - [x] ~~WireMock opt-in 정책 문서 정정~~ — 본 사이클 (S12) 완료. `cli-guide.md` / `onboarding.md` 의 "wiremock 자동 기동" 표기를 "(옵션) wiremock" 으로 정정 (2026-05-03)
 - [x] ~~`<repo> local stop` / `<repo> local restart` 명령 신규~~ — `factory:376~384` 에 구현 완료. `restart` 는 `docker compose ... up -d --build spring` 으로 강제 rebuild (2026-05-03)
 - [ ] [DX] `<repo> prod db-backup [slug]` / `<repo> prod storage-backup [slug]` 명령 — `prod force-clear` (이번 사이클 추가) 의 Step 3 백업 안내가 manual `pg_dump` / `mc cp` 로 출력. 자동화 시 일관된 백업 위치 + tar.gz 압축 + retention 정책 가능. force-clear 와 짝 (clear/init 의 symmetry 와 같이). 본 사이클은 force-clear 만 추가 — 백업 자동화는 별도 사이클 (2026-05-02)
@@ -93,6 +92,8 @@
 - [ ] [DX] `factory install` 의 alias 이름 입력 단계에 *bash 빌트인·예약어 충돌 검증* — 운영자가 `test` 같은 빌트인 명령을 입력하면 `~/.local/bin/test` symlink 가 등록되어도 bash 가 빌트인을 우선해 `test init` 이 no-op 으로 동작 (조건 검사로 해석되어 0 exit). 차단 대상 후보: `test`, `[`, `[[`, `true`, `false`, `cd`, `pwd`, `echo`, `set`, `eval`, `source`, `.`, `:`, `command`, `type`, `which`, `time`, `exec`, `exit`, `kill`, `jobs`, `bg`, `fg`, `wait`, `read`, `local`, `export`, `unset`, `alias`, `unalias`, `history`, `let`, `printf`. 입력 후 `compgen -b <name>` 또는 hardcoded 목록으로 검증 → 매치 시 *재입력 요구*. 도그푸딩 사이클에서 `test` 입력으로 발견됨 (2026-05-03)
 - [ ] [DX] `init-server.sh` 의 partial-fail 인지성 강화 — 현재 Step 6 끝의 `[OK] GitHub Secrets / Variables 등록 완료` 가 *최종 성공* 처럼 보여 사용자가 그 뒤의 Step 9.5 (observability deploy) / Step 10 (verify-server) 가 안 돈 partial fail 을 놓치는 케이스 발생. 보강 방향: ①중간 step 메시지를 `[OK] Step 6 완료` 처럼 단계 표시로 약화. ②`trap EXIT` 추가해 비정상 종료 시 `❌ init 비정상 종료 (exit=$rc) — re-run 권장` 명시. ③최종 success 마커를 박스 형태로 강조 (없으면 곧 실패). 도그푸딩 사이클에서 line 559 bash 에러로 init 이 partial 종료됐는데 deploy 는 decoupled 라 정상 동작 → 사용자가 init 결함을 늦게 발견 (2026-05-03)
 - [ ] [DX] `tools/ci-test.sh` 에 `actionlint` 통합 — 현재 ci-test 는 *content* (build / docs / secrets) 만 검증하고 `.github/workflows/*.yml` 자체의 정적 검증은 누락돼요. 결과적으로 워크플로우의 YAML 구문 오류 / 잘못된 action 버전 / job dependency 누락 같은 컨피그 실수가 push 전에 catch 되지 않아요. `actionlint` 단계 추가 (5-stage → 6-stage 또는 spotless 단계와 병합). 한계: secret 부재 같은 *runtime* 에러는 actionlint 도 catch 하지 못해요 — 그건 별개 보강 (예: 워크플로우 시작 시 token 존재 검증 + graceful skip). 도그푸딩 사이클에서 `template-spring` 의 `GHCR_TOKEN` 미등록으로 sync-docs 가 2일치 모든 push 에서 실패한 케이스로 발견 (2026-05-03)
+- [ ] [DX] Jacoco coverage 룰 점진 상향 — 첫 도입 baseline (line 25% / branch 20%) 에서 line 50% / branch 40% 으로 단계 상향. 약점 모듈 (core-iap-impl 28%/23%, core-push-impl 40%/30%, core-audit-impl 51%/53%, core-user-impl 55%/50%) 보강 후 가능. 6개월 후 재평가 (생성일: 2026-05-06)
+- [ ] [DX] husky hook 활성화 자동화 — 새 clone 후 `npm install` 안 돌리면 `.husky/*` (commit-msg, pre-push) 가 git config core.hooksPath 미설정으로 작동 안 함. README onboarding 에 1회 실행 강제 명시 또는 build 시점 경고. D+E cycle 에서 발견 (생성일: 2026-05-06)
 - [ ] [DX] Multi-session spec 진행 상태 헤더 (S1~SN 체크박스) — multi-session spec 의 복귀 비용 차단. 현재 `superpowers/specs/2026-05-04-cleanup-legacy-cycle*` 같은 8-subsession spec 이 중단된 후 "어디까지 했지?" 추적 어려움. 헤더에 체크박스 도입 후 각 subsession 완료 시 체크. 트리거: 다음 multi-session spec 작성 시 적용 (생성일: 2026-05-06)
 - [ ] [Template] **ADR 형식 통일 사이클** — ADR-021~035 의 *결론부터* 섹션 헤더 명시 (현재는 *상태* 다음 단락으로 통합). ADR-018 같은 *명시 헤더* 형식과 일관성 맞추기 — 15+ 파일 산문 재구성 (생성일: 2026-05-04, audit T9 발견)
 - [x] ~~[Template] ADR Code Reference 보강~~ — T14 재검증 결과 *이미 충실* (모든 ADR 이 file 경로 + 클래스 + 메서드 + line 번호 보유). audit T9 의 누락 분류는 과도 엄격이었음. **불필요로 closed** (2026-05-04)
@@ -136,6 +137,8 @@
 
 ## 완료 (archive, 지난 2개월)
 
+- [x] [DX] Jacoco coverage 게이트 도입 — `build.gradle` 의 subprojects 에 `jacocoTestCoverageVerification` 룰 추가. baseline LINE>=25%, BRANCH>=20% (보수적 첫 도입). 면제: bootstrap, common-testing, *-api. 신규 도메인 추가 시 0% 코드 main 합류 차단. 점진 상향 backlog 등재 (완료일: 2026-05-06, commit: `8765428`)
+- [x] [DX] Pre-push hook — `.husky/pre-push` 신규. spotlessCheck + compileJava + 빠른 단위 테스트 (common-web/security/persistence). 시간 목표 1분 이내. `git push --no-verify` escape hatch. 활성화 전제: `npm install` 1회 (prepare 스크립트가 git config 설정) (완료일: 2026-05-06, commit: `3857614`)
 - [x] [Security] Swagger UI prod 노출 차단 — `application-prod.yml` 에 `springdoc.swagger-ui.enabled=false` + `api-docs.enabled=false` 추가. /swagger-ui.html 과 /v3/api-docs 둘 다 prod 에서 404. dev profile 은 활성 유지 (OWASP A05.1) (완료일: 2026-05-06, commit: `ceb9d45`)
 - [x] [Security] Resend HTTP timeout 명시 — `ResendEmailAdapter` 의 HttpClient 에 connectTimeout=5s, HttpRequest 에 timeout=10s 적용. 다른 외부 client (Apple/Google/Kakao/Naver JWKS) 와 동일 패턴 (OWASP A10.2) (완료일: 2026-05-06, commit: `c8eb350`)
 - [x] Item 7 — DTO/API 네이밍 정리 (완료일: 2026-04-18, commit: `647b0c4`)
